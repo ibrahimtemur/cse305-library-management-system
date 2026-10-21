@@ -13,8 +13,8 @@ A standalone web-based **Library Management System** developed for **CSE305 Soft
 
 | Name Surname | Student Number | Role |
 |---|---|---|
-| **Ibrahim Temur** | `231805033` | Team Member (Product Owner / Architect / Developer / QA / Reviewer) |
-| **Omer Faruk Kuş** | `231805026` | Team Member (Product Owner / Architect / Developer / QA / Reviewer) |
+| **Ibrahim Temur** | `231805033` | **Product Owner (PO)** & Full-Stack Developer / Architect / QA / Reviewer |
+| **Omer Faruk Kuş** | `231805026` | **Scrum Master (SM)** & Full-Stack Developer / Architect / QA / Reviewer |
 
 ---
 

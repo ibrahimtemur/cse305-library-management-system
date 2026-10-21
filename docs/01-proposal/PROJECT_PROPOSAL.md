@@ -113,8 +113,8 @@ Because this is a two-person software engineering team, both members collaborate
 
 | Scrum / Engineering Role | Assigned Team Member(s) | Primary Responsibilities |
 |---|---|---|
-| **Product Owner (PO)** | *TBD — Pending confirmation (Ibrahim Temur / Omer Faruk Kuş)* | Owns product vision, prioritizes the Product Backlog (MoSCoW), clarifies domain assumptions, and validates story acceptance criteria. |
-| **Scrum Master (SM)** | *TBD — Pending confirmation (Ibrahim Temur / Omer Faruk Kuş)* | Facilitates Scrum ceremonies, tracks sprint velocity and midterm capacity buffer, removes technical blockers, and enforces Git/process hygiene. |
+| **Product Owner (PO)** | **Ibrahim Temur** (`231805033`) | Owns product vision, prioritizes the Product Backlog (MoSCoW), clarifies domain assumptions, and validates story acceptance criteria. |
+| **Scrum Master (SM)** | **Omer Faruk Kuş** (`231805026`) | Facilitates Scrum ceremonies, tracks sprint velocity and midterm capacity buffer, removes technical blockers, and enforces Git/process hygiene. |
 | **Developers & Architects** | **Ibrahim Temur** (`231805033`) & **Omer Faruk Kuş** (`231805026`) | Co-design layered architecture and GoF/GRASP patterns, design Stitch UI prototypes, implement Spring Boot + Thymeleaf features, and write JUnit 5 tests (TDD). |
 | **QA & Peer Reviewers** | **Ibrahim Temur** (`231805033`) & **Omer Faruk Kuş** (`231805026`) | Cross-review pull/branch merges, verify test coverage (`mvn test`), audit file headers, and validate synthetic data compliance. |
 

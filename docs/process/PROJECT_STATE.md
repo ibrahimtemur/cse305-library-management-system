@@ -22,15 +22,15 @@
 - **[2026-10-21 | Ibrahim Temur]** Created `AGENTS.md`, `README.md`, `.gitignore`, `.gitattributes`, `tools/set-author.{ps1,cmd}` (`ibrahim` / `omer`), and `tools/package.{ps1,cmd}` (`cse305_hwNN_231805033_231805026.zip`).
 - **[2026-10-21 | Ibrahim Temur]** Initialized Git repository, set local author to Ibrahim Temur, created initial commit (`db0acd1`), created private GitHub repository `ibrahimtemur/cse305-library-management-system`, and pushed both `main` and `develop` branches.
 - **[2026-10-21 | Ibrahim Temur]** Authored `docs/01-proposal/PROJECT_PROPOSAL.md` and `docs/01-proposal/SOLUTION_OUTLINE.md` (and updated `docs/01-proposal/README.md`) defining the problem statement, stakeholders, MoSCoW scope, explicit `ASSUMPTION` domain policies, Scrum milestone timeline (Nov 10 Inception, Nov 17–28 Midterm reduced capacity, Dec 8 Sprint 1, Dec 22 Sprint 2, Jan 5 MVP), 5-tier layered architecture, Stitch UI pipeline, Open Library + synthetic data strategy, and candidate GoF/GRASP design patterns.
+- **[2026-10-21 | Ibrahim Temur]** Finalized Scrum role assignments across `docs/01-proposal/PROJECT_PROPOSAL.md` and `README.md`: **Ibrahim Temur** as **Product Owner (PO)** and **Omer Faruk Kuş** as **Scrum Master (SM)** (with both contributing as Developers/Architects/QA/Reviewers).
 
 ---
 
 ## 2. What Is Next
-1. **Finalize Scrum Role Assignments:** Confirm which team member serves as **Product Owner (PO)** and which serves as **Scrum Master (SM)**, and update `docs/01-proposal/PROJECT_PROPOSAL.md` and `README.md`.
-2. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
-3. **Phase 02 — Inception Artifacts (`docs/02-inception/`, Deadline: Nov 10):**
+1. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
+2. **Phase 02 — Inception Artifacts (`docs/02-inception/`, Deadline: Nov 10):**
    - Define detailed user personas (Librarian/Admin, Member, Guest), functional & non-functional requirements, use-case catalog, domain glossary, and prioritized Scrum Product Backlog with user stories, story points, and acceptance criteria.
-4. **Phase 03 — Architecture, Design Patterns & Stitch UI (`docs/03-design/`, `docs/03-design/ui/`):**
+3. **Phase 03 — Architecture, Design Patterns & Stitch UI (`docs/03-design/`, `docs/03-design/ui/`):**
    - Document layered architecture, domain model / ER schema, and justified GoF/GRASP design patterns (`Strategy`, `State`, `Observer`, `Factory/Builder`, `Adapter/Facade`) in `docs/03-design/`.
    - Design UI screens first with the Stitch MCP and save HTML exports/screenshots under `docs/03-design/ui/`.
 
@@ -47,12 +47,12 @@
 | DEC-06 | 2026-10-21 | Ibrahim Temur | Hybrid Data Strategy: Open Library API book metadata cached in `data/seed/` + 100% synthetic member/loan data | Combines realistic bibliographic catalog data with offline reproducibility and strict personal data privacy compliance (`AGENTS.md` Section 7). |
 | DEC-07 | 2026-10-21 | Ibrahim Temur | Core GoF Pattern Selection: `Strategy` (loan/fine policies), `State` (`BookCopy` lifecycle), `Observer` (return/overdue events), `Factory/Builder` (`Loan` creation), `Adapter` (Open Library ingestion) | Directly addresses domain variability and state invariants without artificial over-engineering. |
 | DEC-08 | 2026-10-21 | Ibrahim Temur | Explicit `ASSUMPTION` tagging (`ASSUMPTION-01`..`09`) for all lending/fine rules | Prevents inventing unverified facts about ADU's real library policies while establishing clear, testable business rules. |
+| DEC-09 | 2026-10-21 | Ibrahim Temur | Scrum Roles: **Ibrahim Temur** = Product Owner (PO); **Omer Faruk Kuş** = Scrum Master (SM); both = Developers/Architects/QA | Establishes clear Scrum accountability while enabling full-stack pair collaboration on a 2-person academic team. |
 
 ---
 
 ## 4. Open Questions & Follow-ups
-- **[OPEN-01]** Which team member is **Product Owner (PO)** and which is **Scrum Master (SM)** between Ibrahim Temur and Omer Faruk Kuş?
-- **[OPEN-02]** What is Omer Faruk Kuş's GitHub username so we can send the collaborator invitation (`gh api -X PUT repos/ibrahimtemur/cse305-library-management-system/collaborators/<username> -f permission=push`)?
-- **[OPEN-03]** Is `231805026@stu.adu.edu.tr` added to Omer Faruk Kuş's GitHub account emails, or should `tools/set-author.ps1` be updated with his primary GitHub email?
-- **[OPEN-04]** Are there specific CSE305 homework 01 (HW01) deliverables, deadlines, or grading rubrics from the course instructor that we should place in `docs/00-course/`?
-- **[OPEN-05]** The workspace is located inside OneDrive (`OneDrive\Masaüstü\LibraryManagementSystem`). Monitor for any OneDrive file-locking during Maven builds or H2 file writes; relocate outside OneDrive if locks occur.
+- **[OPEN-01]** What is Omer Faruk Kuş's GitHub username so we can send the collaborator invitation (`gh api -X PUT repos/ibrahimtemur/cse305-library-management-system/collaborators/<username> -f permission=push`)?
+- **[OPEN-02]** Is `231805026@stu.adu.edu.tr` added to Omer Faruk Kuş's GitHub account emails, or should `tools/set-author.ps1` be updated with his primary GitHub email?
+- **[OPEN-03]** Are there specific CSE305 homework 01 (HW01) deliverables, deadlines, or grading rubrics from the course instructor that we should place in `docs/00-course/`?
+- **[OPEN-04]** The workspace is located inside OneDrive (`OneDrive\Masaüstü\LibraryManagementSystem`). Monitor for any OneDrive file-locking during Maven builds or H2 file writes; relocate outside OneDrive if locks occur.
