@@ -1,0 +1,14 @@
+# Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+# Student No(s)#: 231805033, 231805026
+# General Comments: Line-ending normalization rules across Windows and POSIX shells.
+
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+mvnw text eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.zip binary

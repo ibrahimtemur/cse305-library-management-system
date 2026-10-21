@@ -1,0 +1,58 @@
+# Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+# Student No(s)#: 231805033, 231805026
+# General Comments: Git ignore rules excluding build outputs, local H2 databases, virtual environments, archives, secrets, and IDE files.
+
+# Maven build outputs
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Keep Maven Wrapper metadata (do not ignore .mvn/wrapper/maven-wrapper.properties)
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Submission archives and staging
+dist/
+*.zip
+
+# Runtime H2 database files (seed data in data/seed/ remains tracked)
+data/db/
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Python / tooling environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# IDEs and editors
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+
+# Secrets, credentials, and local overrides
+.env
+.env.*
+*.pem
+*.key
+application-local.properties
+application-secret.properties
+
+# Logs and OS metadata
+*.log
+Thumbs.db
+Desktop.ini
+.DS_Store
