@@ -9,7 +9,7 @@
 - **Active Team Member:** Ibrahim Temur (`231805033`)
 - **Active Branch:** `develop`
 - **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Private)
-- **Current Phase:** Phase 01 — Project Proposal & Solution Outline (**COMPLETED**) → Next: **Phase 02: Inception Artifacts (`docs/02-inception/`)** (Target: Nov 10)
+- **Current Phase:** Phase 01 — Project Proposal & Solution Outline (`docs/01-proposal/`) — **COMPLETED** (`fb11f34`, `cb254a6`) → Ready for **Phase 02: Requirements, Use Cases, Glossary & Scrum Product Backlog (`docs/02-inception/`)** (Deadline: Nov 10)
 
 ---
 
@@ -21,18 +21,22 @@
 - **[2026-10-21 | Ibrahim Temur]** Created standard repository layout (`docs/00-course`, `docs/01-proposal`, `docs/02-inception`, `docs/03-design`, `docs/03-design/ui`, `docs/04-sprints`, `docs/process`, `data/seed`, `tools`, `src`) with mandatory file headers verified across all first-party files.
 - **[2026-10-21 | Ibrahim Temur]** Created `AGENTS.md`, `README.md`, `.gitignore`, `.gitattributes`, `tools/set-author.{ps1,cmd}` (`ibrahim` / `omer`), and `tools/package.{ps1,cmd}` (`cse305_hwNN_231805033_231805026.zip`).
 - **[2026-10-21 | Ibrahim Temur]** Initialized Git repository, set local author to Ibrahim Temur, created initial commit (`db0acd1`), created private GitHub repository `ibrahimtemur/cse305-library-management-system`, and pushed both `main` and `develop` branches.
-- **[2026-10-21 | Ibrahim Temur]** Authored `docs/01-proposal/PROJECT_PROPOSAL.md` and `docs/01-proposal/SOLUTION_OUTLINE.md` (and updated `docs/01-proposal/README.md`) defining the problem statement, stakeholders, MoSCoW scope, explicit `ASSUMPTION` domain policies, Scrum milestone timeline (Nov 10 Inception, Nov 17–28 Midterm reduced capacity, Dec 8 Sprint 1, Dec 22 Sprint 2, Jan 5 MVP), 5-tier layered architecture, Stitch UI pipeline, Open Library + synthetic data strategy, and candidate GoF/GRASP design patterns.
-- **[2026-10-21 | Ibrahim Temur]** Finalized Scrum role assignments across `docs/01-proposal/PROJECT_PROPOSAL.md` and `README.md`: **Ibrahim Temur** as **Product Owner (PO)** and **Omer Faruk Kuş** as **Scrum Master (SM)** (with both contributing as Developers/Architects/QA/Reviewers).
+- **[2026-10-21 | Ibrahim Temur]** Authored `docs/01-proposal/PROJECT_PROPOSAL.md` and `docs/01-proposal/SOLUTION_OUTLINE.md` (and updated `docs/01-proposal/README.md`, commit `fb11f34`) defining the problem statement, stakeholders, MoSCoW scope, explicit `ASSUMPTION` domain policies, Scrum milestone timeline (Nov 10 Inception, Nov 17–28 Midterm reduced capacity, Dec 8 Sprint 1, Dec 22 Sprint 2, Jan 5 MVP), 5-tier layered architecture, Stitch UI pipeline, Open Library + synthetic data strategy, and candidate GoF/GRASP design patterns.
+- **[2026-10-21 | Ibrahim Temur]** Finalized Scrum role assignments across `docs/01-proposal/PROJECT_PROPOSAL.md` and `README.md` (commit `cb254a6`): **Ibrahim Temur** as **Product Owner (PO)** and **Omer Faruk Kuş** as **Scrum Master (SM)** (with both contributing as Developers/Architects/QA/Reviewers).
 
 ---
 
 ## 2. What Is Next
-1. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
-2. **Phase 02 — Inception Artifacts (`docs/02-inception/`, Deadline: Nov 10):**
-   - Define detailed user personas (Librarian/Admin, Member, Guest), functional & non-functional requirements, use-case catalog, domain glossary, and prioritized Scrum Product Backlog with user stories, story points, and acceptance criteria.
-3. **Phase 03 — Architecture, Design Patterns & Stitch UI (`docs/03-design/`, `docs/03-design/ui/`):**
+1. **Phase 02 — Inception & Requirements Engineering (`docs/02-inception/`, Deadline: Nov 10) [NEXT CHAT]:**
+   - Create `docs/02-inception/PERSONAS.md`: Detailed user personas for Librarian/Admin, Student Member, Academic Staff Member, and Guest.
+   - Create `docs/02-inception/REQUIREMENTS.md`: Traceable Functional Requirements (`FR-*`) and Non-Functional Requirements (`NFR-*`: performance, usability, security, testability, synthetic data privacy).
+   - Create `docs/02-inception/USE_CASES.md`: Use-case diagram (Mermaid) and structured use-case specifications (preconditions, main success scenario, alternative/exception flows) for core catalog, checkout/return, overdue fine, and reservation workflows.
+   - Create `docs/02-inception/DOMAIN_GLOSSARY.md`: Ubiquitous language definitions (`Book`, `BookCopy`, `Loan`, `Fine`, `Reservation`, `LoanPolicy`, etc.).
+   - Create `docs/02-inception/PRODUCT_BACKLOG.md`: Prioritized Scrum Product Backlog with Epics, User Stories (`US-*`), Story Points, MoSCoW priority, Sprint allocation (Sprint 1 / Sprint 2 / Sprint 3), Definition of Ready (DoR), Definition of Done (DoD), and Given/When/Then Acceptance Criteria.
+2. **Phase 03 — Architecture, Design Patterns & Stitch UI (`docs/03-design/`, `docs/03-design/ui/`):**
    - Document layered architecture, domain model / ER schema, and justified GoF/GRASP design patterns (`Strategy`, `State`, `Observer`, `Factory/Builder`, `Adapter/Facade`) in `docs/03-design/`.
    - Design UI screens first with the Stitch MCP and save HTML exports/screenshots under `docs/03-design/ui/`.
+3. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
 
 ---
 
