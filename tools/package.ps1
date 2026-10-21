@@ -71,7 +71,7 @@ try {
         if ($excludedTopDirs -contains $segments[0]) {
             continue
         }
-        if ($segments -contains '__pycache__' -or $segments -contains 'node_modules') {
+        if ($segments -contains '__pycache__' -or $segments -contains 'node_modules' -or $segments -contains '.venv' -or $segments -contains 'venv') {
             continue
         }
         if ($relPath -replace '\\', '/' -match '^data/db(/|$)') {
