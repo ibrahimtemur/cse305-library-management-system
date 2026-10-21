@@ -123,21 +123,23 @@ The project follows an iterative **Agile Scrum** schedule aligned directly with 
 
 ```mermaid
 flowchart LR
-    S0["Sprint 0: Foundation\n(Completed Oct 21)"] --> INC["Phase 01: Inception Artifacts\nDeadline: Nov 10"]
-    INC --> MID["Midterm Exam Window\nNov 17 – Nov 28\n(Reduced Capacity)"]
-    MID --> SP1["Sprint 1 Delivery\nDeadline: Dec 8\n(Catalog, Copies, Members)"]
-    SP1 --> SP2["Sprint 2 Delivery\nDeadline: Dec 22\n(Circulation, Fines, Patterns)"]
-    SP2 --> MVP["Sprint 3 / Final MVP\nDeadline: Jan 5\n(Reservations, Dashboard, Polish)"]
+    S0["Week 4 (Oct 20):\nGroup & Project Selection\n+ Sprint 0 Foundation"] --> HW1["HW01 — Week 5 (Oct 27):\nProject Proposal &\nSolution Outline"]
+    HW1 --> HW2["HW02 — Week 7 (Nov 10):\nInception & Scrum\nProduct Backlog"]
+    HW2 --> MID["Weeks 8–9 (Nov 17–28):\nMidterm Exam Window\n(Reduced Capacity)"]
+    MID --> HW3["HW03 — Week 11 (Dec 8):\nElaboration & Sprint 1\n(Catalog, Copies, Members)"]
+    HW3 --> HW4["HW04 — Week 13 (Dec 22):\nConstruction & Sprint 2\n(Circulation, Fines, Patterns)"]
+    HW4 --> HW5["HW05 — Week 15 (Jan 5):\nTransition & Final MVP\n(Reservations, Dashboard, Polish)"]
 ```
 
-| Milestone / Phase | Window | Target Deadline | Key Deliverables & Focus |
+| Milestone / Homework | Course Week | Target Deadline | Key Deliverables & Focus |
 |---|---|---|---|
-| **Sprint 0 — Foundation** | Oct 21 | **Oct 21** *(Done)* | Toolchain setup (JDK 25 / Java 17 target, Maven 3.9.16 Wrapper, Spring Boot 3.5.16, H2, JUnit 5), Git/GitHub repo, `AGENTS.md`, automation scripts. |
-| **Inception Phase** | Oct 22 – Nov 10 | **November 10** | `PROJECT_PROPOSAL.md`, `SOLUTION_OUTLINE.md`, Personas, Functional/Non-Functional Requirements, Use-Case Catalog, Domain Glossary, Product Backlog (`docs/02-inception/`), initial Architecture & GoF/GRASP plan, and Stitch UI prototypes (`docs/03-design/`). |
-| **Midterm Exam Period** | Nov 17 – Nov 28 | *Nov 17 – Nov 28* | **Reduced Capacity Window (~35% normal velocity):** Focus on lightweight JPA entity modeling, unit test scaffolding, and Open Library seed data preparation without heavy UI sprints. |
-| **Sprint 1** | Nov 11 – Dec 8 | **December 8** | Core domain entities & repositories, Catalog & Physical Copy CRUD, Synthetic Member Management, Open Library seed data loader, initial Thymeleaf catalog/member screens, and JUnit 5 unit/slice tests. |
-| **Sprint 2** | Dec 9 – Dec 22 | **December 22** | Circulation Service (Checkout, Return, Renewal), Overdue Detection & Fine Calculation Engine, core GoF/GRASP pattern implementations (*Strategy*, *State*, *Builder/Factory*), librarian circulation UI, and integration tests. |
-| **Sprint 3 (MVP Release)** | Dec 23 – Jan 5 | **January 5** | Book Reservation/Hold queue (*Observer*/*State* integration), Fine payment/waiver workflow, Librarian Dashboard & KPIs, Guest catalog view, full regression testing (`mvn test`), sprint retrospectives, and final submission archive (`tools\package`). |
+| **Group & Project Selection + Sprint 0** | Week 4 | **October 20–21** *(Done)* | Project group & topic selection (*Library Management System*); toolchain setup (JDK 25 / Java 17 target, Maven 3.9.16 Wrapper, Spring Boot 3.5.16, H2, JUnit 5), Git/GitHub repo, `AGENTS.md`, automation scripts. |
+| **HW01 — Project Proposal & Solution Outline** | Week 5 | **October 27** *(Done)* | `PROJECT_PROPOSAL.md` and `SOLUTION_OUTLINE.md` (`docs/01-proposal/`), packaged as `cse305_hw01_231805033_231805026.zip`. |
+| **HW02 — Inception Phase** | Week 6–7 | **November 10** | Vision & system context diagram, Personas, Functional/Non-Functional Requirements (Supplementary Specification), Use Cases, Domain Glossary, Business Rules, Themes/Epics/User Stories/Tasks, Sprint Planning, Product Backlog, and PSI/MVP definition (`docs/02-inception/`). |
+| **Midterm Exam Period** | Weeks 8–9 | *Nov 17 – Nov 28* | **Reduced Capacity Window (~35% normal velocity):** Focus on lightweight JPA entity modeling, unit test scaffolding, and Open Library seed data preparation without heavy UI sprints. |
+| **HW03 — Elaboration / Sprint 1** | Weeks 10–11 | **December 8** | Use-case diagram, system sequence diagrams (SSD), domain/design class diagrams, TDD/Git/Maven plan (`docs/03-design/`), Stitch UI prototypes, and working **Sprint 1** increment (Catalog, Physical Copies, Synthetic Members, Open Library seed data, JUnit 5 tests). |
+| **HW04 — Construction / Sprint 2** | Weeks 12–13 | **December 22** | Working **Sprint 2** increment: Circulation Service (Checkout, Return, Renewal), Overdue Detection & Fine Calculation Engine, core GoF/GRASP pattern implementations (*Strategy*, *State*, *Builder/Factory*), librarian circulation UI, and integration tests. |
+| **HW05 — Transition / MVP Release** | Weeks 14–15 | **January 5** | Complete **MVP Release (Sprint 3)**: Book Reservation/Hold queue (*Observer*/*State* integration), Fine payment/waiver workflow, Librarian Dashboard & KPIs, Guest catalog view, full regression testing (`mvn test`), sprint retrospectives, and final submission archive (`cse305_hw05_231805033_231805026.zip`). |
 
 ---
 

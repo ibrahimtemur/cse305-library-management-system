@@ -9,7 +9,7 @@
 - **Active Team Member:** Ibrahim Temur (`231805033`)
 - **Active Branch:** `develop`
 - **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Private)
-- **Current Phase:** Phase 01 — Project Proposal & Solution Outline (`docs/01-proposal/`) — **COMPLETED** (`fb11f34`, `cb254a6`) → Ready for **Phase 02: Requirements, Use Cases, Glossary & Scrum Product Backlog (`docs/02-inception/`)** (Deadline: Nov 10)
+- **Current Phase:** **HW01 — Project Proposal & Solution Outline (`docs/01-proposal/`, Deadline: Oct 27) — COMPLETED & PACKAGED** → Ready for **HW02: Inception & Scrum Product Backlog (`docs/02-inception/`, Deadline: Nov 10)**
 
 ---
 
@@ -21,22 +21,25 @@
 - **[2026-10-21 | Ibrahim Temur]** Created standard repository layout (`docs/00-course`, `docs/01-proposal`, `docs/02-inception`, `docs/03-design`, `docs/03-design/ui`, `docs/04-sprints`, `docs/process`, `data/seed`, `tools`, `src`) with mandatory file headers verified across all first-party files.
 - **[2026-10-21 | Ibrahim Temur]** Created `AGENTS.md`, `README.md`, `.gitignore`, `.gitattributes`, `tools/set-author.{ps1,cmd}` (`ibrahim` / `omer`), and `tools/package.{ps1,cmd}` (`cse305_hwNN_231805033_231805026.zip`).
 - **[2026-10-21 | Ibrahim Temur]** Initialized Git repository, set local author to Ibrahim Temur, created initial commit (`db0acd1`), created private GitHub repository `ibrahimtemur/cse305-library-management-system`, and pushed both `main` and `develop` branches.
-- **[2026-10-21 | Ibrahim Temur]** Authored `docs/01-proposal/PROJECT_PROPOSAL.md` and `docs/01-proposal/SOLUTION_OUTLINE.md` (and updated `docs/01-proposal/README.md`, commit `fb11f34`) defining the problem statement, stakeholders, MoSCoW scope, explicit `ASSUMPTION` domain policies, Scrum milestone timeline (Nov 10 Inception, Nov 17–28 Midterm reduced capacity, Dec 8 Sprint 1, Dec 22 Sprint 2, Jan 5 MVP), 5-tier layered architecture, Stitch UI pipeline, Open Library + synthetic data strategy, and candidate GoF/GRASP design patterns.
+- **[2026-10-21 | Ibrahim Temur]** Authored `docs/01-proposal/PROJECT_PROPOSAL.md` and `docs/01-proposal/SOLUTION_OUTLINE.md` (and updated `docs/01-proposal/README.md`, commit `fb11f34`) defining the problem statement, stakeholders, MoSCoW scope, explicit `ASSUMPTION` domain policies, Scrum milestone timeline, 5-tier layered architecture, Stitch UI pipeline, Open Library + synthetic data strategy, and candidate GoF/GRASP design patterns.
 - **[2026-10-21 | Ibrahim Temur]** Finalized Scrum role assignments across `docs/01-proposal/PROJECT_PROPOSAL.md` and `README.md` (commit `cb254a6`): **Ibrahim Temur** as **Product Owner (PO)** and **Omer Faruk Kuş** as **Scrum Master (SM)** (with both contributing as Developers/Architects/QA/Reviewers).
+- **[2026-10-21 | Ibrahim Temur]** Ingested official CSE305 Lecture 0 syllabus (Assoc. Prof. Dr. Fatih Soygazi) into `docs/00-course/COURSE_SYLLABUS_AND_SCHEDULE.md` and `AGENTS.md` (5 assignments = 40%, Final = 60%; `HW01: Oct 27`, `HW02: Nov 10`, `HW03: Dec 8`, `HW04: Dec 22`, `HW05: Jan 5`; individual ADUZEM upload rule) and packaged **`dist/cse305_hw01_231805033_231805026.zip`** via `tools\package 01`.
 
 ---
 
 ## 2. What Is Next
-1. **Phase 02 — Inception & Requirements Engineering (`docs/02-inception/`, Deadline: Nov 10) [NEXT CHAT]:**
+1. **Upload HW01 to ADUZEM (Deadline: Oct 27):** Both **Ibrahim Temur** (`231805033`) and **Omer Faruk Kuş** (`231805026`) must individually upload `dist\cse305_hw01_231805033_231805026.zip` from their own personal ADUZEM accounts.
+2. **HW02 — Inception & Scrum Product Backlog (`docs/02-inception/`, Deadline: Nov 10) [NEXT CHAT]:**
+   - Create `docs/02-inception/VISION_AND_CONTEXT.md`: Vision statement and System Context Diagram (Mermaid).
    - Create `docs/02-inception/PERSONAS.md`: Detailed user personas for Librarian/Admin, Student Member, Academic Staff Member, and Guest.
-   - Create `docs/02-inception/REQUIREMENTS.md`: Traceable Functional Requirements (`FR-*`) and Non-Functional Requirements (`NFR-*`: performance, usability, security, testability, synthetic data privacy).
-   - Create `docs/02-inception/USE_CASES.md`: Use-case diagram (Mermaid) and structured use-case specifications (preconditions, main success scenario, alternative/exception flows) for core catalog, checkout/return, overdue fine, and reservation workflows.
-   - Create `docs/02-inception/DOMAIN_GLOSSARY.md`: Ubiquitous language definitions (`Book`, `BookCopy`, `Loan`, `Fine`, `Reservation`, `LoanPolicy`, etc.).
-   - Create `docs/02-inception/PRODUCT_BACKLOG.md`: Prioritized Scrum Product Backlog with Epics, User Stories (`US-*`), Story Points, MoSCoW priority, Sprint allocation (Sprint 1 / Sprint 2 / Sprint 3), Definition of Ready (DoR), Definition of Done (DoD), and Given/When/Then Acceptance Criteria.
-2. **Phase 03 — Architecture, Design Patterns & Stitch UI (`docs/03-design/`, `docs/03-design/ui/`):**
-   - Document layered architecture, domain model / ER schema, and justified GoF/GRASP design patterns (`Strategy`, `State`, `Observer`, `Factory/Builder`, `Adapter/Facade`) in `docs/03-design/`.
+   - Create `docs/02-inception/REQUIREMENTS.md`: Supplementary Specification — traceable Functional Requirements (`FR-*`), Non-Functional Requirements (`NFR-*`), and Business Rules (`BR-*`).
+   - Create `docs/02-inception/USE_CASES.md`: Use-case diagram (Mermaid) and structured use-case specifications for catalog, checkout/return, overdue fine, and reservation workflows.
+   - Create `docs/02-inception/DOMAIN_GLOSSARY.md`: Ubiquitous language glossary (`Book`, `BookCopy`, `Loan`, `Fine`, `Reservation`, `LoanPolicy`, etc.).
+   - Create `docs/02-inception/PRODUCT_BACKLOG.md`: Agile Scrum Themes, Epics, User Stories (`US-*`), Tasks, Story Points, Sprint Planning / Iteration Plan (Sprint 1 / Sprint 2 / Sprint 3), PSI (Potentially Shippable Increment) & MVP definition, Definition of Ready (DoR), Definition of Done (DoD), and Given/When/Then Acceptance Criteria.
+3. **HW03 — Elaboration & Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`, Deadline: Dec 8):**
+   - Document layered architecture, Use-Case Diagram, System Sequence Diagrams (SSD), Domain & Design Class Diagrams, TDD/Git/Maven plan, and justified GoF/GRASP design patterns in `docs/03-design/`.
    - Design UI screens first with the Stitch MCP and save HTML exports/screenshots under `docs/03-design/ui/`.
-3. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
+4. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`, and confirm the email linked to his GitHub account for `tools/set-author.ps1`.
 
 ---
 
@@ -52,11 +55,11 @@
 | DEC-07 | 2026-10-21 | Ibrahim Temur | Core GoF Pattern Selection: `Strategy` (loan/fine policies), `State` (`BookCopy` lifecycle), `Observer` (return/overdue events), `Factory/Builder` (`Loan` creation), `Adapter` (Open Library ingestion) | Directly addresses domain variability and state invariants without artificial over-engineering. |
 | DEC-08 | 2026-10-21 | Ibrahim Temur | Explicit `ASSUMPTION` tagging (`ASSUMPTION-01`..`09`) for all lending/fine rules | Prevents inventing unverified facts about ADU's real library policies while establishing clear, testable business rules. |
 | DEC-09 | 2026-10-21 | Ibrahim Temur | Scrum Roles: **Ibrahim Temur** = Product Owner (PO); **Omer Faruk Kuş** = Scrum Master (SM); both = Developers/Architects/QA | Establishes clear Scrum accountability while enabling full-stack pair collaboration on a 2-person academic team. |
+| DEC-10 | 2026-10-21 | Ibrahim Temur | Official 5-Homework Mapping (`HW01` Oct 27, `HW02` Nov 10, `HW03` Dec 8, `HW04` Dec 22, `HW05` Jan 5) & Dual UP/Scrum Inception Coverage | Aligns every repository phase and `cse305_hwNN_231805033_231805026.zip` package with Assoc. Prof. Dr. Fatih Soygazi's Lecture 0 project schedule. |
 
 ---
 
 ## 4. Open Questions & Follow-ups
 - **[OPEN-01]** What is Omer Faruk Kuş's GitHub username so we can send the collaborator invitation (`gh api -X PUT repos/ibrahimtemur/cse305-library-management-system/collaborators/<username> -f permission=push`)?
 - **[OPEN-02]** Is `231805026@stu.adu.edu.tr` added to Omer Faruk Kuş's GitHub account emails, or should `tools/set-author.ps1` be updated with his primary GitHub email?
-- **[OPEN-03]** Are there specific CSE305 homework 01 (HW01) deliverables, deadlines, or grading rubrics from the course instructor that we should place in `docs/00-course/`?
-- **[OPEN-04]** The workspace is located inside OneDrive (`OneDrive\Masaüstü\LibraryManagementSystem`). Monitor for any OneDrive file-locking during Maven builds or H2 file writes; relocate outside OneDrive if locks occur.
+- **[OPEN-03]** The workspace is located inside OneDrive (`OneDrive\Masaüstü\LibraryManagementSystem`). Monitor for any OneDrive file-locking during Maven builds or H2 file writes; relocate outside OneDrive if locks occur.

@@ -7,10 +7,12 @@
 
 ## Project Identity
 - **Course:** CSE305 Software Engineering — Adnan Menderes University (ADU), Department of Computer Engineering
+- **Course Instructor:** Assoc. Prof. Dr. Fatih Soygazi (`fatih.soygazi@adu.edu.tr`, Office: C 3-41)
+- **Official Syllabus & Schedule Reference:** Always consult [`docs/00-course/COURSE_SYLLABUS_AND_SCHEDULE.md`](docs/00-course/COURSE_SYLLABUS_AND_SCHEDULE.md) for official lecture topics, required textbooks (Pressman 9th Ed., Larman 3rd Ed., Rubin *Essential Scrum*), grading breakdown (`5 Assignments = 40%`, `Final = 60%`), and ADUZEM submission policies.
 - **Project:** Library Management System (standalone project, unrelated to any other repository)
-- **Authors:**
-  - **Ibrahim Temur** — Student No: `231805033`
-  - **Omer Faruk Kuş** — Student No: `231805026`
+- **Authors & Scrum Roles:**
+  - **Ibrahim Temur** — Student No: `231805033` (**Product Owner (PO)** & Developer / Architect / QA / Reviewer)
+  - **Omer Faruk Kuş** — Student No: `231805026` (**Scrum Master (SM)** & Developer / Architect / QA / Reviewer)
 
 ---
 
@@ -111,11 +113,19 @@ Both team members work on this **same computer**, taking turns under a shared Wi
   1. Before writing or modifying code, present a short plan in Turkish.
   2. Execute and verify with automated tests (`mvn test`).
   3. After finishing each work item, update `docs/process/PROJECT_STATE.md` and `docs/process/ai-usage-log.md`.
-- **Submission Archive Naming:** Homework archives MUST be generated via `tools\package <NN>` and named:
+- **Submission Archive Naming & Official 5-Homework Schedule:** Homework archives MUST be generated via `tools\package <NN>` and named:
   ```text
   cse305_hwNN_231805033_231805026.zip
   ```
-  where `NN` is a two-digit number (`01`, `02`, ...), excluding `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, and IDE metadata.
+  where `NN` is a two-digit number (`01`..`05`), excluding `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, and IDE metadata:
+  - **Week 4 (Oct 20):** Project Group & Selected Project (*Library Management System*)
+  - **HW01 — Week 5 (Oct 27):** `cse305_hw01_231805033_231805026.zip` — Project Proposal & Solution Outline (`docs/01-proposal/`)
+  - **HW02 — Week 7 (Nov 10):** `cse305_hw02_231805033_231805026.zip` — Inception: Vision, System Context, Use Cases, Glossary, Business Rules, Themes, Epics, User Stories, Tasks, Sprint Planning, Product Backlog, PSI, MVP (`docs/02-inception/`)
+  - **Weeks 8–9 (Nov 17–28):** Midterm Exam Weeks (reduced capacity buffer)
+  - **HW03 — Week 11 (Dec 8):** `cse305_hw03_231805033_231805026.zip` — Elaboration (Use case diagram, System sequence diagram, Class diagram, TDD/Git/Maven plan) & **Sprint 1** (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`)
+  - **HW04 — Week 13 (Dec 22):** `cse305_hw04_231805033_231805026.zip` — Construction & **Sprint 2** (`docs/04-sprints/sprint-2/`, `src/`)
+  - **HW05 — Week 15 (Jan 5):** `cse305_hw05_231805033_231805026.zip` — Transition & **MVP Final Release** (`docs/04-sprints/sprint-3/`, `src/`)
+- **Individual ADUZEM Upload Rule:** Remind the user when packaging an assignment that **both team members (Ibrahim Temur and Omer Faruk Kuş) must upload the generated `.zip` file individually from their own personal ADUZEM accounts**.
 
 ---
 
