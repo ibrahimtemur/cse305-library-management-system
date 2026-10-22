@@ -26,6 +26,9 @@ data/db/
 *.trace.db
 *.lock.db
 
+# Raw third-party API response cache for the seed data pipeline (never committed)
+data/raw/
+
 # Python / tooling environments
 .venv/
 venv/
