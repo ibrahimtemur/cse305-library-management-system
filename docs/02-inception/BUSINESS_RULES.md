@@ -16,14 +16,14 @@
 
 On **2026-10-22**, the project team (**Ibrahim Temur** and **Omer Faruk Kuş**) verified the official circulation regulations of the **Aydın Adnan Menderes University Directorate of Library and Documentation (ADÜ Kütüphane ve Dokümantasyon Daire Başkanlığı)** against the initial domain assumptions drafted in `HW01`.
 
-### 1.1 Official Reference Sources (Accessed: 2026-10-22)
-1. **ADU Directorate of Library and Documentation — Lending Services (*Ödünç Verme Hizmetleri*):**  
+### 1.1 Official Reference Sources (Verification Basis — Accessed: 2026-10-22)
+1. **Aydın Adnan Menderes Üniversitesi Kütüphane ve Dokümantasyon Daire Başkanlığı - Ödünç Verme Hizmetleri:**  
    <https://kutuphane.adu.edu.tr/default.asp?idx=313333> (Accessed: 2026-10-22)
-2. **ADU Directorate of Library and Documentation — Frequently Asked Questions (*Sıkça Sorulan Sorular / SSS*):**  
+2. **Aydın Adnan Menderes Üniversitesi Kütüphane ve Dokümantasyon Daire Başkanlığı - Sıkça Sorulan Sorular (SSS):**  
    <https://kutuphane.adu.edu.tr/default.asp?idx=323130> (Accessed: 2026-10-22)
-3. **Adnan Menderes University Libraries Regulation (*Adnan Menderes Üniversitesi Kütüphaneler Yönetmeliği*):**  
-   Legislation Information System (*Mevzuat Bilgi Sistemi*) — <https://www.mevzuat.gov.tr> (Accessed: 2026-10-22)
-4. **ADU Library Official Web Portal & Announcement Archive:**  
+3. **Adnan Menderes Üniversitesi Kütüphaneler Yönetmeliği:**  
+   (Mevzuat Bilgi Sistemi - <https://www.mevzuat.gov.tr>) (Accessed: 2026-10-22)
+4. **ADÜ Kütüphane Resmi Web Portalı ve Duyuru Arşivi:**  
    <https://kutuphane.adu.edu.tr> (Accessed: 2026-10-22)
 
 ### 1.2 Confirmed Institutional Rules vs. Project Assumptions

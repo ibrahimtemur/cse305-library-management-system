@@ -110,7 +110,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
 - **Extensions (Alternative Flows):**
   - **2a. No Matching Books Found:**
     1. The system displays an empty-state message (*"No books match your search criteria"*) and a control to clear active filters.
-  - **4a. Selected Book Is a Non-Circulating Reference Work (`referenceOnly == true`, `BR-014`):**
+  - **4a. Selected Book Is a Non-Circulating Reference Work (`referenceOnly == true` — *PLANNED: will exist after seed v2 (`OPEN-06`)*, `BR-014`):**
     1. When viewing an encyclopedia, dictionary, or catalog marked `referenceOnly == true`, the system displays a prominent **`REFERENCE ONLY — IN-LIBRARY USE ONLY`** banner and disables checkout and reservation controls.
   - **4b. All Circulating Copies Are Checked Out (`0 AVAILABLE`, `BR-012`):**
     1. For a title such as `isbn13: "9780321573513"` (*Algorithms*) where all copies are `LOANED` or `RESERVED`, the system displays **`ALL COPIES UNAVAILABLE`** along with the current FIFO hold queue length and enables the "Reserve Book" action (`UC-08`) for eligible authenticated members.
@@ -245,11 +245,11 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
   - **3a. Administrative Fine Waiver (`WAIVED`, `FR-026`):**
     1. Instead of collecting payment, the `Librarian` selects **"Waive Fine"** (e.g., as in seeded record `FINE-0004` on `LOAN-0005` for `SYN-STU-0040`, settled as `WAIVED` by `syn-lib-0003`).
     2. The system sets `fine.status = WAIVED`, `fine.settledOn = currentDate`, and `fine.settledBy = librarian.username`, clearing the fine block (`BR-010`, `BR-011`).
-  - **3b. Member Submits a Lost-Book Petition (`BR-015` — Confirmed Rule, `FR-027`):**
-    1. If a member reports that they have lost a borrowed copy, the `Librarian` selects **"Record Lost-Book Petition"** on the active `Loan` and confirms `lostReportedOn = currentDate`.
+  - **3b. Member Submits a Lost-Book Petition (`BR-015` — Confirmed Rule, `FR-027`; `lostReportedOn` & `appraisedValue` are *PLANNED: will exist after seed v2 (`OPEN-06`) / runtime input*):**
+    1. If a member reports that they have lost a borrowed copy, the `Librarian` selects **"Record Lost-Book Petition"** on the active `Loan` and confirms `lostReportedOn = currentDate` (*PLANNED: will exist after seed v2 (`OPEN-06`)*).
     2. The system immediately **freezes daily overdue fine accrual as of `lostReportedOn`** (`overdueDays = max(0, (lostReportedOn - dueDate).days)`, `amount = 0.25 * overdueDays`) and sets a **1-month (`30 calendar days`) replacement deadline** (`lostReportedOn + 30 days`).
     3. **Case 3b-i (Replaced within 1 month):** If the member brings a replacement copy on or before `lostReportedOn + 30 days`, the Librarian records replacement; the loan closes (`RETURNED`) and only the frozen overdue fine (if any up to `lostReportedOn`) requires settlement.
-    4. **Case 3b-ii (Not replaced within 1 month — 2x Valuation Penalty):** If the copy is not replaced within `30 calendar days`, the Librarian enters the Valuation Commission's determined book value (`appraisedValue` in `TRY`, `ASSUMPTION-15`). The system transitions `copy.status` to `LOST`, closes the loan, and records a compensation charge of `2.00 * appraisedValue` TRY (in addition to any frozen overdue fine up to `lostReportedOn`), which can then be settled as `PAID` or `WAIVED`.
+    4. **Case 3b-ii (Not replaced within 1 month — 2x Valuation Penalty):** If the copy is not replaced within `30 calendar days`, the Librarian enters the Valuation Commission's determined book value (`appraisedValue` in `TRY`, `ASSUMPTION-15` — *PLANNED: runtime input, not in current seed*). The system transitions `copy.status` to `LOST`, closes the loan, and records a compensation charge of `2.00 * appraisedValue` TRY (in addition to any frozen overdue fine up to `lostReportedOn`), which can then be settled as `PAID` or `WAIVED`.
 - **Linked Requirements & Business Rules:**
   - **Functional Requirements:** `FR-005`, `FR-014`, `FR-015`, `FR-025`, `FR-026`, `FR-027`
   - **Business Rules:** `BR-007`, `BR-008`, `BR-009`, `BR-010`, `BR-011`, `BR-015`, `BR-017`
@@ -282,7 +282,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
 
 ### 4.3 `UC-02` — Log In and Log Out (Brief)
 - **Actors:** `Member` (`ROLE_MEMBER`), `Librarian` (`ROLE_LIBRARIAN`)
-- **Summary:** The user submits their synthetic identifier (`username` such as `syn-lib-0001` for Librarians; `memberId` such as `SYN-STU-0001` / `SYN-STF-0003` / `SYN-ADM-0001` or `@synthetic.lms.local` email for Members) and demo password. The system verifies the password against the BCrypt hash seeded at application startup (`ASSUMPTION-16`, `NFR-008`), establishes an authenticated session with `ROLE_LIBRARIAN` or `ROLE_MEMBER`, and redirects to the Librarian Dashboard (`UC-11`) or Member Self-Service Portal (`UC-10`). Logging out invalidates the session and returns the user to `ROLE_GUEST`.
+- **Summary:** The user submits their synthetic identifier (`username` such as `syn-lib-0001` for Librarians; `memberId` such as `SYN-STU-0001` / `SYN-STF-0003` or `SYN-ADM-0001` [*PLANNED: will exist after seed v2 (`OPEN-06`)*] or `@synthetic.lms.local` email for Members) and demo password. The system verifies the password against the BCrypt hash seeded at application startup (`ASSUMPTION-16`, `NFR-008`), establishes an authenticated session with `ROLE_LIBRARIAN` or `ROLE_MEMBER`, and redirects to the Librarian Dashboard (`UC-11`) or Member Self-Service Portal (`UC-10`). Logging out invalidates the session and returns the user to `ROLE_GUEST`.
 - **Linked `FR-*` & `BR-*`:** `FR-016`, `FR-017`; `BR-001`, `BR-018`.
 
 ---
