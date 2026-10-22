@@ -11,7 +11,7 @@
   - **Ibrahim Temur** — Student No: `231805033`
   - **Omer Faruk Kuş** — Student No: `231805026`
 - **Base Package:** `edu.adu.lms`
-- **Document Version:** `1.0` (2026-10-21)
+- **Document Version:** `1.1` (2026-10-22)
 
 ---
 
@@ -161,3 +161,6 @@ Every architectural layer is verified continuously via `mvn test` (`.\mvnw.cmd t
 1. **Domain & Pattern Unit Tests (`src/test/java/edu/adu/lms/...`):** Fast, zero-Spring-context JUnit 5 tests verifying `FineCalculationStrategy`, `LoanPolicyStrategy`, `BookCopy` state transitions, and boundary conditions (e.g., `0` days overdue, exact due date, maximum fine cap).
 2. **Repository Slice Tests (`@DataJpaTest`):** Validate entity mappings, unique constraints (ISBN, copy barcode, member number), and custom finder queries against in-memory H2 (`jdbc:h2:mem:lms_test`).
 3. **Service & Controller Integration Tests (`@SpringBootTest`, `@WebMvcTest`):** Verify end-to-end checkout, return, overdue block enforcement, reservation queue promotion, and HTTP view rendering with MockMvc.
+
+### 6.1 Agentic Development & Verification Governance
+Development is executed through an AI-assisted, human-governed workflow governed by [`AGENTS.md`](../../AGENTS.md). AI agents operate under explicit engineering hats (*Product Owner*, *Architect*, *Developer*, *QA Engineer*, *Reviewer*) following the `Plan -> Execute -> Record` cadence to draft documentation, prototype UI screens in **Stitch MCP**, and generate TDD test suites and Spring Boot code, while all scope, prioritization, business rule (`ASSUMPTION`), acceptance, and `main`-branch merge decisions remain strictly with the human team. Every increment is gated by passing `mvn test` execution, a separate cross-model `Reviewer` pass (using a different model than the authoring model), human inspection, and full audit logging in [`docs/process/ai-usage-log.md`](../process/ai-usage-log.md) to mitigate AI hallucination and over-reliance risks.

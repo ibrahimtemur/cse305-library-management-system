@@ -11,7 +11,7 @@
   - **Ibrahim Temur** — Student No: `231805033`
   - **Omer Faruk Kuş** — Student No: `231805026`
 - **Engineering Methodology:** Agile Scrum & Test-Driven Development (TDD)
-- **Document Version:** `1.0` (2026-10-21)
+- **Document Version:** `1.1` (2026-10-22)
 
 ---
 
@@ -103,6 +103,7 @@ Features are prioritized using the **MoSCoW** framework to guarantee a shippable
 | **`ASSUMPTION-06`** | **Borrowing Eligibility Block** | **ASSUMPTION:** A member who has any currently overdue loan or any unpaid fine balance (`> 0.00 TRY`), or whose membership status is `SUSPENDED`, is blocked from checking out new books or renewing loans until the overdue copy is returned and fines are settled/waived. |
 | **`ASSUMPTION-07`** | **Reservation Queue Allocation** | **ASSUMPTION:** Reservations are placed at the *book title* level in First-In, First-Out (FIFO) order; when a physical copy of that title is returned, its state transitions to `RESERVED` for the member at the head of the queue rather than immediately becoming `AVAILABLE` to walk-in borrowers. |
 | **`ASSUMPTION-08`** | **Synthetic Identity & Local Auth** | **ASSUMPTION:** All user authentication and member records use local database credentials and 100% synthetic personal data; no real ADU student IDs, emails, or institutional systems are accessed. |
+| **`ASSUMPTION-09`** | **Seeded Physical Copies per Title** | **ASSUMPTION:** Each seeded book title is initialized with **1 to 4 physical copies (`BookCopy`)** assigned deterministic synthetic barcode identifiers (e.g., `LMS-COPY-1001`) so multi-copy lending and reservation queues can be demonstrated immediately. |
 
 ---
 
@@ -141,6 +142,27 @@ flowchart LR
 | **HW04 — Construction / Sprint 2** | Weeks 12–13 | **December 22** | Working **Sprint 2** increment: Circulation Service (Checkout, Return, Renewal), Overdue Detection & Fine Calculation Engine, core GoF/GRASP pattern implementations (*Strategy*, *State*, *Builder/Factory*), librarian circulation UI, and integration tests. |
 | **HW05 — Transition / MVP Release** | Weeks 14–15 | **January 5** | Complete **MVP Release (Sprint 3)**: Book Reservation/Hold queue (*Observer*/*State* integration), Fine payment/waiver workflow, Librarian Dashboard & KPIs, Guest catalog view, full regression testing (`mvn test`), sprint retrospectives, and final submission archive (`cse305_hw05_231805033_231805026.zip`). |
 
+### 6.3 Agentic Development Approach
+
+ In alignment with Week 15 of the CSE305 syllabus (*AI-based Software Development Lifecycle*), this project uses a disciplined, human-governed **Agentic Development Approach**:
+
+1. **Division of Responsibilities (AI Agents vs. Human Engineers):**
+   - **AI Agent Activities:** Drafting and structuring Markdown documentation, generating UI screen prototypes via the **Stitch MCP** server, writing TDD unit/integration test scaffolding (JUnit 5) and Spring Boot implementation code, and performing automated checklist/code review passes.
+   - **Human Engineering Decisions:** Defining project scope and MoSCoW priorities, establishing domain business rules and `ASSUMPTION` boundaries, resolving architectural trade-offs, verifying acceptance criteria, inspecting runtime behavior, and approving merges into the `main` branch.
+2. **Governance via `AGENTS.md`:**
+   - Every AI session is strictly bound by [`AGENTS.md`](../../AGENTS.md), which enforces:
+     - **Role-Based Working "Hats":** Explicit perspective switching across *Product Owner*, *Architect*, *Developer*, *QA Engineer*, and *Reviewer*.
+     - **`Plan -> Execute -> Record` Cadence:** Every task begins with an explicit plan in Turkish for human approval before modifying repository files, followed by test verification (`mvn test`) and state updates in [`docs/process/PROJECT_STATE.md`](../process/PROJECT_STATE.md).
+     - **Language & Header Rules:** Chat communication with the team occurs in Turkish, while 100% of repository content (code, identifiers, comments, Javadoc, tests, documentation, commits) is written in English and starts with the mandatory CSE305 student authorship header.
+3. **Human-in-the-Loop Quality Gates:**
+   - **Plan & Merge Gate:** No implementation starts without plan approval, and merging `develop` into `main` requires explicit human authorization.
+   - **Cross-Model Review Pass:** Significant code and documentation increments undergo a dedicated `Reviewer` hat pass using a **different AI model** than the model that authored the work, reducing single-model blind spots before human sign-off.
+   - **Automated Test Gate:** All production changes must pass `mvn test` (`.\mvnw.cmd test`) against the isolated in-memory H2 test database.
+4. **Academic Transparency (`docs/process/ai-usage-log.md`):**
+   - Every AI-assisted task is recorded in [`docs/process/ai-usage-log.md`](../process/ai-usage-log.md) with the date, active student name, prompt summary, the exact model selected in the Antigravity model selector, generated outputs, and truthful human review status (`Reviewed by ...` vs. `Pending human review`).
+5. **Known Limitations of AI Assistance:**
+   - Large language models do not possess intrinsic knowledge of local institutional policies, can hallucinate framework methods or subtly flawed state transitions, lose context across separate chat sessions without structured state files (`PROJECT_STATE.md`), and can over-engineer design patterns unless constrained by human architectural review and automated tests.
+
 ---
 
 ## 7. Risks & Mitigation Matrix
@@ -153,3 +175,4 @@ flowchart LR
 | **RISK-04** | **OneDrive File-Locking on H2 or Maven `target/`:** The workspace resides under a OneDrive-synced path, which can occasionally lock rapidly changing binary files during builds or H2 writes. | Medium | Low | Exclude `target/` and `data/db/` from Git, use in-memory H2 (`jdbc:h2:mem:lms_test`) for all automated JUnit 5 tests, and relocate the local clone outside OneDrive if file-locking occurs. |
 | **RISK-05** | **Artificial or Over-Engineered Design Patterns:** Forcing GoF patterns where simple object-oriented code suffices can bloat the codebase and obscure business logic. | Low | Medium | Apply GoF/GRASP patterns strictly where domain variation exists (e.g., *Strategy* for member-type lending/fine policies, *State* for `BookCopy` lifecycle) and document the problem-solution rationale in `docs/03-design/`. |
 | **RISK-06** | **Scope Creep on Secondary Features:** Spending excessive time on optional features (Guest portal, live API enrichment, complex charts) could delay core circulation reliability. | Medium | Medium | Enforce strict MoSCoW prioritization: all **Must Have (`M1`–`M6`)** items and their JUnit 5 test suites must pass before starting **Should Have** or **Could Have** stories. |
+| **RISK-07** | **Incorrect or Hallucinated AI Output & Over-Reliance on Agents:** AI agents may generate hallucinated APIs, unverified domain rules, or subtle logic defects if outputs are accepted uncritically. | Medium | High | Enforce human review of every artifact, strict Test-Driven Development (`mvn test`), cross-model review passes (using a different model for the `Reviewer` hat than the authoring model), explicit `ASSUMPTION` tagging, and full audit logging in `docs/process/ai-usage-log.md`. |

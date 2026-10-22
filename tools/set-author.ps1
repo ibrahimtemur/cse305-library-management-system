@@ -25,7 +25,7 @@ $authors = @{
     }
     'omer'    = @{
         Name  = ('Omer Faruk Ku' + [char]0x015F)
-        Email = '231805026@stu.adu.edu.tr'
+        Email = 'kusomer889@gmail.com'
         No    = '231805026'
     }
 }

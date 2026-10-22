@@ -102,7 +102,7 @@ Both team members work on this **same computer**, taking turns under a shared Wi
 
 ## 7. Academic Integrity, Data Privacy, and Security
 - **Originality:** Never copy code or prose from external student projects. Cite any external references, standards, or libraries used.
-- **AI Transparency:** Log every significant AI-assisted task in `docs/process/ai-usage-log.md` with date, active student name, prompt summary, the **actual active model used in that session** (note: if `Gemini 3 Pro` is ever mentioned in a prompt, log it as `Gemini 4 Argon`; if another model such as `Claude Opus 4.6` is active, log that actual model), output produced, and human review notes.
+- **AI Transparency:** Log every significant AI-assisted task in `docs/process/ai-usage-log.md` with date, active student name, prompt summary, the model name (log the model name exactly as shown in the Antigravity model selector, as told by the user), output produced, and human review notes.
 - **Synthetic Data Only:** Never use real personal data (names, national IDs, phone numbers, real student records). All member and loan seed/test data in `data/seed/` and tests must be completely synthetic.
 - **Zero Secrets:** Never commit API keys, tokens, passwords, or credentials to the repository or print them in logs.
 
