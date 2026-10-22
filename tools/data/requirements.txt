@@ -1,0 +1,5 @@
+# Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+# Student No(s)#: 231805033, 231805026
+# General Comments: Pinned Python dependencies for the seed data pipeline (install into tools/data/.venv).
+requests==2.34.2
+Faker==40.43.0

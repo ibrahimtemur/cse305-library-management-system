@@ -74,7 +74,7 @@ try {
         if ($segments -contains '__pycache__' -or $segments -contains 'node_modules' -or $segments -contains '.venv' -or $segments -contains 'venv') {
             continue
         }
-        if ($relPath -replace '\\', '/' -match '^data/db(/|$)') {
+        if ($relPath -replace '\\', '/' -match '^data/(db|raw)(/|$)') {
             continue
         }
         if ($relPath -replace '\\', '/' -in @('.mvn/timing.properties', '.mvn/wrapper/maven-wrapper.jar')) {

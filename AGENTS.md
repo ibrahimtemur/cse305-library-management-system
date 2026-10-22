@@ -63,6 +63,8 @@ General Comments: <one-line purpose of this file>
 
 > **Third-Party Generated Files Exception:** Standard third-party tool bootstrap files (`mvnw`, `mvnw.cmd`, `.mvn/wrapper/maven-wrapper.properties`) keep their upstream Apache 2.0 license headers intact and are attributed in `README.md`.
 
+> **Generated JSON Data Files Exception:** Machine-generated JSON data files under `data/seed/` (`*.json`) cannot hold comments and therefore carry **no** header. Authorship is documented in `data/README.md` (which has the mandatory header), and the generator scripts that produce them (`tools/data/*.py`) keep the mandatory header. This exception applies **only** to generated JSON data files; all code and documents still require the header.
+
 ---
 
 ## 3. Shared Computer Rule (Mandatory Start-of-Chat Check)
@@ -117,7 +119,7 @@ Both team members work on this **same computer**, taking turns under a shared Wi
   ```text
   cse305_hwNN_231805033_231805026.zip
   ```
-  where `NN` is a two-digit number (`01`..`05`), excluding `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, and IDE metadata:
+  where `NN` is a two-digit number (`01`..`05`), excluding `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, `data/raw/`, and IDE metadata:
   - **Week 4 (Oct 20):** Project Group & Selected Project (*Library Management System*)
   - **HW01 — Week 5 (Oct 27):** `cse305_hw01_231805033_231805026.zip` — Project Proposal & Solution Outline (`docs/01-proposal/`)
   - **HW02 — Week 7 (Nov 10):** `cse305_hw02_231805033_231805026.zip` — Inception: Vision, System Context, Use Cases, Glossary, Business Rules, Themes, Epics, User Stories, Tasks, Sprint Planning, Product Backlog, PSI, MVP (`docs/02-inception/`)

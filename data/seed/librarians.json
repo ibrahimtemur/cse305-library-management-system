@@ -1,0 +1,20 @@
+[
+  {
+    "username": "syn-lib-0001",
+    "displayName": "Enginiz Yıldırım",
+    "email": "syn-lib-0001@synthetic.lms.local",
+    "role": "ROLE_LIBRARIAN"
+  },
+  {
+    "username": "syn-lib-0002",
+    "displayName": "Sonad Zengin",
+    "email": "syn-lib-0002@synthetic.lms.local",
+    "role": "ROLE_LIBRARIAN"
+  },
+  {
+    "username": "syn-lib-0003",
+    "displayName": "Muvahhide Yorulmaz",
+    "email": "syn-lib-0003@synthetic.lms.local",
+    "role": "ROLE_LIBRARIAN"
+  }
+]
