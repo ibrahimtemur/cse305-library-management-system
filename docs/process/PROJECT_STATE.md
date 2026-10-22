@@ -6,7 +6,7 @@
 # Project State — CSE305 Library Management System
 
 - **Last Updated:** 2026-10-22
-- **Active Team Member:** Omer Faruk Kuş (`231805026` — Scrum Master)
+- **Active Team Member:** Ibrahim Temur (`231805033` — Product Owner)
 - **Team Members:** Ibrahim Temur (`231805033` — Product Owner) & Omer Faruk Kuş (`231805026` — Scrum Master)
 - **Active Branch:** `develop`
 - **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Private)
@@ -28,6 +28,7 @@
 - **[2026-10-21 | Ibrahim Temur]** Ingested official CSE305 Lecture 0 syllabus (Assoc. Prof. Dr. Fatih Soygazi) into `docs/00-course/COURSE_SYLLABUS_AND_SCHEDULE.md` and `AGENTS.md` (5 assignments = 40%, Final = 60%; `HW01: Oct 27`, `HW02: Nov 10`, `HW03: Dec 8`, `HW04: Dec 22`, `HW05: Jan 5`; individual ADUZEM upload rule). *(Reviewed and approved by Ibrahim Temur)*
 - **[2026-10-21 | Omer Faruk Kuş]** Verified live application runtime (`.\mvnw.cmd spring-boot:run`) and embedded H2 Console connectivity (`jdbc:h2:file:./data/db/lms;AUTO_SERVER=TRUE`) in browser, updated `tools/package.ps1` to exclude nested `.venv` directories (`8c5e4c1`), and packaged `dist/cse305_hw01_231805033_231805026.zip`. *(Reviewed and verified by Omer Faruk Kuş)*
 - **[2026-10-22 | Omer Faruk Kuş]** Polished HW01 (`v1.1`) prior to submission (`499e8a4`): added Section `6.3 Agentic Development Approach`, `ASSUMPTION-09`, and `RISK-07` to `docs/01-proposal/PROJECT_PROPOSAL.md`; added Section `6.1 Agentic Development & Verification Governance` to `docs/01-proposal/SOLUTION_OUTLINE.md`; updated `AGENTS.md` Section 7 model-logging rule; audited `ai-usage-log.md` and `PROJECT_STATE.md` review notes and model selector names (`Claude Sonnet 5.5` / `Gemini 4 Argon`); configured Omer Faruk Kuş's confirmed GitHub email (`kusomer889@gmail.com`) in `tools/set-author.ps1`; and rebuilt **`dist/cse305_hw01_231805033_231805026.zip`** (28 files). *(Reviewed and approved jointly by Omer Faruk Kuş and Ibrahim Temur)*
+- **[2026-10-22 | Ibrahim Temur]** Built the reproducible seed data pipeline (feature `M6`, branch `feature/data-pipeline` merged into `develop`): implemented `tools/data/lms_seed_common.py`, `tools/data/fetch_books.py` (polite Open Library Search API fetcher with `>= 1.2s` delay, `LMS_CONTACT_EMAIL` env-var User-Agent check, and gitignored `data/raw/openlibrary/` cache), and `tools/data/generate_synthetic.py` (`RANDOM_SEED = 20261022`, `REFERENCE_DATE = 2026-10-22`, `Faker('tr_TR')`); generated `data/seed/books-openlibrary.json` (782 clean books across 11 categories), `members.json` (60 synthetic student/staff members), `librarians.json` (3 accounts, zero credentials), `copies.json` (1,706 physical copies), `loans.json` (165 active/returned loans), `fines.json` (40 fines obeying `ASSUMPTION-05`), and `reservations.json` (22 FIFO holds across 12 titles); added 72 offline `unittest` validation tests under `tools/data/tests/`; documented the generated JSON file header exception in `AGENTS.md` §2; and authored `data/README.md` and `data/seed/README.md`. *(Pending human review)*
 
 ---
 
@@ -61,6 +62,7 @@
 | DEC-09 | 2026-10-21 | Ibrahim Temur & Omer Faruk Kuş | Scrum Roles: **Ibrahim Temur** = Product Owner (PO); **Omer Faruk Kuş** = Scrum Master (SM); both = Developers/Architects/QA | Establishes clear Scrum accountability while enabling full-stack pair collaboration on a 2-person academic team. |
 | DEC-10 | 2026-10-21 | Omer Faruk Kuş | Official 5-Homework Mapping (`HW01` Oct 27, `HW02` Nov 10, `HW03` Dec 8, `HW04` Dec 22, `HW05` Jan 5) & Dual UP/Scrum Inception Coverage | Aligns every repository phase and `cse305_hwNN_231805033_231805026.zip` package with Assoc. Prof. Dr. Fatih Soygazi's Lecture 0 project schedule. |
 | DEC-11 | 2026-10-22 | Omer Faruk Kuş | Agentic Development Governance & Cross-Model Review Gate | Documents AI vs. human responsibilities (`PROJECT_PROPOSAL.md` §6.3, `SOLUTION_OUTLINE.md` §6.1), adds `RISK-07`, and enforces logging the exact model name shown in the Antigravity model selector. |
+| DEC-12 | 2026-10-22 | Ibrahim Temur | Reproducible Seed Pipeline (`RANDOM_SEED = 20261022`, `REFERENCE_DATE = 2026-10-22`), `LMS_CONTACT_EMAIL` Env-Var Politeness, and Generated JSON Header Exception | Ensures byte-identical offline synthetic data generation, prevents committing real contact emails to Git, and documents why machine-generated `data/seed/*.json` files omit comment headers (`AGENTS.md` §2). |
 
 ---
 
@@ -68,3 +70,4 @@
 - **[OPEN-01]** What is Omer Faruk Kuş's GitHub username so we can send the collaborator invitation (`gh api -X PUT repos/ibrahimtemur/cse305-library-management-system/collaborators/<username> -f permission=push`)?
 - **[OPEN-02 — RESOLVED 2026-10-22]** Confirmed Omer Faruk Kuş's GitHub email as `kusomer889@gmail.com` and updated `tools/set-author.ps1` accordingly.
 - **[OPEN-03]** The workspace is located inside OneDrive (`OneDrive\Masaüstü\LibraryManagementSystem`). Monitor for any OneDrive file-locking during Maven builds or H2 file writes; relocate outside OneDrive if locks occur.
+- **[OPEN-04]** All seed dates in `data/seed/*.json` (`loans.json`, `fines.json`, `reservations.json`, `members.json`) are relative to `REFERENCE_DATE = 2026-10-22`. The upcoming Spring Boot seed loader story should evaluate shifting seed dates relative to the application startup date so that active, due-soon, and overdue loan scenarios do not go stale over time.
