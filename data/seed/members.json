@@ -1,0 +1,602 @@
+[
+  {
+    "memberId": "SYN-STU-0001",
+    "firstName": "Tutkucan",
+    "lastName": "Ergül",
+    "email": "syn-stu-0001@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Chemistry",
+    "registeredOn": "2025-07-28"
+  },
+  {
+    "memberId": "SYN-STU-0002",
+    "firstName": "Menişan",
+    "lastName": "Arslan",
+    "email": "syn-stu-0002@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Physics",
+    "registeredOn": "2025-04-16"
+  },
+  {
+    "memberId": "SYN-STU-0003",
+    "firstName": "Hazrat",
+    "lastName": "Yorulmaz",
+    "email": "syn-stu-0003@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-02-24"
+  },
+  {
+    "memberId": "SYN-STU-0004",
+    "firstName": "Nurcan",
+    "lastName": "Bilgin",
+    "email": "syn-stu-0004@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2024-05-05"
+  },
+  {
+    "memberId": "SYN-STU-0005",
+    "firstName": "Nayil",
+    "lastName": "Yılmaz",
+    "email": "syn-stu-0005@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-04-28"
+  },
+  {
+    "memberId": "SYN-STU-0006",
+    "firstName": "Ülke",
+    "lastName": "Alemdar",
+    "email": "syn-stu-0006@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2025-08-31"
+  },
+  {
+    "memberId": "SYN-STU-0007",
+    "firstName": "Havali",
+    "lastName": "Yaman",
+    "email": "syn-stu-0007@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-01-13"
+  },
+  {
+    "memberId": "SYN-STU-0008",
+    "firstName": "Batırhan",
+    "lastName": "Akar",
+    "email": "syn-stu-0008@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2024-03-22"
+  },
+  {
+    "memberId": "SYN-STU-0009",
+    "firstName": "Kenter",
+    "lastName": "Hançer",
+    "email": "syn-stu-0009@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Business Administration",
+    "registeredOn": "2024-07-12"
+  },
+  {
+    "memberId": "SYN-STU-0010",
+    "firstName": "Sadeti",
+    "lastName": "Sezer",
+    "email": "syn-stu-0010@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2023-12-19"
+  },
+  {
+    "memberId": "SYN-STU-0011",
+    "firstName": "Sevican",
+    "lastName": "Mansız",
+    "email": "syn-stu-0011@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mechanical Engineering",
+    "registeredOn": "2025-10-14"
+  },
+  {
+    "memberId": "SYN-STU-0012",
+    "firstName": "Dorukhan",
+    "lastName": "Korutürk",
+    "email": "syn-stu-0012@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2025-02-02"
+  },
+  {
+    "memberId": "SYN-STU-0013",
+    "firstName": "Kenter",
+    "lastName": "İnönü",
+    "email": "syn-stu-0013@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Business Administration",
+    "registeredOn": "2024-04-09"
+  },
+  {
+    "memberId": "SYN-STU-0014",
+    "firstName": "Ginyas",
+    "lastName": "Zorlu",
+    "email": "syn-stu-0014@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-12-05"
+  },
+  {
+    "memberId": "SYN-STU-0015",
+    "firstName": "Ekmel",
+    "lastName": "Bilir",
+    "email": "syn-stu-0015@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2025-04-26"
+  },
+  {
+    "memberId": "SYN-STU-0016",
+    "firstName": "Muvahhide",
+    "lastName": "Dumanlı",
+    "email": "syn-stu-0016@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mechanical Engineering",
+    "registeredOn": "2024-09-11"
+  },
+  {
+    "memberId": "SYN-STU-0017",
+    "firstName": "Abdülkerim",
+    "lastName": "Zengin",
+    "email": "syn-stu-0017@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Chemistry",
+    "registeredOn": "2025-04-21"
+  },
+  {
+    "memberId": "SYN-STU-0018",
+    "firstName": "Efser",
+    "lastName": "Arsoy",
+    "email": "syn-stu-0018@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "SUSPENDED",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-12-30"
+  },
+  {
+    "memberId": "SYN-STU-0019",
+    "firstName": "Fatih",
+    "lastName": "Zengin",
+    "email": "syn-stu-0019@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mechanical Engineering",
+    "registeredOn": "2023-11-03"
+  },
+  {
+    "memberId": "SYN-STU-0020",
+    "firstName": "Vaysal",
+    "lastName": "Güçlü",
+    "email": "syn-stu-0020@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Philosophy",
+    "registeredOn": "2024-01-29"
+  },
+  {
+    "memberId": "SYN-STU-0021",
+    "firstName": "Bariş",
+    "lastName": "Yorulmaz",
+    "email": "syn-stu-0021@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2023-11-06"
+  },
+  {
+    "memberId": "SYN-STU-0022",
+    "firstName": "Gazel",
+    "lastName": "Manço",
+    "email": "syn-stu-0022@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2025-03-30"
+  },
+  {
+    "memberId": "SYN-STU-0023",
+    "firstName": "Ağbegim",
+    "lastName": "Erdoğan",
+    "email": "syn-stu-0023@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2025-02-07"
+  },
+  {
+    "memberId": "SYN-STU-0024",
+    "firstName": "Doğuhan",
+    "lastName": "Durdu",
+    "email": "syn-stu-0024@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2024-08-07"
+  },
+  {
+    "memberId": "SYN-STU-0025",
+    "firstName": "Muhip",
+    "lastName": "Zorlu",
+    "email": "syn-stu-0025@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "SUSPENDED",
+    "department": "History",
+    "registeredOn": "2024-02-29"
+  },
+  {
+    "memberId": "SYN-STU-0026",
+    "firstName": "Gelengül",
+    "lastName": "Şama",
+    "email": "syn-stu-0026@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "History",
+    "registeredOn": "2025-05-23"
+  },
+  {
+    "memberId": "SYN-STU-0027",
+    "firstName": "Cüneyit",
+    "lastName": "Karadeniz",
+    "email": "syn-stu-0027@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "History",
+    "registeredOn": "2023-12-01"
+  },
+  {
+    "memberId": "SYN-STU-0028",
+    "firstName": "Hürdoğan",
+    "lastName": "Şafak",
+    "email": "syn-stu-0028@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-12-11"
+  },
+  {
+    "memberId": "SYN-STU-0029",
+    "firstName": "Nurdeniz",
+    "lastName": "İnönü",
+    "email": "syn-stu-0029@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "History",
+    "registeredOn": "2024-01-08"
+  },
+  {
+    "memberId": "SYN-STU-0030",
+    "firstName": "İsmet",
+    "lastName": "Çorlu",
+    "email": "syn-stu-0030@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2025-02-22"
+  },
+  {
+    "memberId": "SYN-STU-0031",
+    "firstName": "Şevket",
+    "lastName": "Ertaş",
+    "email": "syn-stu-0031@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2025-10-12"
+  },
+  {
+    "memberId": "SYN-STU-0032",
+    "firstName": "Özge",
+    "lastName": "İnönü",
+    "email": "syn-stu-0032@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Chemistry",
+    "registeredOn": "2023-11-13"
+  },
+  {
+    "memberId": "SYN-STU-0033",
+    "firstName": "Aydinç",
+    "lastName": "Yaman",
+    "email": "syn-stu-0033@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "SUSPENDED",
+    "department": "Physics",
+    "registeredOn": "2023-12-08"
+  },
+  {
+    "memberId": "SYN-STU-0034",
+    "firstName": "Öncel",
+    "lastName": "İhsanoğlu",
+    "email": "syn-stu-0034@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2025-01-29"
+  },
+  {
+    "memberId": "SYN-STU-0035",
+    "firstName": "Gülnaziye",
+    "lastName": "Bilir",
+    "email": "syn-stu-0035@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2023-09-06"
+  },
+  {
+    "memberId": "SYN-STU-0036",
+    "firstName": "Barışcan",
+    "lastName": "Bilge",
+    "email": "syn-stu-0036@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "History",
+    "registeredOn": "2023-11-16"
+  },
+  {
+    "memberId": "SYN-STU-0037",
+    "firstName": "Beyler",
+    "lastName": "Arsoy",
+    "email": "syn-stu-0037@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Business Administration",
+    "registeredOn": "2024-04-13"
+  },
+  {
+    "memberId": "SYN-STU-0038",
+    "firstName": "Dalkılıç",
+    "lastName": "Hançer",
+    "email": "syn-stu-0038@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Philosophy",
+    "registeredOn": "2025-01-11"
+  },
+  {
+    "memberId": "SYN-STU-0039",
+    "firstName": "Fayize",
+    "lastName": "Akar",
+    "email": "syn-stu-0039@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2025-06-02"
+  },
+  {
+    "memberId": "SYN-STU-0040",
+    "firstName": "Abdülsamed",
+    "lastName": "Sakarya",
+    "email": "syn-stu-0040@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2025-09-26"
+  },
+  {
+    "memberId": "SYN-STU-0041",
+    "firstName": "Biltaş",
+    "lastName": "Kısakürek",
+    "email": "syn-stu-0041@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2025-10-17"
+  },
+  {
+    "memberId": "SYN-STU-0042",
+    "firstName": "Meşhur",
+    "lastName": "Durdu",
+    "email": "syn-stu-0042@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-09-09"
+  },
+  {
+    "memberId": "SYN-STU-0043",
+    "firstName": "Doğannur",
+    "lastName": "Güçlü",
+    "email": "syn-stu-0043@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Business Administration",
+    "registeredOn": "2025-10-29"
+  },
+  {
+    "memberId": "SYN-STU-0044",
+    "firstName": "Peren",
+    "lastName": "Erdoğan",
+    "email": "syn-stu-0044@synthetic.lms.local",
+    "memberType": "STUDENT",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2024-09-22"
+  },
+  {
+    "memberId": "SYN-STF-0001",
+    "firstName": "Gülçe",
+    "lastName": "Akdeniz",
+    "email": "syn-stf-0001@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Philosophy",
+    "registeredOn": "2022-10-01"
+  },
+  {
+    "memberId": "SYN-STF-0002",
+    "firstName": "Baydu",
+    "lastName": "Arsoy",
+    "email": "syn-stf-0002@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Mathematics",
+    "registeredOn": "2018-11-14"
+  },
+  {
+    "memberId": "SYN-STF-0003",
+    "firstName": "Atasagun",
+    "lastName": "Öcalan",
+    "email": "syn-stf-0003@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2023-08-18"
+  },
+  {
+    "memberId": "SYN-STF-0004",
+    "firstName": "Mümtaze",
+    "lastName": "Akça",
+    "email": "syn-stf-0004@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Mechanical Engineering",
+    "registeredOn": "2022-11-24"
+  },
+  {
+    "memberId": "SYN-STF-0005",
+    "firstName": "Çelikkan",
+    "lastName": "Yılmaz",
+    "email": "syn-stf-0005@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2020-05-16"
+  },
+  {
+    "memberId": "SYN-STF-0006",
+    "firstName": "Şamiha",
+    "lastName": "Güçlü",
+    "email": "syn-stf-0006@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2021-06-25"
+  },
+  {
+    "memberId": "SYN-STF-0007",
+    "firstName": "Artan",
+    "lastName": "Yüksel",
+    "email": "syn-stf-0007@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Chemistry",
+    "registeredOn": "2022-05-25"
+  },
+  {
+    "memberId": "SYN-STF-0008",
+    "firstName": "Alpsü",
+    "lastName": "İnönü",
+    "email": "syn-stf-0008@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2022-10-07"
+  },
+  {
+    "memberId": "SYN-STF-0009",
+    "firstName": "Özay",
+    "lastName": "Aksu",
+    "email": "syn-stf-0009@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Physics",
+    "registeredOn": "2023-06-22"
+  },
+  {
+    "memberId": "SYN-STF-0010",
+    "firstName": "Tanbay",
+    "lastName": "Akdeniz",
+    "email": "syn-stf-0010@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2021-04-16"
+  },
+  {
+    "memberId": "SYN-STF-0011",
+    "firstName": "Göli",
+    "lastName": "Zorlu",
+    "email": "syn-stf-0011@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Electrical and Electronics Engineering",
+    "registeredOn": "2023-05-27"
+  },
+  {
+    "memberId": "SYN-STF-0012",
+    "firstName": "Görsev",
+    "lastName": "Ülker",
+    "email": "syn-stf-0012@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Physics",
+    "registeredOn": "2018-11-03"
+  },
+  {
+    "memberId": "SYN-STF-0013",
+    "firstName": "Zeynelabidin",
+    "lastName": "Gül",
+    "email": "syn-stf-0013@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Business Administration",
+    "registeredOn": "2021-12-05"
+  },
+  {
+    "memberId": "SYN-STF-0014",
+    "firstName": "Atgun",
+    "lastName": "Akdeniz",
+    "email": "syn-stf-0014@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "SUSPENDED",
+    "department": "Computer Engineering",
+    "registeredOn": "2018-12-13"
+  },
+  {
+    "memberId": "SYN-STF-0015",
+    "firstName": "Tarancı",
+    "lastName": "Ertaş",
+    "email": "syn-stf-0015@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Turkish Language and Literature",
+    "registeredOn": "2022-10-05"
+  },
+  {
+    "memberId": "SYN-STF-0016",
+    "firstName": "Akcivan",
+    "lastName": "Akdeniz",
+    "email": "syn-stf-0016@synthetic.lms.local",
+    "memberType": "ACADEMIC_STAFF",
+    "status": "ACTIVE",
+    "department": "Computer Engineering",
+    "registeredOn": "2023-01-04"
+  }
+]
