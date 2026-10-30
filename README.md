@@ -18,6 +18,18 @@ A standalone web-based **Library Management System** developed for **CSE305 Soft
 
 ---
 
+## HW01 Submission Deliverables (`v1.2` — Due: Tuesday, November 3, 2026)
+
+For immediate inspection when opening the submission archive (`cse305_hw01_231805033_231805026.zip`), the consolidated three-part **HW01** document (**Part 1: Problem Description**, **Part 2: Solution Outline**, and **Part 3: Domain Model**) is placed both at the repository root and under [`docs/01-proposal/`](docs/01-proposal/README.md):
+
+- **[`HW01_Problem_Solution_DomainModel.pdf`](HW01_Problem_Solution_DomainModel.pdf)** *(Root-level print-ready PDF with rendered diagrams)*
+- **[`docs/01-proposal/HW01_Problem_Solution_DomainModel.md`](docs/01-proposal/HW01_Problem_Solution_DomainModel.md)** & **[`docs/01-proposal/HW01_Problem_Solution_DomainModel.pdf`](docs/01-proposal/HW01_Problem_Solution_DomainModel.pdf)** *(Consolidated Markdown source & PDF)*
+- **[`docs/01-proposal/PROJECT_PROPOSAL.md`](docs/01-proposal/PROJECT_PROPOSAL.md)** (`v1.2`) — Detailed Problem Description, Stakeholders, Scope, MoSCoW Features, Confirmed ADU Rules & `ASSUMPTION-01`..`17`, Scrum Timeline, and Risk Matrix
+- **[`docs/01-proposal/SOLUTION_OUTLINE.md`](docs/01-proposal/SOLUTION_OUTLINE.md)** (`v1.2`) — Detailed 5-Tier Layered Architecture, Technology Stack, Stitch MCP UI-First Workflow, `Seed v2` Data Strategy, and GoF/GRASP Design Patterns
+- **[`docs/01-proposal/images/domain-model.png`](docs/01-proposal/images/domain-model.png)** / **[`.svg`](docs/01-proposal/images/domain-model.svg)** / **[`.mmd`](docs/01-proposal/images/domain-model.mmd)** — Larman (Ch. 9) Conceptual Domain Model Class Diagram
+
+---
+
 ## Technology Stack
 
 - **Language:** Java 17 (compiled with `--release 17`, compatible with JDK 17–25)
@@ -33,13 +45,14 @@ A standalone web-based **Library Management System** developed for **CSE305 Soft
 
 ```text
 LibraryManagementSystem/
+├── HW01_Problem_Solution_DomainModel.pdf # Root-level consolidated HW01 submission PDF (v1.2)
 ├── AGENTS.md                        # Permanent AI agent & engineering governance rules
 ├── README.md                        # Project overview and usage instructions
 ├── pom.xml                          # Maven build configuration
 ├── mvnw / mvnw.cmd                  # Maven Wrapper scripts
 ├── docs/
 │   ├── 00-course/                   # Course guidelines and assignment rubrics
-│   ├── 01-proposal/                 # Project proposal and scope documents
+│   ├── 01-proposal/                 # HW01 Problem Description, Solution Outline & Domain Model (v1.2)
 │   ├── 02-inception/                # Requirements, personas, use cases, product backlog
 │   ├── 03-design/                   # Architecture, UML diagrams, GoF/GRASP documentation
 │   │   └── ui/                      # Stitch UI screen designs and exports
@@ -48,8 +61,9 @@ LibraryManagementSystem/
 │       ├── PROJECT_STATE.md         # Current phase, completed work, decisions, next steps
 │       └── ai-usage-log.md          # Complete audit log of AI-assisted tasks
 ├── data/
-│   └── seed/                        # Synthetic seed datasets (no real personal data)
+│   └── seed/                        # Reproducible Open Library + synthetic seed v2 datasets
 ├── tools/
+│   ├── data/                        # Reproducible seed data pipeline scripts & 80 unit tests
 │   ├── set-author.ps1 / .cmd        # Sets repository-local Git author (ibrahim | omer)
 │   └── package.ps1 / .cmd           # Builds homework zip: cse305_hwNN_231805033_231805026.zip
 └── src/
