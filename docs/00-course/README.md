@@ -9,4 +9,4 @@ Stores CSE305 Software Engineering course guidelines, homework handouts, grading
 
 ## Documents in This Directory
 
-- [`COURSE_SYLLABUS_AND_SCHEDULE.md`](COURSE_SYLLABUS_AND_SCHEDULE.md) — Official Lecture 0 syllabus by Assoc. Prof. Dr. Fatih Soygazi covering weekly lecture topics, required textbooks (Pressman 9th Ed., Larman 3rd Ed., Rubin *Essential Scrum*), the 5-homework project schedule (`Oct 20`, `Oct 27`, `Nov 10`, `Dec 8`, `Dec 22`, `Jan 5`), grading weights (`40%` assignments / `60%` final), and the 6 mandatory Project Policy rules.
+- [`COURSE_SYLLABUS_AND_SCHEDULE.md`](COURSE_SYLLABUS_AND_SCHEDULE.md) — Official Lecture 0 syllabus by Assoc. Prof. Dr. Fatih Soygazi covering weekly lecture topics, required textbooks (Pressman 9th Ed., Larman 3rd Ed., Rubin *Essential Scrum*), the 5-homework project schedule (`Oct 20`, `Nov 3` [`HW01` postponed from `Oct 27`], `Nov 10`, `Dec 8`, `Dec 22`, `Jan 5`), grading weights (`40%` assignments / `60%` final), and the 6 mandatory Project Policy rules.

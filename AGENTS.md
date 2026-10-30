@@ -121,7 +121,7 @@ Both team members work on this **same computer**, taking turns under a shared Wi
   ```
   where `NN` is a two-digit number (`01`..`05`), excluding `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, `data/raw/`, and IDE metadata:
   - **Week 4 (Oct 20):** Project Group & Selected Project (*Library Management System*)
-  - **HW01 — Week 5 (Oct 27):** `cse305_hw01_231805033_231805026.zip` — Project Proposal & Solution Outline (`docs/01-proposal/`)
+  - **HW01 — Week 6 (Nov 3, postponed from Oct 27 per instructor's 2026-10-27 announcement):** `cse305_hw01_231805033_231805026.zip` — Problem Description, Solution Outline & Domain Model (`docs/01-proposal/`)
   - **HW02 — Week 7 (Nov 10):** `cse305_hw02_231805033_231805026.zip` — Inception: Vision, System Context, Use Cases, Glossary, Business Rules, Themes, Epics, User Stories, Tasks, Sprint Planning, Product Backlog, PSI, MVP (`docs/02-inception/`)
   - **Weeks 8–9 (Nov 17–28):** Midterm Exam Weeks (reduced capacity buffer)
   - **HW03 — Week 11 (Dec 8):** `cse305_hw03_231805033_231805026.zip` — Elaboration (Use case diagram, System sequence diagram, Class diagram, TDD/Git/Maven plan) & **Sprint 1** (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`)

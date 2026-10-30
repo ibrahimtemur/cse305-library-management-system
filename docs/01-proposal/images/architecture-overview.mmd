@@ -1,0 +1,9 @@
+%% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+%% Student No(s)#: 231805033, 231805026
+%% General Comments: Mermaid source of the compact layered architecture overview used in Part 2 of the HW01 submission document.
+flowchart LR
+    UI["1. Presentation<br/>Thymeleaf"] --> CTRL["2. Controller<br/>Spring MVC"]
+    CTRL --> SVC["3. Service and Policy<br/>Strategy, State, Observer"]
+    SVC --> REPO["4. Repository and Entity<br/>Spring Data JPA"]
+    REPO --> DB["5. Database<br/>H2"]
+    SEED["Seed data<br/>data/seed/*.json"] -.->|"planned loader"| SVC
