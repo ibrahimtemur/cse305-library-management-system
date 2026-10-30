@@ -7,6 +7,9 @@
 
 A standalone web-based **Library Management System** developed for **CSE305 Software Engineering** at **Adnan Menderes University (ADU)**, Department of Computer Engineering, following **Agile Scrum**, **Test-Driven Development (TDD)**, **GoF/GRASP Object-Oriented Design Patterns**, and an **agentic software engineering workflow**.
 
+- **GitHub Repository:** [`https://github.com/ibrahimtemur/cse305-library-management-system`](https://github.com/ibrahimtemur/cse305-library-management-system) *(Private academic repository; collaborator access available to the course instructor upon request)*
+- **Course Instructor:** Assoc. Prof. Dr. Fatih Soygazi (`fatih.soygazi@adu.edu.tr`)
+
 ---
 
 ## Team Members

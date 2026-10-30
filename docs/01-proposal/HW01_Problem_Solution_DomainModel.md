@@ -17,6 +17,7 @@
 | **Document date** | 2026-10-30 |
 | **Submission** | HW01 — due **Tuesday 2026-11-03** (postponed from 2026-10-27 by the instructor's announcement of 2026-10-27; the document now has three parts: Problem Description, Solution Outline, Domain Model) |
 | **Archive** | `cse305_hw01_231805033_231805026.zip` (created with `tools\package 01`) |
+| **GitHub repository** | [`https://github.com/ibrahimtemur/cse305-library-management-system`](https://github.com/ibrahimtemur/cse305-library-management-system) *(private academic repository)* |
 
 > [!NOTE]
 > **How to read this document.** Parts 1 and 2 are concise consolidations. Details live in the companion documents [`PROJECT_PROPOSAL.md`](PROJECT_PROPOSAL.md) and [`SOLUTION_OUTLINE.md`](SOLUTION_OUTLINE.md) (both version `1.2`), and in the Inception documents [`BUSINESS_RULES.md`](../02-inception/BUSINESS_RULES.md) (`BR-001`..`BR-018`), [`DOMAIN_GLOSSARY.md`](../02-inception/DOMAIN_GLOSSARY.md), [`REQUIREMENTS.md`](../02-inception/REQUIREMENTS.md) (`FR-001`..`FR-032`), and [`USE_CASES.md`](../02-inception/USE_CASES.md) (`UC-01`..`UC-11`). Part 3 (Domain Model) is specified in full here. The seed data is documented in [`data/README.md`](../../data/README.md).
