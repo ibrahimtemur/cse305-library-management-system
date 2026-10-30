@@ -6,7 +6,9 @@
     "queuePosition": 1,
     "status": "WAITING",
     "createdOn": "2026-10-12",
-    "readyCopyBarcode": null
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0002",
@@ -15,7 +17,9 @@
     "queuePosition": 2,
     "status": "WAITING",
     "createdOn": "2026-10-13",
-    "readyCopyBarcode": null
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0003",
@@ -23,8 +27,10 @@
     "memberId": "SYN-STU-0027",
     "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-10-18",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0004",
@@ -32,8 +38,10 @@
     "memberId": "SYN-STU-0032",
     "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-10-09",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0005",
@@ -41,8 +49,10 @@
     "memberId": "SYN-STU-0012",
     "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-10-09",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-14",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0006",
@@ -50,8 +60,10 @@
     "memberId": "SYN-STU-0014",
     "queuePosition": 3,
     "status": "WAITING",
-    "createdOn": "2026-10-09",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-15",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0007",
@@ -59,8 +71,10 @@
     "memberId": "SYN-STF-0003",
     "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-10-12",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-14",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0008",
@@ -68,8 +82,10 @@
     "memberId": "SYN-STU-0016",
     "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-10-12",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-14",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0009",
@@ -77,8 +93,10 @@
     "memberId": "SYN-STU-0003",
     "queuePosition": 1,
     "status": "READY",
-    "createdOn": "2026-10-18",
-    "readyCopyBarcode": "LMS-COPY-1599"
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": "LMS-COPY-1599",
+    "readyOn": "2026-10-21",
+    "holdUntil": "2026-10-24"
   },
   {
     "reservationId": "RES-0010",
@@ -86,115 +104,141 @@
     "memberId": "SYN-STU-0024",
     "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-10-19",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0011",
-    "isbn13": "9780393634990",
-    "memberId": "SYN-STU-0020",
+    "isbn13": "9780471155195",
+    "memberId": "SYN-STU-0040",
     "queuePosition": 1,
-    "status": "READY",
-    "createdOn": "2026-09-02",
-    "readyCopyBarcode": "LMS-COPY-1629"
+    "status": "WAITING",
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0012",
-    "isbn13": "9780393634990",
-    "memberId": "SYN-STU-0035",
+    "isbn13": "9780471155195",
+    "memberId": "SYN-STU-0013",
     "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-09-03",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-14",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0013",
-    "isbn13": "9780596510046",
-    "memberId": "SYN-STF-0001",
+    "isbn13": "9780471241003",
+    "memberId": "SYN-STU-0024",
     "queuePosition": 1,
-    "status": "WAITING",
-    "createdOn": "2026-10-19",
-    "readyCopyBarcode": null
+    "status": "READY",
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": "LMS-COPY-1733",
+    "readyOn": "2026-10-20",
+    "holdUntil": "2026-10-23"
   },
   {
     "reservationId": "RES-0014",
-    "isbn13": "9780755344666",
-    "memberId": "SYN-STU-0029",
+    "isbn13": "9780753555644",
+    "memberId": "SYN-STF-0006",
     "queuePosition": 1,
-    "status": "READY",
-    "createdOn": "2025-12-28",
-    "readyCopyBarcode": "LMS-COPY-2035"
+    "status": "WAITING",
+    "createdOn": "2026-10-14",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0015",
-    "isbn13": "9780755344666",
-    "memberId": "SYN-STU-0028",
-    "queuePosition": 2,
+    "isbn13": "9780810994553",
+    "memberId": "SYN-STU-0016",
+    "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-02-20",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0016",
-    "isbn13": "9780764570698",
-    "memberId": "SYN-STU-0031",
-    "queuePosition": 1,
+    "isbn13": "9780810994553",
+    "memberId": "SYN-STU-0022",
+    "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-10-18",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-15",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0017",
-    "isbn13": "9780764570698",
-    "memberId": "SYN-STU-0005",
-    "queuePosition": 2,
+    "isbn13": "9780810994553",
+    "memberId": "SYN-ADM-0005",
+    "queuePosition": 3,
     "status": "WAITING",
-    "createdOn": "2026-10-19",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-15",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0018",
     "isbn13": "9781593271442",
-    "memberId": "SYN-STU-0026",
+    "memberId": "SYN-STU-0035",
     "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-10-16",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0019",
     "isbn13": "9781593271442",
-    "memberId": "SYN-STF-0009",
+    "memberId": "SYN-STU-0007",
     "queuePosition": 2,
     "status": "WAITING",
-    "createdOn": "2026-10-16",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0020",
-    "isbn13": "9781627790369",
-    "memberId": "SYN-STF-0002",
-    "queuePosition": 1,
+    "isbn13": "9781593271442",
+    "memberId": "SYN-STU-0032",
+    "queuePosition": 3,
     "status": "WAITING",
-    "createdOn": "2026-10-16",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0021",
     "isbn13": "9781627790369",
-    "memberId": "SYN-STU-0037",
-    "queuePosition": 2,
+    "memberId": "SYN-ADM-0001",
+    "queuePosition": 1,
     "status": "WAITING",
-    "createdOn": "2026-10-17",
-    "readyCopyBarcode": null
+    "createdOn": "2026-10-13",
+    "readyCopyBarcode": null,
+    "readyOn": null,
+    "holdUntil": null
   },
   {
     "reservationId": "RES-0022",
-    "isbn13": "9787302115342",
-    "memberId": "SYN-STU-0032",
+    "isbn13": "9781668221570",
+    "memberId": "SYN-STF-0008",
     "queuePosition": 1,
-    "status": "WAITING",
-    "createdOn": "2026-10-18",
-    "readyCopyBarcode": null
+    "status": "READY",
+    "createdOn": "2026-10-12",
+    "readyCopyBarcode": "LMS-COPY-2438",
+    "readyOn": "2026-10-22",
+    "holdUntil": "2026-10-25"
   }
 ]
