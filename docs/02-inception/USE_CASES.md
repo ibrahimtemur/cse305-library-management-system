@@ -110,7 +110,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
 - **Extensions (Alternative Flows):**
   - **2a. No Matching Books Found:**
     1. The system displays an empty-state message (*"No books match your search criteria"*) and a control to clear active filters.
-  - **4a. Selected Book Is a Non-Circulating Reference Work (`referenceOnly == true` — *PLANNED: will exist after seed v2 (`OPEN-06`)*, `BR-014`):**
+  - **4a. Selected Book Is a Non-Circulating Reference Work (`referenceOnly == true`, e.g., `isbn13: "9780824722876"` *Encyclopedia of Computer Science and Technology*, `BR-014`):**
     1. When viewing an encyclopedia, dictionary, or catalog marked `referenceOnly == true`, the system displays a prominent **`REFERENCE ONLY — IN-LIBRARY USE ONLY`** banner and disables checkout and reservation controls.
   - **4b. All Circulating Copies Are Checked Out (`0 AVAILABLE`, `BR-012`):**
     1. For a title such as `isbn13: "9780321573513"` (*Algorithms*) where all copies are `LOANED` or `RESERVED`, the system displays **`ALL COPIES UNAVAILABLE`** along with the current FIFO hold queue length and enables the "Reserve Book" action (`UC-08`) for eligible authenticated members.
@@ -156,7 +156,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
   - **3a. Member Status Is `SUSPENDED` (`BR-011`):**
     1. The system rejects checkout with error: *"Checkout blocked: Member account `<memberId>` is currently SUSPENDED (`BR-011`)."*
   - **3b. Member Holds an Overdue Loan or Unpaid Fine (`BR-011` — Confirmed Rule):**
-    1. If the member has any active loan with `currentDate > dueDate` (e.g., `LOAN-0099`) or any `UNPAID` fine (e.g., `FINE-0019` for `SYN-STU-0025`), the system rejects checkout and displays a link to return the overdue item (`UC-06`) or settle the fine (`UC-09`).
+    1. If the member has any active loan with `currentDate > dueDate` (e.g., `LOAN-0099`) or any `UNPAID` fine (e.g., `FINE-0022` on `LOAN-0107` for `SYN-STU-0025`), the system rejects checkout and displays a link to return the overdue item (`UC-06`) or settle the fine (`UC-09`).
   - **3c. Member Has Reached Borrowing Quota (`BR-002` — Confirmed Rule):**
     1. If `activeLoanCount >= 7` (`ACADEMIC_STAFF`) or `activeLoanCount >= 3` (`ADMINISTRATIVE_STAFF` / `STUDENT`), the system rejects checkout with error: *"Checkout blocked: Member has reached the maximum limit of `<7|3>` active loans for `<memberType>` (`BR-002`)."*
   - **3d. Post-Renewal 1-Month Cooldown Active (`BR-006` — Confirmed Rule):**
@@ -208,9 +208,9 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
     1. Because `loan.renewalCount >= 1`, the system records `returnDate` such that any subsequent checkout attempt by `loan.memberId` for `book.isbn13` before `returnDate + 30 days` will be blocked under `BR-006` (`FR-013`). The return receipt notes: *"Post-renewal cooldown active for this member on this title until `<returnDate + 30 days>`."*
   - **5a. Active `WAITING` Reservation Queue Exists for `book.isbn13` (`BR-013` — Confirmed Rule):**
     1. The `BookReturnedEvent` listener detects one or more `WAITING` reservations for `book.isbn13` ordered by `queuePosition`.
-    2. The head reservation (`queuePosition == 1`) is promoted from `WAITING` to `status = READY` and bound to `readyCopyBarcode = copy.barcode` (`FR-022`).
+    2. The head reservation (`queuePosition == 1`) is promoted from `WAITING` to `status = READY`, bound to `readyCopyBarcode = copy.barcode`, and populated with `readyOn = returnDate` and `holdUntil = returnDate + 3 days` (`FR-022`).
     3. `BookCopyState` transitions `copy.status` from `LOANED` to `RESERVED` (instead of `AVAILABLE`).
-    4. The system creates an **in-app notification** for the reserving member stating that `copy.barcode` is held for pickup for **2–3 days** (`3 calendar days` expiration target: `returnDate + 3 days`, `ASSUMPTION-13`).
+    4. The system creates an **in-app notification** for the reserving member stating that `copy.barcode` is held for pickup for **2–3 days** (`3 calendar days` expiration target: `holdUntil = returnDate + 3 days`, `ASSUMPTION-13`).
     5. The system displays a prominent alert to the Librarian: **`PLACE ON HOLD SHELF — Status: RESERVED for Member <memberId> (Reservation <reservationId>, Hold until <returnDate + 3 days>)`**.
 - **Linked Requirements & Business Rules:**
   - **Functional Requirements:** `FR-005`, `FR-012`, `FR-013`, `FR-014`, `FR-015`, `FR-022`
@@ -228,14 +228,14 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
   - **Member:** Wants their `UNPAID` fine resolved so their borrowing privileges (`BR-011`) are restored immediately.
 - **Preconditions:**
   - The Librarian is authenticated with `ROLE_LIBRARIAN` (`UC-02`).
-  - For fine settlement/waiver: an `UNPAID` `Fine` record exists for a returned (or lost-resolved) `Loan` (`BR-010`).
+  - For fine settlement/waiver: an `UNPAID` `Fine` record exists for a returned (`status == RETURNED`) or lost-closed (`status == LOST`) `Loan` (`BR-010`).
   - For lost-copy reporting: an `ACTIVE` `Loan` exists for the member (`BR-015`).
 - **Postconditions (Success Guarantee):**
   - For settlement/waiver: `fine.status` becomes `PAID` or `WAIVED`, `fine.settledOn = currentDate`, and `fine.settledBy = librarian.username`. If the member has no other `UNPAID` fines, no overdue active loans, and `status == ACTIVE`, their borrowing block (`BR-011`) is lifted.
-  - For lost-copy petition: daily overdue fine accrual freezes on `lostReportedOn`; if unreplaced after 1 month (`30 days`), `copy.status` becomes `LOST` and a `2.00 * appraisedValue` compensation charge is recorded (`BR-015`).
+  - For lost-copy petition: daily overdue fine accrual freezes on `lostReportedOn`, the loan is closed as `LOST` (`returnDate = null`), and `copy.status` becomes `LOST`; if unreplaced after 1 month (`30 days`), a `2.00 * appraisedValue` compensation charge is recorded at runtime (`BR-015`).
 - **Main Success Scenario (Basic Flow — Desk Fine Payment `PAID`):**
-  1. The `Librarian` navigates to the Member Profile (`UC-04` / `UC-10`) or Fines Management view and selects an `UNPAID` fine (e.g., `FINE-0019` on returned/resolved loan `LOAN-0105` for member `SYN-STU-0025`).
-  2. The system verifies that the underlying `Loan` is no longer accruing daily fines (`loan.status == RETURNED` or lost-resolved, `BR-010`) and displays `fineId`, `loanId`, `overdueDays`, `amount` (computed at `0.25 TRY/day`), and `assessedOn`.
+  1. The `Librarian` navigates to the Member Profile (`UC-04` / `UC-10`) or Fines Management view and selects an `UNPAID` fine (e.g., `FINE-0022` on returned loan `LOAN-0107` for member `SYN-STU-0025`, or `FINE-0025` on lost loan `LOAN-0103` for member `SYN-STU-0002`).
+  2. The system verifies that the underlying `Loan` is no longer accruing daily fines (`loan.status == RETURNED` or `loan.status == LOST`, `BR-010`) and displays `fineId`, `loanId`, `overdueDays`, `amount` (computed at `0.25 TRY/day`), and `assessedOn`.
   3. The `Member` pays the fine at the desk, and the `Librarian` clicks **"Mark as Paid"** (`FR-025`).
   4. Inside a `@Transactional` boundary, the system updates `fine.status = PAID`, `fine.settledOn = currentDate`, and `fine.settledBy = librarian.username` (e.g., `"syn-lib-0001"`).
   5. The system re-evaluates the member's eligibility (`BR-011`) and displays an updated badge (`ELIGIBLE TO BORROW` if no other blocks exist).
@@ -243,13 +243,13 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
   - **2a. Attempt to Settle a Fine While the Book Is Still Checked Out (`loan.status == ACTIVE`, `BR-010`):**
     1. If the loan is still `ACTIVE` and has not been returned or resolved as lost, the system blocks premature settlement with message: *"Fine is still accruing daily (`0.25 TRY/day`). Return the book copy (`UC-06`) or record a lost-book petition (`BR-015`) before settling the fine."*
   - **3a. Administrative Fine Waiver (`WAIVED`, `FR-026`):**
-    1. Instead of collecting payment, the `Librarian` selects **"Waive Fine"** (e.g., as in seeded record `FINE-0004` on `LOAN-0005` for `SYN-STU-0040`, settled as `WAIVED` by `syn-lib-0003`).
+    1. Instead of collecting payment, the `Librarian` selects **"Waive Fine"** (e.g., as in seeded record `FINE-0001` on `LOAN-0010` for `SYN-ADM-0005` or `FINE-0005` on `LOAN-0040` for `SYN-STU-0033`, settled as `WAIVED` by `syn-lib-0003`).
     2. The system sets `fine.status = WAIVED`, `fine.settledOn = currentDate`, and `fine.settledBy = librarian.username`, clearing the fine block (`BR-010`, `BR-011`).
-  - **3b. Member Submits a Lost-Book Petition (`BR-015` — Confirmed Rule, `FR-027`; `lostReportedOn` & `appraisedValue` are *PLANNED: will exist after seed v2 (`OPEN-06`) / runtime input*):**
-    1. If a member reports that they have lost a borrowed copy, the `Librarian` selects **"Record Lost-Book Petition"** on the active `Loan` and confirms `lostReportedOn = currentDate` (*PLANNED: will exist after seed v2 (`OPEN-06`)*).
-    2. The system immediately **freezes daily overdue fine accrual as of `lostReportedOn`** (`overdueDays = max(0, (lostReportedOn - dueDate).days)`, `amount = 0.25 * overdueDays`) and sets a **1-month (`30 calendar days`) replacement deadline** (`lostReportedOn + 30 days`).
+  - **3b. Member Submits a Lost-Book Petition (`BR-015` — Confirmed Rule, `FR-027`):**
+    1. If a member reports that they have lost a borrowed copy, the `Librarian` selects **"Record Lost-Book Petition"** on the active `Loan` and confirms `lostReportedOn = currentDate` (e.g., seeded record `LOAN-0103` on `LMS-COPY-1464` for `SYN-STU-0002`, where `status = "LOST"`, `returnDate = null`, and `lostReportedOn = "2026-10-01"`).
+    2. The system immediately **freezes daily overdue fine accrual as of `lostReportedOn`** (`overdueDays = max(0, (lostReportedOn - dueDate).days)`, `amount = 0.25 * overdueDays`, e.g., `FINE-0025` with `overdueDays: 15`, `amount: "3.75"`, `assessedOn: "2026-10-01"`), transitions `loan.status` to `LOST` (`returnDate = null`) and `copy.status` to `LOST`, and sets a **1-month (`30 calendar days`) replacement deadline** (`lostReportedOn + 30 days`).
     3. **Case 3b-i (Replaced within 1 month):** If the member brings a replacement copy on or before `lostReportedOn + 30 days`, the Librarian records replacement; the loan closes (`RETURNED`) and only the frozen overdue fine (if any up to `lostReportedOn`) requires settlement.
-    4. **Case 3b-ii (Not replaced within 1 month — 2x Valuation Penalty):** If the copy is not replaced within `30 calendar days`, the Librarian enters the Valuation Commission's determined book value (`appraisedValue` in `TRY`, `ASSUMPTION-15` — *PLANNED: runtime input, not in current seed*). The system transitions `copy.status` to `LOST`, closes the loan, and records a compensation charge of `2.00 * appraisedValue` TRY (in addition to any frozen overdue fine up to `lostReportedOn`), which can then be settled as `PAID` or `WAIVED`.
+    4. **Case 3b-ii (Not replaced within 1 month — 2x Valuation Penalty):** If the copy is not replaced within `30 calendar days`, the Librarian enters the Valuation Commission's determined book value (`appraisedValue` in `TRY` at runtime, `ASSUMPTION-15`). The system records a compensation charge of `2.00 * appraisedValue` TRY (in addition to any frozen overdue fine up to `lostReportedOn`), which can then be settled as `PAID` or `WAIVED`.
 - **Linked Requirements & Business Rules:**
   - **Functional Requirements:** `FR-005`, `FR-014`, `FR-015`, `FR-025`, `FR-026`, `FR-027`
   - **Business Rules:** `BR-007`, `BR-008`, `BR-009`, `BR-010`, `BR-011`, `BR-015`, `BR-017`
@@ -271,7 +271,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
 ### 4.2 `UC-08` — Reserve a Book (Place or Cancel Hold) (Brief)
 - **Actors:** `Member` (`ROLE_MEMBER`, self-service) or `Librarian` (`ROLE_LIBRARIAN`, desk)
 - **Preconditions:** The user is authenticated (`UC-02`). For placing a hold, the target `Book` (`isbn13`) exists in the catalog.
-- **Main Flow (Place Hold):** When viewing a circulating book (`referenceOnly == false`, `BR-014`) that currently has **zero `AVAILABLE` copies** (e.g., `isbn13: "9780321573513"` *Algorithms*), the Member or Librarian clicks **"Reserve Book"** (`FR-020`). The system verifies that the member is `ACTIVE`, has no borrowing blocks (`BR-011`) or active post-renewal cooldown on that title (`BR-006`), does **not** currently hold an `ACTIVE` loan for any copy of that title (`BR-012`), and does **not** already hold a `WAITING` or `READY` reservation for that title (`BR-012`). The system creates a `Reservation` record (`reservationId`, `isbn13`, `memberId`, `createdOn = currentDate`, `status = WAITING`, `readyCopyBarcode = null`) assigned the next FIFO `queuePosition` (`1..n`, `FR-021`). When a copy of that title is later returned (`UC-06`), the `queuePosition == 1` reservation becomes `READY`, binds `readyCopyBarcode`, triggers an **in-app notification**, and holds the `RESERVED` copy for **2–3 days** (`3 calendar days` target, `BR-013`, `FR-022`).
+- **Main Flow (Place Hold):** When viewing a circulating book (`referenceOnly == false`, `BR-014`) that currently has **zero `AVAILABLE` copies** (e.g., `isbn13: "9780321573513"` *Algorithms*), the Member or Librarian clicks **"Reserve Book"** (`FR-020`). The system verifies that the member is `ACTIVE`, has no borrowing blocks (`BR-011`), does **not** currently hold an `ACTIVE` loan for any copy of that title (`BR-012`), and does **not** already hold a `WAITING` or `READY` reservation for that title (`BR-012`). The system creates a `Reservation` record (`reservationId`, `isbn13`, `memberId`, `createdOn = currentDate`, `status = WAITING`, `readyCopyBarcode = null`, `readyOn = null`, `holdUntil = null`) assigned the next FIFO `queuePosition` (`1..n`, `FR-021`). When a copy of that title is later returned (`UC-06`), the `queuePosition == 1` reservation becomes `READY`, binds `readyCopyBarcode`, sets `readyOn = returnDate` and `holdUntil = readyOn + 3 days`, triggers an **in-app notification**, and holds the `RESERVED` copy for **2–3 days** (`3 calendar days` target, `BR-013`, `FR-022`).
 - **Alternative Flows:**
   - **Cancel / Expire Hold (`FR-023`):** If the member or Librarian cancels a reservation (or if a `READY` hold is not picked up within `3 calendar days`), the reservation is removed from the active queue, trailing `WAITING` reservations shift up (`queuePosition - 1`), and any held `readyCopyBarcode` is reassigned to the new `queuePosition == 1` member or returned to `AVAILABLE`.
   - **Precondition Failure:** Rejected if `>= 1` copy is `AVAILABLE` on the shelf, if `referenceOnly == true`, or if the member already holds/queues for the book.
@@ -282,7 +282,7 @@ Every use case (`UC-01`..`UC-11`) explicitly lists the Functional Requirements (
 
 ### 4.3 `UC-02` — Log In and Log Out (Brief)
 - **Actors:** `Member` (`ROLE_MEMBER`), `Librarian` (`ROLE_LIBRARIAN`)
-- **Summary:** The user submits their synthetic identifier (`username` such as `syn-lib-0001` for Librarians; `memberId` such as `SYN-STU-0001` / `SYN-STF-0003` or `SYN-ADM-0001` [*PLANNED: will exist after seed v2 (`OPEN-06`)*] or `@synthetic.lms.local` email for Members) and demo password. The system verifies the password against the BCrypt hash seeded at application startup (`ASSUMPTION-16`, `NFR-008`), establishes an authenticated session with `ROLE_LIBRARIAN` or `ROLE_MEMBER`, and redirects to the Librarian Dashboard (`UC-11`) or Member Self-Service Portal (`UC-10`). Logging out invalidates the session and returns the user to `ROLE_GUEST`.
+- **Summary:** The user submits their synthetic identifier (`username` such as `syn-lib-0001` for Librarians; `memberId` such as `SYN-STU-0001`, `SYN-STF-0003`, or `SYN-ADM-0001` or `@synthetic.lms.local` email for Members) and demo password. The system verifies the password against the BCrypt hash seeded at application startup (`ASSUMPTION-16`, `NFR-008`), establishes an authenticated session with `ROLE_LIBRARIAN` or `ROLE_MEMBER`, and redirects to the Librarian Dashboard (`UC-11`) or Member Self-Service Portal (`UC-10`). Logging out invalidates the session and returns the user to `ROLE_GUEST`.
 - **Linked `FR-*` & `BR-*`:** `FR-016`, `FR-017`; `BR-001`, `BR-018`.
 
 ---
