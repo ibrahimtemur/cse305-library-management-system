@@ -9,7 +9,7 @@
 - **Active Team Member:** Ibrahim Temur (`231805033` — Product Owner)
 - **Team Members:** Ibrahim Temur (`231805033` — Product Owner) & Omer Faruk Kuş (`231805026` — Scrum Master)
 - **Active Branch:** `develop`
-- **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Private)
+- **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Public)
 - **Current Phase:** **HW01 Final (`v1.2`) — Problem Description, Solution Outline & Domain Model (`docs/01-proposal/`, New Deadline: Tuesday, Nov 3, postponed from Oct 27 per instructor's 2026-10-27 announcement) COMPLETED** → Next: **Upload `HW01 v1.2` to ADUZEM & Proceed to HW02 Part 2: Agile Scrum Product Backlog (`docs/02-inception/PRODUCT_BACKLOG.md`, Deadline: Nov 10)**
 
 ---
