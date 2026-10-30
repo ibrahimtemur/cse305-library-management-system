@@ -1,6 +1,6 @@
 # Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
 # Student No(s)#: 231805033, 231805026
-# General Comments: Unit tests for ISBN validation/conversion and ASSUMPTION-05 fine helpers (offline, no data files needed).
+# General Comments: Unit tests for ISBN validation/conversion, reference-only detection (BR-014), and confirmed ADU fine helpers (BR-008/BR-009).
 import sys
 import unittest
 from datetime import date
@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from lms_seed_common import (  # noqa: E402
     clean_isbn,
     compute_fine,
+    is_reference_only_book,
     is_valid_isbn10,
     is_valid_isbn13,
     isbn10_to_isbn13,
@@ -54,26 +55,45 @@ class IsbnTests(unittest.TestCase):
 
 
 class FineRuleTests(unittest.TestCase):
-    """ASSUMPTION-05: 5.00 TRY per overdue day, capped at 250.00 TRY."""
+    """BR-008 & BR-009 (ASSUMPTION-10): 0.25 TRY per overdue day, with no maximum cap."""
 
     def test_zero_days_costs_nothing(self):
         self.assertEqual(compute_fine(0), Decimal("0.00"))
 
-    def test_daily_rate(self):
-        self.assertEqual(compute_fine(1), Decimal("5.00"))
-        self.assertEqual(compute_fine(10), Decimal("50.00"))
+    def test_daily_rate_of_25_kurus(self):
+        self.assertEqual(compute_fine(1), Decimal("0.25"))
+        self.assertEqual(compute_fine(4), Decimal("1.00"))
+        self.assertEqual(compute_fine(10), Decimal("2.50"))
+        self.assertEqual(compute_fine(53), Decimal("13.25"))
 
-    def test_cap_boundaries(self):
-        self.assertEqual(compute_fine(49), Decimal("245.00"))
-        self.assertEqual(compute_fine(50), Decimal("250.00"))
-        self.assertEqual(compute_fine(51), Decimal("250.00"))
-        self.assertEqual(compute_fine(400), Decimal("250.00"))
+    def test_no_upper_cap(self):
+        self.assertEqual(compute_fine(50), Decimal("12.50"))
+        self.assertEqual(compute_fine(100), Decimal("25.00"))
+        self.assertEqual(compute_fine(1000), Decimal("250.00"))
+        self.assertEqual(compute_fine(1200), Decimal("300.00"))
 
     def test_overdue_days(self):
         due = date(2026, 10, 1)
         self.assertEqual(overdue_days(due, date(2026, 9, 30)), 0)
         self.assertEqual(overdue_days(due, date(2026, 10, 1)), 0)
         self.assertEqual(overdue_days(due, date(2026, 10, 2)), 1)
+
+
+class ReferenceOnlyRuleTests(unittest.TestCase):
+    """BR-014: strict word-boundary detection for dictionaries, encyclopedias, and catalogs."""
+
+    def test_matches_dictionary_encyclopedia_and_catalog_keywords(self):
+        self.assertTrue(is_reference_only_book("Dictionary of mechanical engineering", None, ["Mechanical engineering"]))
+        self.assertTrue(is_reference_only_book("Encyclopedia of Computer Science and Technology", None, ["Computer science"]))
+        self.assertTrue(is_reference_only_book("World War II", None, ["World War, 1939-1945", "Encyclopedias"]))
+        self.assertTrue(is_reference_only_book("National Union Catalog", None, []))
+        self.assertTrue(is_reference_only_book("Türkçe Sözlük", None, []))
+
+    def test_rejects_complete_reference_and_substring_false_positives(self):
+        self.assertFalse(is_reference_only_book("C, The Complete Reference", None, ["C (Computer program language)"]))
+        self.assertFalse(is_reference_only_book("Java", "The Complete Reference, Thirteenth Edition", ["Java"]))
+        self.assertFalse(is_reference_only_book("Mechanical engineering reference manual for the PE exam", None, ["Handbooks, manuals"]))
+        self.assertFalse(is_reference_only_book("Unravel me", None, ["Dictatorship", "Fiction"]))
 
 
 if __name__ == "__main__":

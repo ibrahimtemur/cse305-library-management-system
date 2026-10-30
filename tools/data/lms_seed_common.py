@@ -1,16 +1,18 @@
 # Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
 # Student No(s)#: 231805033, 231805026
-# General Comments: Shared constants, ISBN helpers, fine rules, and deterministic JSON I/O for the seed data pipeline (feature M6).
+# General Comments: Shared constants, ISBN helpers, reference-only detection, fine rules, and deterministic JSON I/O for the seed data pipeline (feature M6).
 """Shared helpers for the LMS seed data pipeline.
 
-The loan and fine constants below are the project ASSUMPTIONs documented in
-``docs/01-proposal/PROJECT_PROPOSAL.md`` (ASSUMPTION-02, -03, -05). They are not
-official Adnan Menderes University library regulations.
+The loan, fine, renewal cooldown, hold pickup, and reference-only constants below
+implement the confirmed Adnan Menderes University (ADU) library lending rules and
+explicit project assumptions documented in ``docs/02-inception/BUSINESS_RULES.md``
+(BR-001..BR-018) and ``docs/02-inception/DOMAIN_GLOSSARY.md``.
 """
 
 from __future__ import annotations
 
 import json
+import re
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
@@ -26,13 +28,35 @@ REFERENCE_DATE = date(2026, 10, 22)
 # Fixed random seed for reproducible synthetic data.
 RANDOM_SEED = 20261022
 
-# ASSUMPTION-02 / ASSUMPTION-03: borrowing limits and standard loan periods.
-LOAN_DAYS = {"STUDENT": 14, "ACADEMIC_STAFF": 30}
-MAX_ACTIVE_LOANS = {"STUDENT": 3, "ACADEMIC_STAFF": 5}
-# ASSUMPTION-05: flat daily fine and per-loan cap, in Turkish lira.
-FINE_PER_DAY = Decimal("5.00")
-FINE_CAP = Decimal("250.00")
+# BR-002 / BR-003 (CONFIRMED ADU rules): borrowing limits and 30-day loan period across all member types.
+LOAN_DAYS = {
+    "STUDENT": 30,
+    "ACADEMIC_STAFF": 30,
+    "ADMINISTRATIVE_STAFF": 30,
+}
+MAX_ACTIVE_LOANS = {
+    "STUDENT": 3,
+    "ACADEMIC_STAFF": 7,
+    "ADMINISTRATIVE_STAFF": 3,
+}
+
+# BR-008 / BR-009 (CONFIRMED ADU tariff + ASSUMPTION-10): 0.25 TRY per overdue day, no cap.
+FINE_PER_DAY = Decimal("0.25")
 CURRENCY = "TRY"
+
+# BR-006 / ASSUMPTION-12: 1-month (30-day) post-renewal re-borrowing cooldown on the same title.
+RENEWAL_COOLDOWN_DAYS = 30
+# BR-013 / ASSUMPTION-13: 3-day pickup hold window for READY reservations.
+HOLD_PICKUP_DAYS = 3
+# BR-015 / ASSUMPTION-12: 1-month (30-day) replacement window from lostReportedOn.
+LOST_REPLACEMENT_DAYS = 30
+
+# BR-014 / ASSUMPTION-14: strict word-boundary heuristic for non-circulating reference works
+# (dictionaries, encyclopedias, catalogs and Turkish equivalents).
+REFERENCE_KEYWORD_RE = re.compile(
+    r"\b(dictionar(?:y|ies)|encyclopa?edia(?:s)?|catalog(?:ue)?s?|sözlük(?:ler)?|ansiklopedi(?:ler)?|katalog(?:lar)?)\b",
+    re.IGNORECASE,
+)
 
 # Small fixed set of catalog categories (subject mapping targets).
 CATEGORIES = (
@@ -87,14 +111,35 @@ def clean_isbn(raw: str) -> str:
     return raw.replace("-", "").replace(" ", "").strip()
 
 
+def is_reference_only_book(
+    title_or_book: str | dict[str, Any],
+    subtitle: str | None = None,
+    subjects: list[str] | tuple[str, ...] = (),
+) -> bool:
+    """Return True if the book is a non-circulating reference work (BR-014)."""
+    if isinstance(title_or_book, dict):
+        title = str(title_or_book.get("title") or "")
+        subtitle = title_or_book.get("subtitle")
+        subjects = title_or_book.get("subjects") or ()
+    else:
+        title = title_or_book
+    texts = [title]
+    if subtitle:
+        texts.append(subtitle)
+    texts.extend(s for s in subjects if isinstance(s, str))
+    return any(REFERENCE_KEYWORD_RE.search(text) for text in texts)
+
+
 def overdue_days(due: date, end: date) -> int:
     """Return whole calendar days past the due date (0 if not late)."""
     return max(0, (end - due).days)
 
 
 def compute_fine(days: int) -> Decimal:
-    """Return the fine for the given overdue days under ASSUMPTION-05."""
-    return min(FINE_CAP, FINE_PER_DAY * days)
+    """Return the uncapped fine for the given overdue days under BR-008 and BR-009 (0.25 TRY/day)."""
+    if days <= 0:
+        return Decimal("0.00")
+    return FINE_PER_DAY * days
 
 
 def write_json(path: Path, data: Any) -> None:

@@ -1,6 +1,6 @@
 # Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
 # Student No(s)#: 231805033, 231805026
-# General Comments: Offline unit tests for Open Library record normalization, category mapping, and politeness rules in fetch_books.py.
+# General Comments: Offline unit tests for Open Library record normalization, referenceOnly tagging, category mapping, and politeness rules in fetch_books.py.
 import contextlib
 import io
 import os
@@ -50,6 +50,16 @@ class NormalizeDocTests(unittest.TestCase):
         self.assertEqual(record["coverUrl"], "https://covers.openlibrary.org/b/id/15105950-M.jpg")
         self.assertEqual(record["pageCount"], 611)
         self.assertEqual(record["category"], "Databases")
+        self.assertIs(record["referenceOnly"], False)
+
+    def test_reference_only_flag_set_for_dictionaries_and_encyclopedias_only(self):
+        enc_doc = make_doc(title="Encyclopedia of Computer Science and Technology", subject=["Computer science"])
+        enc_record, _ = fetch_books.normalize_doc(enc_doc, "Computer Science")
+        self.assertIs(enc_record["referenceOnly"], True)
+
+        complete_ref_doc = make_doc(title="C, The Complete Reference", subject=["C (Computer program language)"])
+        complete_ref_record, _ = fetch_books.normalize_doc(complete_ref_doc, "Programming")
+        self.assertIs(complete_ref_record["referenceOnly"], False)
 
     def test_isbn10_only_edition_is_converted_to_valid_isbn13(self):
         doc = make_doc()

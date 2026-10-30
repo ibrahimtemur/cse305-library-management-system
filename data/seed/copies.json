@@ -162,7 +162,7 @@
   {
     "barcode": "LMS-COPY-1033",
     "isbn13": "9780030062285",
-    "status": "MAINTENANCE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1034",
@@ -212,7 +212,7 @@
   {
     "barcode": "LMS-COPY-1043",
     "isbn13": "9780030417610",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1044",
@@ -222,7 +222,7 @@
   {
     "barcode": "LMS-COPY-1045",
     "isbn13": "9780041000450",
-    "status": "LOST"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1046",
@@ -252,7 +252,7 @@
   {
     "barcode": "LMS-COPY-1051",
     "isbn13": "9780060803520",
-    "status": "LOANED"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1052",
@@ -347,7 +347,7 @@
   {
     "barcode": "LMS-COPY-1070",
     "isbn13": "9780070108295",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1071",
@@ -407,7 +407,7 @@
   {
     "barcode": "LMS-COPY-1082",
     "isbn13": "9780070380288",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1083",
@@ -637,7 +637,7 @@
   {
     "barcode": "LMS-COPY-1128",
     "isbn13": "9780072482621",
-    "status": "MAINTENANCE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1129",
@@ -837,7 +837,7 @@
   {
     "barcode": "LMS-COPY-1168",
     "isbn13": "9780080965772",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1169",
@@ -932,12 +932,12 @@
   {
     "barcode": "LMS-COPY-1187",
     "isbn13": "9780130325686",
-    "status": "LOST"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1188",
     "isbn13": "9780130325686",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1189",
@@ -987,7 +987,7 @@
   {
     "barcode": "LMS-COPY-1198",
     "isbn13": "9780130661876",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1199",
@@ -1082,7 +1082,7 @@
   {
     "barcode": "LMS-COPY-1217",
     "isbn13": "9780131172616",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1218",
@@ -1112,7 +1112,7 @@
   {
     "barcode": "LMS-COPY-1223",
     "isbn13": "9780131445963",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1224",
@@ -1192,12 +1192,12 @@
   {
     "barcode": "LMS-COPY-1239",
     "isbn13": "9780131988477",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1240",
     "isbn13": "9780132023221",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1241",
@@ -1382,12 +1382,12 @@
   {
     "barcode": "LMS-COPY-1277",
     "isbn13": "9780133905397",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1278",
     "isbn13": "9780134093413",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1279",
@@ -1497,7 +1497,7 @@
   {
     "barcode": "LMS-COPY-1300",
     "isbn13": "9780135287040",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1301",
@@ -1552,7 +1552,7 @@
   {
     "barcode": "LMS-COPY-1311",
     "isbn13": "9780136054276",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1312",
@@ -1667,12 +1667,12 @@
   {
     "barcode": "LMS-COPY-1334",
     "isbn13": "9780138451400",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1335",
     "isbn13": "9780138453053",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1336",
@@ -1722,7 +1722,7 @@
   {
     "barcode": "LMS-COPY-1345",
     "isbn13": "9780140168792",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1346",
@@ -1747,7 +1747,7 @@
   {
     "barcode": "LMS-COPY-1350",
     "isbn13": "9780140280197",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1351",
@@ -1862,7 +1862,7 @@
   {
     "barcode": "LMS-COPY-1373",
     "isbn13": "9780198297581",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1374",
@@ -1892,7 +1892,7 @@
   {
     "barcode": "LMS-COPY-1379",
     "isbn13": "9780199277896",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1380",
@@ -1907,7 +1907,7 @@
   {
     "barcode": "LMS-COPY-1382",
     "isbn13": "9780199561520",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1383",
@@ -2122,12 +2122,12 @@
   {
     "barcode": "LMS-COPY-1425",
     "isbn13": "9780201633467",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1426",
     "isbn13": "9780201656428",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1427",
@@ -2262,7 +2262,7 @@
   {
     "barcode": "LMS-COPY-1453",
     "isbn13": "9780205112555",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1454",
@@ -2317,7 +2317,7 @@
   {
     "barcode": "LMS-COPY-1464",
     "isbn13": "9780241678923",
-    "status": "AVAILABLE"
+    "status": "LOST"
   },
   {
     "barcode": "LMS-COPY-1465",
@@ -2457,7 +2457,7 @@
   {
     "barcode": "LMS-COPY-1492",
     "isbn13": "9780306825552",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1493",
@@ -2572,7 +2572,7 @@
   {
     "barcode": "LMS-COPY-1515",
     "isbn13": "9780314285003",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1516",
@@ -2767,7 +2767,7 @@
   {
     "barcode": "LMS-COPY-1554",
     "isbn13": "9780321500243",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1555",
@@ -2837,7 +2837,7 @@
   {
     "barcode": "LMS-COPY-1568",
     "isbn13": "9780324599510",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1569",
@@ -2897,7 +2897,7 @@
   {
     "barcode": "LMS-COPY-1580",
     "isbn13": "9780330251457",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1581",
@@ -3132,7 +3132,7 @@
   {
     "barcode": "LMS-COPY-1627",
     "isbn13": "9780393062243",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1628",
@@ -3142,12 +3142,12 @@
   {
     "barcode": "LMS-COPY-1629",
     "isbn13": "9780393634990",
-    "status": "RESERVED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1630",
     "isbn13": "9780393634990",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1631",
@@ -3172,7 +3172,7 @@
   {
     "barcode": "LMS-COPY-1635",
     "isbn13": "9780393957464",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1636",
@@ -3257,7 +3257,7 @@
   {
     "barcode": "LMS-COPY-1652",
     "isbn13": "9780395321317",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1653",
@@ -3367,7 +3367,7 @@
   {
     "barcode": "LMS-COPY-1674",
     "isbn13": "9780425094716",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1675",
@@ -3377,7 +3377,7 @@
   {
     "barcode": "LMS-COPY-1676",
     "isbn13": "9780425107461",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1677",
@@ -3432,7 +3432,7 @@
   {
     "barcode": "LMS-COPY-1687",
     "isbn13": "9780440543053",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1688",
@@ -3507,7 +3507,7 @@
   {
     "barcode": "LMS-COPY-1702",
     "isbn13": "9780470088708",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1703",
@@ -3652,7 +3652,7 @@
   {
     "barcode": "LMS-COPY-1731",
     "isbn13": "9780471155195",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1732",
@@ -3662,12 +3662,12 @@
   {
     "barcode": "LMS-COPY-1733",
     "isbn13": "9780471241003",
-    "status": "AVAILABLE"
+    "status": "RESERVED"
   },
   {
     "barcode": "LMS-COPY-1734",
     "isbn13": "9780471241003",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1735",
@@ -3777,7 +3777,7 @@
   {
     "barcode": "LMS-COPY-1756",
     "isbn13": "9780471757160",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1757",
@@ -3822,7 +3822,7 @@
   {
     "barcode": "LMS-COPY-1765",
     "isbn13": "9780471972082",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1766",
@@ -3872,7 +3872,7 @@
   {
     "barcode": "LMS-COPY-1775",
     "isbn13": "9780520088078",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1776",
@@ -3967,7 +3967,7 @@
   {
     "barcode": "LMS-COPY-1794",
     "isbn13": "9780534149468",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1795",
@@ -3992,7 +3992,7 @@
   {
     "barcode": "LMS-COPY-1799",
     "isbn13": "9780534341749",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1800",
@@ -4082,7 +4082,7 @@
   {
     "barcode": "LMS-COPY-1817",
     "isbn13": "9780538676007",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1818",
@@ -4167,7 +4167,7 @@
   {
     "barcode": "LMS-COPY-1834",
     "isbn13": "9780553052435",
-    "status": "AVAILABLE"
+    "status": "LOST"
   },
   {
     "barcode": "LMS-COPY-1835",
@@ -4177,7 +4177,7 @@
   {
     "barcode": "LMS-COPY-1836",
     "isbn13": "9780553052435",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1837",
@@ -4267,12 +4267,12 @@
   {
     "barcode": "LMS-COPY-1854",
     "isbn13": "9780558307226",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1855",
     "isbn13": "9780558307226",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1856",
@@ -4527,7 +4527,7 @@
   {
     "barcode": "LMS-COPY-1906",
     "isbn13": "9780596009205",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-1907",
@@ -4552,12 +4552,12 @@
   {
     "barcode": "LMS-COPY-1911",
     "isbn13": "9780596510046",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1912",
     "isbn13": "9780596510046",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1913",
@@ -4622,7 +4622,7 @@
   {
     "barcode": "LMS-COPY-1925",
     "isbn13": "9780669397611",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1926",
@@ -4812,7 +4812,7 @@
   {
     "barcode": "LMS-COPY-1963",
     "isbn13": "9780672324536",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1964",
@@ -4872,7 +4872,7 @@
   {
     "barcode": "LMS-COPY-1975",
     "isbn13": "9780679733737",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-1976",
@@ -4972,7 +4972,7 @@
   {
     "barcode": "LMS-COPY-1995",
     "isbn13": "9780697251909",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-1996",
@@ -5042,7 +5042,7 @@
   {
     "barcode": "LMS-COPY-2009",
     "isbn13": "9780716786948",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-2010",
@@ -5052,7 +5052,7 @@
   {
     "barcode": "LMS-COPY-2011",
     "isbn13": "9780718196042",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2012",
@@ -5137,12 +5137,12 @@
   {
     "barcode": "LMS-COPY-2028",
     "isbn13": "9780753555644",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2029",
     "isbn13": "9780753555644",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2030",
@@ -5167,12 +5167,12 @@
   {
     "barcode": "LMS-COPY-2034",
     "isbn13": "9780755327362",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2035",
     "isbn13": "9780755344666",
-    "status": "RESERVED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2036",
@@ -5232,7 +5232,7 @@
   {
     "barcode": "LMS-COPY-2047",
     "isbn13": "9780764569012",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2048",
@@ -5242,12 +5242,12 @@
   {
     "barcode": "LMS-COPY-2049",
     "isbn13": "9780764570698",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2050",
     "isbn13": "9780764597688",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2051",
@@ -5382,7 +5382,7 @@
   {
     "barcode": "LMS-COPY-2077",
     "isbn13": "9780804139298",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2078",
@@ -5432,7 +5432,7 @@
   {
     "barcode": "LMS-COPY-2087",
     "isbn13": "9780805390629",
-    "status": "LOST"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2088",
@@ -5467,12 +5467,12 @@
   {
     "barcode": "LMS-COPY-2094",
     "isbn13": "9780810994553",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2095",
     "isbn13": "9780810994553",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2096",
@@ -5582,7 +5582,7 @@
   {
     "barcode": "LMS-COPY-2117",
     "isbn13": "9780877095200",
-    "status": "AVAILABLE"
+    "status": "LOST"
   },
   {
     "barcode": "LMS-COPY-2118",
@@ -5622,7 +5622,7 @@
   {
     "barcode": "LMS-COPY-2125",
     "isbn13": "9780891411307",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2126",
@@ -5717,7 +5717,7 @@
   {
     "barcode": "LMS-COPY-2144",
     "isbn13": "9780903203210",
-    "status": "LOST"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2145",
@@ -5907,12 +5907,12 @@
   {
     "barcode": "LMS-COPY-2182",
     "isbn13": "9781118905555",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2183",
     "isbn13": "9781118909584",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2184",
@@ -5967,7 +5967,7 @@
   {
     "barcode": "LMS-COPY-2194",
     "isbn13": "9781119174103",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2195",
@@ -6082,7 +6082,7 @@
   {
     "barcode": "LMS-COPY-2217",
     "isbn13": "9781250206701",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-2218",
@@ -6112,7 +6112,7 @@
   {
     "barcode": "LMS-COPY-2223",
     "isbn13": "9781265058432",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2224",
@@ -6122,7 +6122,7 @@
   {
     "barcode": "LMS-COPY-2225",
     "isbn13": "9781284089189",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2226",
@@ -6142,7 +6142,7 @@
   {
     "barcode": "LMS-COPY-2229",
     "isbn13": "9781285087160",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2230",
@@ -6182,7 +6182,7 @@
   {
     "barcode": "LMS-COPY-2237",
     "isbn13": "9781292376356",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2238",
@@ -6247,7 +6247,7 @@
   {
     "barcode": "LMS-COPY-2250",
     "isbn13": "9781400064168",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2251",
@@ -6442,7 +6442,7 @@
   {
     "barcode": "LMS-COPY-2289",
     "isbn13": "9781449344726",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2290",
@@ -6492,7 +6492,7 @@
   {
     "barcode": "LMS-COPY-2299",
     "isbn13": "9781471156267",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2300",
@@ -6517,7 +6517,7 @@
   {
     "barcode": "LMS-COPY-2304",
     "isbn13": "9781473212794",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2305",
@@ -6702,7 +6702,7 @@
   {
     "barcode": "LMS-COPY-2341",
     "isbn13": "9781529387155",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2342",
@@ -6767,7 +6767,7 @@
   {
     "barcode": "LMS-COPY-2354",
     "isbn13": "9781563523304",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2355",
@@ -6782,7 +6782,7 @@
   {
     "barcode": "LMS-COPY-2357",
     "isbn13": "9781565924642",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2358",
@@ -7032,7 +7032,7 @@
   {
     "barcode": "LMS-COPY-2407",
     "isbn13": "9781593277406",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2408",
@@ -7097,7 +7097,7 @@
   {
     "barcode": "LMS-COPY-2420",
     "isbn13": "9781600330520",
-    "status": "LOST"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-2421",
@@ -7187,12 +7187,12 @@
   {
     "barcode": "LMS-COPY-2438",
     "isbn13": "9781668221570",
-    "status": "AVAILABLE"
+    "status": "RESERVED"
   },
   {
     "barcode": "LMS-COPY-2439",
     "isbn13": "9781668221570",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2440",
@@ -7287,7 +7287,7 @@
   {
     "barcode": "LMS-COPY-2458",
     "isbn13": "9781784971618",
-    "status": "LOANED"
+    "status": "LOST"
   },
   {
     "barcode": "LMS-COPY-2459",
@@ -7317,7 +7317,7 @@
   {
     "barcode": "LMS-COPY-2464",
     "isbn13": "9781788171823",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2465",
@@ -7437,7 +7437,7 @@
   {
     "barcode": "LMS-COPY-2488",
     "isbn13": "9781847941831",
-    "status": "AVAILABLE"
+    "status": "LOST"
   },
   {
     "barcode": "LMS-COPY-2489",
@@ -7522,7 +7522,7 @@
   {
     "barcode": "LMS-COPY-2505",
     "isbn13": "9781893224544",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2506",
@@ -7662,12 +7662,12 @@
   {
     "barcode": "LMS-COPY-2533",
     "isbn13": "9781982166687",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2534",
     "isbn13": "9781982166687",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2535",
@@ -7702,7 +7702,7 @@
   {
     "barcode": "LMS-COPY-2541",
     "isbn13": "9783540760474",
-    "status": "MAINTENANCE"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2542",
@@ -7777,7 +7777,7 @@
   {
     "barcode": "LMS-COPY-2556",
     "isbn13": "9786051410135",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2557",
@@ -7817,7 +7817,7 @@
   {
     "barcode": "LMS-COPY-2564",
     "isbn13": "9786054183524",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-2565",
@@ -7837,7 +7837,7 @@
   {
     "barcode": "LMS-COPY-2568",
     "isbn13": "9786054630776",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2569",
@@ -7862,7 +7862,7 @@
   {
     "barcode": "LMS-COPY-2573",
     "isbn13": "9787302115342",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2574",
@@ -7897,7 +7897,7 @@
   {
     "barcode": "LMS-COPY-2580",
     "isbn13": "9788131702444",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2581",
@@ -8002,7 +8002,7 @@
   {
     "barcode": "LMS-COPY-2601",
     "isbn13": "9789354402173",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2602",
@@ -8117,7 +8117,7 @@
   {
     "barcode": "LMS-COPY-2624",
     "isbn13": "9789752201279",
-    "status": "AVAILABLE"
+    "status": "MAINTENANCE"
   },
   {
     "barcode": "LMS-COPY-2625",
@@ -8242,7 +8242,7 @@
   {
     "barcode": "LMS-COPY-2649",
     "isbn13": "9789753630573",
-    "status": "AVAILABLE"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2650",
@@ -8297,7 +8297,7 @@
   {
     "barcode": "LMS-COPY-2660",
     "isbn13": "9789754709612",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2661",
@@ -8327,7 +8327,7 @@
   {
     "barcode": "LMS-COPY-2666",
     "isbn13": "9789754782530",
-    "status": "LOST"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2667",
@@ -8337,7 +8337,7 @@
   {
     "barcode": "LMS-COPY-2668",
     "isbn13": "9789754782530",
-    "status": "LOST"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2669",
@@ -8442,7 +8442,7 @@
   {
     "barcode": "LMS-COPY-2689",
     "isbn13": "9789811568503",
-    "status": "LOANED"
+    "status": "AVAILABLE"
   },
   {
     "barcode": "LMS-COPY-2690",
@@ -8487,7 +8487,7 @@
   {
     "barcode": "LMS-COPY-2698",
     "isbn13": "9798558098426",
-    "status": "LOST"
+    "status": "LOANED"
   },
   {
     "barcode": "LMS-COPY-2699",

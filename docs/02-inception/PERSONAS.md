@@ -19,9 +19,9 @@
 | Persona | System Role | Member Type (`memberType`) | Representative Seed Record | Confirmed Borrowing Quota (`BR-002`) | Confirmed Loan Period (`BR-003`) | Primary Interface Focus |
 |---|---|---|---|---|---|---|
 | **1. Librarian / Admin** | `ROLE_LIBRARIAN` | N/A (Staff Account) | `username: "syn-lib-0001"` (`Enginiz Yıldırım`) in [`librarians.json`](../../data/seed/librarians.json) | Operational Administrator | N/A | Circulation Desk, Catalog & Copy CRUD, Member Mgmt, Fine & Lost-Book Settlement, KPI Dashboard |
-| **2. Student Member** | `ROLE_MEMBER` | `STUDENT` | `memberId: "SYN-STU-0001"` (`Tutkucan Ergül`) & `"SYN-STU-0044"` (`Peren Erdoğan`) in [`members.json`](../../data/seed/members.json) | Max **3 books** (`CONFIRMED`) | **30 calendar days** (`CONFIRMED`) | Self-Service Catalog Search, Own Loans/Fines View, Online Renewal, Hold Queue |
+| **2. Student Member** | `ROLE_MEMBER` | `STUDENT` | `memberId: "SYN-STU-0001"` (`Tutkucan Ergül`) & `"SYN-STU-0003"` (`Hazrat Yorulmaz`) in [`members.json`](../../data/seed/members.json) | Max **3 books** (`CONFIRMED`) | **30 calendar days** (`CONFIRMED`) | Self-Service Catalog Search, Own Loans/Fines View, Online Renewal, Hold Queue |
 | **3. Academic Staff Member** | `ROLE_MEMBER` | `ACADEMIC_STAFF` | `memberId: "SYN-STF-0003"` (`Atasagun Öcalan`) & `"SYN-STF-0002"` (`Baydu Arsoy`) in [`members.json`](../../data/seed/members.json) | Max **7 books** (`CONFIRMED`) | **30 calendar days** (`CONFIRMED`) | Research Catalog Lookup, Higher-Quota Borrowing (`7` books), Self-Service Renewal & Holds |
-| **4. Administrative Staff Member** | `ROLE_MEMBER` | `ADMINISTRATIVE_STAFF` *(PLANNED: will exist after seed v2 (`OPEN-06`))* | `SYN-ADM-0001` *(PLANNED: will exist after seed v2 (`OPEN-06`))* | Max **3 books** (`CONFIRMED`) | **30 calendar days** (`CONFIRMED`) | Self-Service Catalog Lookup, Borrowing up to `3` Books, Own Loans/Fines View |
+| **4. Administrative Staff Member** | `ROLE_MEMBER` | `ADMINISTRATIVE_STAFF` | `memberId: "SYN-ADM-0001"` (`Doğannur Güçlü`) & `"SYN-ADM-0004"` (`Peren Erdoğan`) in [`members.json`](../../data/seed/members.json) | Max **3 books** (`CONFIRMED`) | **30 calendar days** (`CONFIRMED`) | Self-Service Catalog Lookup, Borrowing up to `3` Books, Own Loans/Fines View |
 | **5. Guest Visitor** | `ROLE_GUEST` | Unauthenticated | Anonymous browser session | **0 books** (Read-Only) | N/A | Public Read-Only Catalog Search & Shelf Availability Lookup |
 
 ---
@@ -44,7 +44,7 @@
 - **Goals:**
   - Process book checkouts and returns rapidly using a member's personal university ID card number (`memberId`) and the physical copy's barcode (`barcode`, e.g., `LMS-COPY-1001`) without manual date arithmetic.
   - Rely on the system to automatically enforce confirmed ADU borrowing rules: member-type quotas (`7` for `ACADEMIC_STAFF`, `3` for `ADMINISTRATIVE_STAFF` and `STUDENT`), `30`-day due dates, non-circulating reference book restrictions (`BR-014`), 1-month (`30`-day) post-renewal re-borrowing cooldowns (`BR-006`), and automatic borrowing blocks when a member holds an overdue item or an unpaid fine (`BR-011`).
-  - Maintain accurate copy-level states (`AVAILABLE`, `LOANED`, `RESERVED`, `MAINTENANCE`, `LOST`), handle lost-book petitions (`BR-015`: freezing overdue fines on `lostReportedOn` and assessing `2 * appraisedValue` if unreplaced after 1 month — both fields `PLANNED: will exist after seed v2 (OPEN-06)` / runtime domain attributes), and record desk fine payments (`PAID`) or administrative waivers (`WAIVED`) with full auditability (`settledBy: "syn-lib-0001"`).
+  - Maintain accurate copy-level states (`AVAILABLE`, `LOANED`, `RESERVED`, `MAINTENANCE`, `LOST`), handle lost-book petitions (`BR-015`: freezing overdue fines on `lostReportedOn` and assessing `2 * appraisedValue` if unreplaced after 1 month, where `appraisedValue` is entered by the Librarian at runtime), and record desk fine payments (`PAID`) or administrative waivers (`WAIVED`) with full auditability (`settledBy: "syn-lib-0001"`).
   - Monitor daily library health via the Operational Dashboard (active loans, due-soon loans within `0..3` days, overdue loans, and unpaid fine balances).
 - **Pain Points:**
   - Checking manually whether a returned book has a waiting reservation queue—and remembering to set the copy aside in `RESERVED` state for the `2–3 day` pickup window (`BR-013`) instead of reshelving it—is error-prone without automated prompts.
@@ -53,7 +53,7 @@
 - **Typical Scenarios:**
   1. **Desk Checkout (`UC-05`):** Student `Tutkucan Ergül` (`SYN-STU-0001`) presents her personal university ID card at the desk to borrow copy `LMS-COPY-1002` of Yașar Kemal's *İnce Memed* (`isbn13: "9780002615075"`). `Enginiz Yıldırım` (`syn-lib-0001`) enters `SYN-STU-0001` and `LMS-COPY-1002`; the system verifies she has no overdue loans or unpaid fines, is below her 3-book limit, and creates a 30-day loan.
   2. **Copy Return & Hold Allocation (`UC-06`):** When a borrowed copy of Robert Sedgewick's *Algorithms* (`isbn13: "9780321573513"`) is returned at the desk, the system detects active `WAITING` reservation `RES-0004` (`memberId: "SYN-STU-0032"`, `queuePosition: 1`), transitions the copy to `RESERVED` instead of `AVAILABLE`, binds `readyCopyBarcode`, and triggers an in-app pickup notification for the 2–3 day hold window.
-  3. **Fine Settlement & Waiver (`UC-09`):** `Enginiz Yıldırım` reviews an `UNPAID` fine (such as `FINE-0019` on `LOAN-0105` for member `SYN-STU-0025`, or `FINE-0005` on `LOAN-0028` for `SYN-STU-0038` which `syn-lib-0001` settled as `PAID` on `2026-03-20`) and records payment or waiver, immediately clearing the financial block on the member's profile.
+  3. **Fine Settlement & Waiver (`UC-09`):** `Enginiz Yıldırım` reviews an `UNPAID` fine (such as `FINE-0022` on `LOAN-0107` for member `SYN-STU-0025`, or `FINE-0012` on `LOAN-0070` for `SYN-STU-0038` which `syn-lib-0001` settled as `PAID` on `2026-06-01`) and records payment or waiver, immediately clearing the financial block on the member's profile.
 
 ---
 
@@ -72,7 +72,7 @@
     "registeredOn": "2025-07-28"
   }
   ```
-  *(Additional representative student records in [`members.json`](../../data/seed/members.json): `SYN-STU-0044` `Peren Erdoğan` in `Computer Engineering`, and `SYN-STU-0003` `Hazrat Yorulmaz` who holds `READY` reservation `RES-0009` on `isbn13: "9780345451323"` with `readyCopyBarcode: "LMS-COPY-1599"`.)*
+  *(Additional representative student record in [`members.json`](../../data/seed/members.json): `SYN-STU-0003` `Hazrat Yorulmaz` in `Computer Engineering`, who holds `READY` reservation `RES-0009` on `isbn13: "9780345451323"` with `readyCopyBarcode: "LMS-COPY-1599"`, `readyOn: "2026-10-21"`, and `holdUntil: "2026-10-24"`.)*
 - **Role Context:** Undergraduate student who borrows course textbooks and general reading books. Subject to confirmed ADU student rules: maximum **3 active loans** simultaneously (`BR-002`) for **30 calendar days** per loan (`BR-003`), with a daily overdue fine of **0.25 TRY/day** (`BR-008`).
 - **Goals:**
   - Search the catalog by title, author, `isbn13`, or subject category (e.g., `Computer Science`, `Programming`, `Databases`, `Chemistry`) before walking to the library.
@@ -120,22 +120,22 @@
 
 ---
 
-### Persona 4 — Administrative Staff Member (`ROLE_MEMBER`, `memberType = "ADMINISTRATIVE_STAFF"` — *PLANNED: will exist after seed v2 (`OPEN-06`)*)
+### Persona 4 — Administrative Staff Member (`ROLE_MEMBER`, `memberType = "ADMINISTRATIVE_STAFF"`)
 
-- **Seed Convention Reference (`ASSUMPTION-17`, *PLANNED: will exist after seed v2 (`OPEN-06`)*):**
+- **Seed Record Reference ([`data/seed/members.json`](../../data/seed/members.json)):**
   ```json
   {
     "memberId": "SYN-ADM-0001",
-    "firstName": "<PLANNED: will exist after seed v2 (OPEN-06)>",
-    "lastName": "<PLANNED: will exist after seed v2 (OPEN-06)>",
+    "firstName": "Doğannur",
+    "lastName": "Güçlü",
     "email": "syn-adm-0001@synthetic.lms.local",
     "memberType": "ADMINISTRATIVE_STAFF",
     "status": "ACTIVE",
     "department": "Business Administration",
-    "registeredOn": "2024-03-15"
+    "registeredOn": "2025-10-29"
   }
   ```
-  *(**PLANNED: will exist after seed v2 (`OPEN-06`):** The current `data/seed/members.json` v1 snapshot contains `STUDENT` and `ACADEMIC_STAFF` rows only; `SYN-ADM-0001` and `memberType = "ADMINISTRATIVE_STAFF"` do **not** exist in the current seed v1 file and will be generated in seed v2 under `OPEN-06`.)*
+  *(Additional representative administrative staff record in [`members.json`](../../data/seed/members.json): `SYN-ADM-0004` `Peren Erdoğan` in `Computer Engineering`, `registeredOn: "2024-09-22"`.)*
 - **Role Context:** University administrative personnel borrowing general literature, history, or professional development books. Under confirmed ADU rules (`BR-002`, `BR-003`), administrative staff share the same borrowing quota and duration as students: at most **3 active loans** simultaneously for **30 calendar days**.
 - **Goals:**
   - Browse Turkish Literature, History, and Business Administration books during lunch breaks, check shelf availability, borrow up to `3` books in person with their university staff ID card (`BR-016`), and review due dates or renew loans via the Member Self-Service Portal (`UC-07`, `UC-10`).

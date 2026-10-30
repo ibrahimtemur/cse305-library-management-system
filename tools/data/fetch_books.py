@@ -35,6 +35,7 @@ from lms_seed_common import (
     CATEGORIES,
     RAW_DIR,
     clean_isbn,
+    is_reference_only_book,
     is_valid_isbn13,
     isbn10_to_isbn13,
     write_json,
@@ -231,19 +232,22 @@ def normalize_doc(doc: dict[str, Any], default_category: str) -> tuple[dict[str,
             subjects.append(raw.strip())
     subtitle = _first_str(chosen.get("subtitle"))
 
+    subtitle_norm = _capitalize_first(subtitle) if subtitle else None
+    subjects_trimmed = subjects[:5]
     record = {
         "isbn13": isbn13,
         "title": title,
-        "subtitle": _capitalize_first(subtitle) if subtitle else None,
+        "subtitle": subtitle_norm,
         "authors": authors[:5],
         "publisher": _first_str(chosen.get("publisher")),
         "firstPublishYear": year,
         "category": map_category(subjects, default_category),
-        "subjects": subjects[:5],
+        "subjects": subjects_trimmed,
         "pageCount": pages,
         "coverId": cover_id,
         "coverUrl": COVER_URL_TEMPLATE.format(cover_id=cover_id),
         "openLibraryWorkKey": doc.get("key"),
+        "referenceOnly": is_reference_only_book(title, subtitle_norm, subjects_trimmed),
     }
     return record, "ok"
 
