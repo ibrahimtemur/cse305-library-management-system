@@ -11,6 +11,7 @@
   - **Ibrahim Temur** — Student No: `231805033` (Product Owner)
   - **Omer Faruk Kuş** — Student No: `231805026` (Scrum Master)
 - **Base Package:** `edu.adu.lms`
+- **GitHub Repository:** [`https://github.com/ibrahimtemur/cse305-library-management-system`](https://github.com/ibrahimtemur/cse305-library-management-system)
 - **Document Version:** `1.2` (2026-10-30)
 - **Part of:** [`HW01_Problem_Solution_DomainModel.md`](HW01_Problem_Solution_DomainModel.md) (single HW01 submission document); companion: [`PROJECT_PROPOSAL.md`](PROJECT_PROPOSAL.md)
 
