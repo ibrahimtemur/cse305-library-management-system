@@ -1,7 +1,7 @@
 # Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
 # Student No(s)#: 231805033, 231805026
-# General Comments: Validation tests for the committed seed data files (integrity, foreign keys, loan/fine rules, FIFO queues, privacy, reproducibility).
-"""Validate data/seed/*.json against the project ASSUMPTIONs.
+# General Comments: Validation tests for the committed seed data files (integrity, foreign keys, confirmed ADU loan/fine/cooldown/lost/hold rules, FIFO queues, privacy, reproducibility).
+"""Validate data/seed/*.json against confirmed ADU library rules (BUSINESS_RULES.md).
 
 The business-rule constants are deliberately re-declared here (instead of imported from
 the generator) so that a typo in the generator cannot silently pass its own tests.
@@ -21,12 +21,32 @@ REPO_ROOT = TOOLS_DATA.parents[1]
 SEED = REPO_ROOT / "data" / "seed"
 sys.path.insert(0, str(TOOLS_DATA))
 
-# ASSUMPTION-02/03/05 (project assumptions, not official ADU regulations).
+# Independently declared constants from docs/02-inception/BUSINESS_RULES.md (BR-001..BR-018).
 REFERENCE_DATE = date(2026, 10, 22)
-LOAN_DAYS = {"STUDENT": 14, "ACADEMIC_STAFF": 30}
-MAX_ACTIVE = {"STUDENT": 3, "ACADEMIC_STAFF": 5}
-FINE_PER_DAY = Decimal("5.00")
-FINE_CAP = Decimal("250.00")
+LOAN_DAYS = {
+    "STUDENT": 30,
+    "ACADEMIC_STAFF": 30,
+    "ADMINISTRATIVE_STAFF": 30,
+}
+MAX_ACTIVE = {
+    "STUDENT": 3,
+    "ACADEMIC_STAFF": 7,
+    "ADMINISTRATIVE_STAFF": 3,
+}
+MEMBER_ID_PREFIX = {
+    "STUDENT": "STU",
+    "ACADEMIC_STAFF": "STF",
+    "ADMINISTRATIVE_STAFF": "ADM",
+}
+FINE_PER_DAY = Decimal("0.25")
+RENEWAL_COOLDOWN_DAYS = 30
+HOLD_PICKUP_DAYS = 3
+LOST_REPLACEMENT_DAYS = 30
+EXPECTED_REFERENCE_ISBNS = {
+    "9780717261680",
+    "9780824722876",
+    "9781560917540",
+}
 
 CATEGORIES = {
     "Computer Science", "Software Engineering", "Programming", "Databases", "Mathematics",
@@ -34,6 +54,7 @@ CATEGORIES = {
     "Philosophy & Social Sciences", "Turkish Literature",
 }
 COPY_STATUSES = {"AVAILABLE", "LOANED", "RESERVED", "MAINTENANCE", "LOST"}
+LOAN_STATUSES = {"ACTIVE", "RETURNED", "LOST"}
 SYNTHETIC_DOMAIN = "synthetic.lms.local"
 
 DATA = {}
@@ -67,17 +88,18 @@ def setUpModule():
 
 
 def end_of(loan):
-    """Date up to which the loan ran (return date, or the reference date if still active)."""
-    return d(loan["returnDate"]) or REFERENCE_DATE
+    """Date up to which the loan ran or accrued fines (lostReportedOn, returnDate, or REFERENCE_DATE)."""
+    return d(loan["lostReportedOn"]) or d(loan["returnDate"]) or REFERENCE_DATE
 
 
 def active_at(loan, day):
-    returned = d(loan["returnDate"])
-    return d(loan["checkoutDate"]) <= day and (returned is None or returned > day)
+    ended = d(loan["lostReportedOn"]) or d(loan["returnDate"])
+    return d(loan["checkoutDate"]) <= day and (ended is None or ended > day)
 
 
 class BookTests(unittest.TestCase):
     def test_row_count_is_within_target(self):
+        self.assertEqual(len(DATA["books-openlibrary"]), 782)
         self.assertTrue(500 <= len(DATA["books-openlibrary"]) <= 800, len(DATA["books-openlibrary"]))
 
     def test_isbn13_unique_and_checksum_valid(self):
@@ -102,29 +124,49 @@ class BookTests(unittest.TestCase):
                 self.assertIn(b["category"], CATEGORIES)
                 self.assertTrue(b["subtitle"] is None or b["subtitle"].strip())
                 self.assertEqual(b["coverUrl"], f"https://covers.openlibrary.org/b/id/{b['coverId']}-M.jpg")
+                self.assertIsInstance(b["referenceOnly"], bool)
 
     def test_every_category_is_used(self):
         self.assertEqual({b["category"] for b in DATA["books-openlibrary"]}, CATEGORIES)
+
+    def test_reference_only_books_match_strict_word_boundary_rule(self):
+        kw = re.compile(
+            r"\b(dictionar(?:y|ies)|encyclopa?edia(?:s)?|catalog(?:ue)?s?|sözlük(?:ler)?|ansiklopedi(?:ler)?|katalog(?:lar)?)\b",
+            re.IGNORECASE,
+        )
+        flagged = {b["isbn13"] for b in DATA["books-openlibrary"] if b["referenceOnly"]}
+        self.assertEqual(flagged, EXPECTED_REFERENCE_ISBNS)
+        for b in DATA["books-openlibrary"]:
+            texts = [b["title"]] + ([b["subtitle"]] if b["subtitle"] else []) + list(b["subjects"])
+            expected = any(kw.search(t) for t in texts)
+            self.assertEqual(b["referenceOnly"], expected, b["isbn13"])
 
 
 class MemberAndLibrarianTests(unittest.TestCase):
     def test_member_count_ids_and_emails(self):
         members = DATA["members"]
-        self.assertTrue(55 <= len(members) <= 65)
+        self.assertEqual(len(members), 60)
         self.assertEqual(len({m["memberId"] for m in members}), len(members))
         self.assertEqual(len({m["email"] for m in members}), len(members))
         for m in members:
-            kind = "STU" if m["memberType"] == "STUDENT" else "STF"
+            self.assertIn(m["memberType"], LOAN_DAYS)
+            kind = MEMBER_ID_PREFIX[m["memberType"]]
             self.assertRegex(m["memberId"], rf"^SYN-{kind}-\d{{4}}$")
             self.assertEqual(m["email"], f"{m['memberId'].lower()}@{SYNTHETIC_DOMAIN}")
-            self.assertIn(m["memberType"], LOAN_DAYS)
             self.assertIn(m["status"], {"ACTIVE", "SUSPENDED"})
             self.assertTrue(m["firstName"].strip() and m["lastName"].strip())
 
-    def test_both_member_types_and_a_few_suspended_members(self):
-        types = {m["memberType"] for m in DATA["members"]}
-        self.assertEqual(types, {"STUDENT", "ACADEMIC_STAFF"})
-        suspended = [m for m in DATA["members"] if m["status"] == "SUSPENDED"]
+    def test_all_three_member_types_mix_and_suspended_members(self):
+        members = DATA["members"]
+        types = {m["memberType"] for m in members}
+        self.assertEqual(types, {"STUDENT", "ACADEMIC_STAFF", "ADMINISTRATIVE_STAFF"})
+        by_type = defaultdict(int)
+        for m in members:
+            by_type[m["memberType"]] += 1
+        self.assertEqual(by_type["STUDENT"], 40)
+        self.assertEqual(by_type["ACADEMIC_STAFF"], 10)
+        self.assertEqual(by_type["ADMINISTRATIVE_STAFF"], 10)
+        suspended = [m for m in members if m["status"] == "SUSPENDED"]
         self.assertTrue(1 <= len(suspended) <= 8)
 
     def test_librarians(self):
@@ -136,13 +178,13 @@ class MemberAndLibrarianTests(unittest.TestCase):
             self.assertTrue(l["displayName"].strip())
             self.assertEqual(set(l), {"username", "displayName", "email", "role"})
 
-    def test_no_credentials_anywhere_in_seed_files(self):
-        pattern = re.compile(r"pass(word|wd)|secret|token|credential|hash|apikey|api_key", re.IGNORECASE)
+    def test_no_credentials_or_appraised_value_anywhere_in_seed_files(self):
+        pattern = re.compile(r"pass(word|wd)|secret|token|credential|hash|apikey|api_key|appraisedValue", re.IGNORECASE)
 
         def walk(node, path):
             if isinstance(node, dict):
                 for key, value in node.items():
-                    self.assertIsNone(pattern.search(key), f"credential-like key {key!r} in {path}")
+                    self.assertIsNone(pattern.search(key), f"disallowed key {key!r} in {path}")
                     walk(value, path)
             elif isinstance(node, list):
                 for item in node:
@@ -177,15 +219,33 @@ class CopyTests(unittest.TestCase):
         active = {l["copyBarcode"] for l in DATA["loans"] if l["status"] == "ACTIVE"}
         self.assertEqual(loaned, active)
 
+    def test_lost_copies_match_lost_loans_exactly(self):
+        lost_copies = {c["barcode"] for c in DATA["copies"] if c["status"] == "LOST"}
+        lost_loans = {l["copyBarcode"] for l in DATA["loans"] if l["status"] == "LOST"}
+        self.assertEqual(lost_copies, lost_loans)
+        self.assertTrue(3 <= len(lost_copies) <= 10)
+
     def test_reserved_copies_match_ready_reservations(self):
         reserved = {c["barcode"] for c in DATA["copies"] if c["status"] == "RESERVED"}
         ready = {r["readyCopyBarcode"] for r in DATA["reservations"] if r["status"] == "READY"}
         self.assertEqual(reserved, ready)
 
+    def test_reference_only_books_are_never_loaned_or_reserved(self):
+        ref_isbns = {b["isbn13"] for b in DATA["books-openlibrary"] if b["referenceOnly"]}
+        self.assertTrue(len(ref_isbns) >= 3)
+        for isbn in ref_isbns:
+            for c in DATA["copies_by_isbn"][isbn]:
+                self.assertEqual(c["status"], "AVAILABLE", f"reference copy {c['barcode']} not AVAILABLE")
+        for l in DATA["loans"]:
+            isbn = DATA["copies_by_barcode"][l["copyBarcode"]]["isbn13"]
+            self.assertNotIn(isbn, ref_isbns, f"reference book {isbn} loaned in {l['loanId']}")
+        for r in DATA["reservations"]:
+            self.assertNotIn(r["isbn13"], ref_isbns, f"reference book {r['isbn13']} reserved in {r['reservationId']}")
+
 
 class LoanTests(unittest.TestCase):
     def test_row_count_and_unique_ids(self):
-        self.assertTrue(120 <= len(DATA["loans"]) <= 200, len(DATA["loans"]))
+        self.assertTrue(120 <= len(DATA["loans"]) <= 220, len(DATA["loans"]))
         self.assertEqual(len(DATA["loans_by_id"]), len(DATA["loans"]))
 
     def test_foreign_keys_resolve(self):
@@ -193,23 +253,46 @@ class LoanTests(unittest.TestCase):
             self.assertIn(l["memberId"], DATA["members_by_id"])
             self.assertIn(l["copyBarcode"], DATA["copies_by_barcode"])
 
-    def test_dates_are_valid_and_ordered(self):
+    def test_dates_and_statuses_are_valid_and_ordered(self):
+        statuses_seen = set()
         for l in DATA["loans"]:
             with self.subTest(loan=l["loanId"]):
-                checkout, due, returned = d(l["checkoutDate"]), d(l["dueDate"]), d(l["returnDate"])
+                checkout = d(l["checkoutDate"])
+                due = d(l["dueDate"])
+                returned = d(l["returnDate"])
+                lost_reported = d(l["lostReportedOn"])
+                status = l["status"]
+                statuses_seen.add(status)
+                self.assertIn(status, LOAN_STATUSES)
                 self.assertLessEqual(checkout, REFERENCE_DATE)
                 self.assertGreater(due, checkout)
-                if returned:
+
+                if status == "RETURNED":
+                    self.assertIsNotNone(returned, f"{l['loanId']}: RETURNED loan must have returnDate")
+                    self.assertIsNone(lost_reported, f"{l['loanId']}: RETURNED loan must not have lostReportedOn")
                     self.assertGreater(returned, checkout)
                     self.assertLessEqual(returned, REFERENCE_DATE)
-                    self.assertEqual(l["status"], "RETURNED")
+                elif status == "LOST":
+                    self.assertIsNone(returned, f"{l['loanId']}: LOST loan must have returnDate=null")
+                    self.assertIsNotNone(lost_reported, f"{l['loanId']}: LOST loan must have lostReportedOn")
+                    self.assertGreater(lost_reported, due, f"{l['loanId']}: LOST loan must be overdue at lostReportedOn")
+                    self.assertGreater(
+                        lost_reported,
+                        REFERENCE_DATE - timedelta(days=LOST_REPLACEMENT_DAYS),
+                        f"{l['loanId']}: lostReportedOn must be within the active 30-day replacement window",
+                    )
+                    self.assertLessEqual(lost_reported, REFERENCE_DATE)
                 else:
-                    self.assertEqual(l["status"], "ACTIVE")
+                    self.assertEqual(status, "ACTIVE")
+                    self.assertIsNone(returned)
+                    self.assertIsNone(lost_reported)
+        self.assertEqual(statuses_seen, LOAN_STATUSES)
 
     def test_due_date_follows_loan_period_and_renewal_rules(self):
         for l in DATA["loans"]:
             with self.subTest(loan=l["loanId"]):
                 period = LOAN_DAYS[DATA["members_by_id"][l["memberId"]]["memberType"]]
+                self.assertEqual(period, 30)
                 checkout = d(l["checkoutDate"])
                 self.assertIn(l["renewalCount"], (0, 1))
                 self.assertEqual(d(l["dueDate"]), checkout + timedelta(days=period * (1 + l["renewalCount"])))
@@ -254,8 +337,9 @@ class LoanTests(unittest.TestCase):
             by_copy[l["copyBarcode"]].append(l)
         for barcode, loans in by_copy.items():
             loans.sort(key=lambda l: l["checkoutDate"])
-            self.assertLessEqual(sum(1 for l in loans if l["status"] == "ACTIVE"), 1, barcode)
+            self.assertLessEqual(sum(1 for l in loans if l["status"] in ("ACTIVE", "LOST")), 1, barcode)
             for earlier, later in zip(loans, loans[1:]):
+                self.assertEqual(earlier["status"], "RETURNED", f"{barcode}: non-returned loan followed by another loan")
                 self.assertIsNotNone(earlier["returnDate"], f"{barcode}: open loan followed by another loan")
                 self.assertLessEqual(d(earlier["returnDate"]), d(later["checkoutDate"]), barcode)
 
@@ -268,7 +352,28 @@ class LoanTests(unittest.TestCase):
                     self.assertNotIn(isbn, seen, member_id)
                     seen.add(isbn)
 
-    def test_borrowing_block_rule_assumption_06_at_every_checkout(self):
+    def test_post_renewal_30_day_cooldown_rule_br_006(self):
+        reborrowed_after_cooldown = 0
+        for member_id, loans in DATA["loans_by_member"].items():
+            by_isbn = defaultdict(list)
+            for l in loans:
+                isbn = DATA["copies_by_barcode"][l["copyBarcode"]]["isbn13"]
+                by_isbn[isbn].append(l)
+            for isbn, title_loans in by_isbn.items():
+                title_loans.sort(key=lambda l: l["checkoutDate"])
+                for earlier, later in zip(title_loans, title_loans[1:]):
+                    if earlier["renewalCount"] >= 1 and earlier["status"] == "RETURNED":
+                        ret_date = d(earlier["returnDate"])
+                        later_checkout = d(later["checkoutDate"])
+                        self.assertGreaterEqual(
+                            later_checkout,
+                            ret_date + timedelta(days=RENEWAL_COOLDOWN_DAYS),
+                            f"{member_id} re-borrowed {isbn} within 30-day post-renewal cooldown",
+                        )
+                        reborrowed_after_cooldown += 1
+        self.assertGreaterEqual(reborrowed_after_cooldown, 1, "expected at least one post-cooldown re-borrow example")
+
+    def test_borrowing_block_rule_br_011_at_every_checkout(self):
         fines_by_member = defaultdict(list)
         for f in DATA["fines"]:
             fines_by_member[f["memberId"]].append(f)
@@ -292,6 +397,7 @@ class LoanTests(unittest.TestCase):
         self.assertGreaterEqual(sum(1 for x in due_in if 0 <= x <= 3), 5, "due-soon loans")
         self.assertGreaterEqual(sum(1 for x in due_in if x < 0), 5, "overdue active loans")
         self.assertGreaterEqual(len([l for l in DATA["loans"] if l["status"] == "RETURNED"]), 50)
+        self.assertGreaterEqual(len([l for l in DATA["loans"] if l["status"] == "LOST"]), 3)
         self.assertTrue(any(l["renewalCount"] == 1 for l in DATA["loans"]))
 
 
@@ -307,7 +413,7 @@ class FineTests(unittest.TestCase):
                 self.assertIn(f["settledBy"], librarians)
         self.assertEqual(len({f["loanId"] for f in DATA["fines"]}), len(DATA["fines"]), "one fine per loan")
 
-    def test_every_late_loan_has_exactly_one_correct_fine_and_no_other_loan_has_one(self):
+    def test_every_late_loan_has_exactly_one_correct_uncapped_fine_and_no_other_loan_has_one(self):
         fines_by_loan = {f["loanId"]: f for f in DATA["fines"]}
         for l in DATA["loans"]:
             with self.subTest(loan=l["loanId"]):
@@ -317,20 +423,23 @@ class FineTests(unittest.TestCase):
                     self.assertIsNone(fine)
                     continue
                 self.assertIsNotNone(fine)
-                expected = min(FINE_CAP, FINE_PER_DAY * late)
+                expected = FINE_PER_DAY * late
                 self.assertEqual(fine["overdueDays"], late)
                 self.assertEqual(fine["amount"], f"{expected:.2f}")
                 self.assertEqual(Decimal(fine["amount"]), expected)
                 self.assertEqual(fine["currency"], "TRY")
 
-    def test_fine_amounts_never_exceed_the_cap_and_cap_applies_from_50_days(self):
-        for f in DATA["fines"]:
-            self.assertLessEqual(Decimal(f["amount"]), FINE_CAP)
-            self.assertGreater(Decimal(f["amount"]), 0)
-            if f["overdueDays"] >= 50:
-                self.assertEqual(Decimal(f["amount"]), FINE_CAP)
-        self.assertTrue(any(f["overdueDays"] > 50 and f["amount"] == "250.00" for f in DATA["fines"]), "no capped example")
-        self.assertTrue(any(Decimal(f["amount"]) < FINE_CAP for f in DATA["fines"]), "no uncapped example")
+    def test_lost_loans_freeze_fine_at_lost_reported_on(self):
+        fines_by_loan = {f["loanId"]: f for f in DATA["fines"]}
+        lost_loans = [l for l in DATA["loans"] if l["status"] == "LOST"]
+        self.assertGreaterEqual(len(lost_loans), 3)
+        for l in lost_loans:
+            fine = fines_by_loan.get(l["loanId"])
+            self.assertIsNotNone(fine, f"LOST loan {l['loanId']} missing frozen overdue fine")
+            expected_days = (d(l["lostReportedOn"]) - d(l["dueDate"])).days
+            self.assertEqual(fine["overdueDays"], expected_days)
+            self.assertEqual(fine["assessedOn"], l["lostReportedOn"])
+            self.assertEqual(Decimal(fine["amount"]), FINE_PER_DAY * expected_days)
 
     def test_status_and_settlement_consistency(self):
         for f in DATA["fines"]:
@@ -340,13 +449,17 @@ class FineTests(unittest.TestCase):
             if loan["status"] == "ACTIVE":
                 self.assertEqual(f["status"], "UNPAID")
                 self.assertEqual(assessed, REFERENCE_DATE)
+            elif loan["status"] == "LOST":
+                self.assertEqual(assessed, d(loan["lostReportedOn"]))
             else:
+                self.assertEqual(loan["status"], "RETURNED")
                 self.assertEqual(assessed, d(loan["returnDate"]))
+
             if f["status"] == "UNPAID":
                 self.assertIsNone(f["settledOn"])
                 self.assertIsNone(f["settledBy"])
             else:
-                self.assertEqual(loan["status"], "RETURNED")
+                self.assertIn(loan["status"], {"RETURNED", "LOST"})
                 self.assertIsNotNone(f["settledBy"])
                 settled = d(f["settledOn"])
                 self.assertGreaterEqual(settled, assessed)
@@ -359,7 +472,9 @@ class FineTests(unittest.TestCase):
         blocked = {f["memberId"] for f in DATA["fines"] if f["status"] == "UNPAID"}
         self.assertTrue(blocked)
         for member_id in blocked:
-            unpaid_assessed = min(d(f["assessedOn"]) for f in DATA["fines"] if f["memberId"] == member_id and f["status"] == "UNPAID")
+            unpaid_assessed = min(
+                d(f["assessedOn"]) for f in DATA["fines"] if f["memberId"] == member_id and f["status"] == "UNPAID"
+            )
             for loan in DATA["loans_by_member"][member_id]:
                 self.assertLess(d(loan["checkoutDate"]), unpaid_assessed)
 
@@ -428,15 +543,26 @@ class ReservationTests(unittest.TestCase):
             latest_checkout = max((d(l["checkoutDate"]) for l in active_by_isbn[isbn]), default=date.min)
             self.assertGreaterEqual(d(queue[0]["createdOn"]), latest_checkout, isbn)
 
-    def test_ready_reservations_are_at_the_head_and_waiting_ones_have_no_copy(self):
+    def test_ready_reservations_have_ready_on_and_hold_until_and_waiting_ones_have_nulls(self):
         for isbn, queue in self.queues.items():
             for r in queue:
                 if r["status"] == "READY":
                     self.assertEqual(r["queuePosition"], 1)
+                    self.assertIsNotNone(r["readyCopyBarcode"])
                     self.assertEqual(DATA["copies_by_barcode"][r["readyCopyBarcode"]]["status"], "RESERVED")
+                    ready_on = d(r["readyOn"])
+                    hold_until = d(r["holdUntil"])
+                    self.assertIsNotNone(ready_on)
+                    self.assertIsNotNone(hold_until)
+                    self.assertGreaterEqual(ready_on, d(r["createdOn"]))
+                    self.assertLessEqual(ready_on, REFERENCE_DATE)
+                    self.assertEqual(hold_until, ready_on + timedelta(days=HOLD_PICKUP_DAYS))
+                    self.assertGreaterEqual(hold_until, REFERENCE_DATE)
                 else:
                     self.assertEqual(r["status"], "WAITING")
                     self.assertIsNone(r["readyCopyBarcode"])
+                    self.assertIsNone(r["readyOn"])
+                    self.assertIsNone(r["holdUntil"])
         self.assertTrue(any(r["status"] == "READY" for r in DATA["reservations"]))
         self.assertTrue(any(r["status"] == "WAITING" for r in DATA["reservations"]))
 
@@ -479,6 +605,14 @@ class ReproducibilityTests(unittest.TestCase):
 
         books = DATA["books-openlibrary"]
         self.assertEqual(generate_synthetic.generate(books), generate_synthetic.generate(books))
+
+    def test_offline_fetch_books_matches_committed_books_openlibrary_with_zero_network_requests(self):
+        import fetch_books
+
+        client = fetch_books.PoliteClient(offline=True, refresh=False)
+        catalog, _ = fetch_books.build_catalog(client)
+        self.assertEqual(client.network_requests, 0)
+        self.assertEqual(catalog, DATA["books-openlibrary"])
 
 
 if __name__ == "__main__":
