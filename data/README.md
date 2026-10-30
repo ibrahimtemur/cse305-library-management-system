@@ -151,7 +151,7 @@ All files are UTF-8 (no BOM), LF line endings, a JSON array of objects. Dates ar
 | `openLibraryWorkKey` | Open Library work key (one record per work) |
 | `referenceOnly` | Boolean (`true` for 3 non-circulating encyclopedias/dictionaries matched by word-boundary keyword rules: `9780717261680`, `9780824722876`, `9781560917540`; `false` for the remaining 779 circulating books) |
 
-### `members.json` (60 rows: 40 `STUDENT`, 10 `ACADEMIC_STAFF`, 10 `ADMINISTRATIVE_STAFF`)
+### `members.json` (60 rows: 40 `STUDENT`, 10 `ACADEMIC_STAFF`, 10 `ADMINISTRATIVE_STAFF`; 55 `ACTIVE`, 5 `SUSPENDED`)
 
 `memberId` (`SYN-STU-0001`..`0040`, `SYN-STF-0001`..`0010`, or `SYN-ADM-0001`..`0010`), `firstName`, `lastName`, `email`
 (`syn-stu-0001@synthetic.lms.local`, `syn-stf-0001@synthetic.lms.local`, `syn-adm-0001@synthetic.lms.local`),
@@ -162,21 +162,22 @@ All files are UTF-8 (no BOM), LF line endings, a JSON array of objects. Dates ar
 
 `username` (`syn-lib-0001`..`0003`), `displayName`, `email`, `role` (`ROLE_LIBRARIAN`). **No password or credential field.**
 
-### `copies.json` (1,706 rows)
+### `copies.json` (1,706 rows: 1,624 `AVAILABLE`, 59 `LOANED`, 15 `MAINTENANCE`, 5 `LOST`, 3 `RESERVED`)
 
 `barcode` (unique, `LMS-COPY-1001`..`LMS-COPY-2706`), `isbn13` (FK to books), `status`
 (`AVAILABLE` | `LOANED` | `RESERVED` | `MAINTENANCE` | `LOST`).
-`LOANED` copies are exactly the copies with an `ACTIVE` loan; `LOST` copies are exactly the copies with a `LOST` loan;
-`RESERVED` copies are exactly the copies held by a `READY` reservation; all copies of `referenceOnly` books are `AVAILABLE`.
+Per-title copy distribution across the 782 books: `1` copy (`250` titles), `2` copies (`255` titles), `3` copies (`162` titles), `4` copies (`115` titles).
+`LOANED` copies (`59`) are exactly the copies with an `ACTIVE` loan; `LOST` copies (`5`) are exactly the copies with a `LOST` loan;
+`RESERVED` copies (`3`) are exactly the copies held by a `READY` reservation; all `7` copies of the `3` `referenceOnly` books are `AVAILABLE`.
 
-### `loans.json` (164 rows)
+### `loans.json` (164 rows: 59 `ACTIVE` [15 overdue, 12 due-soon within 0..3 days, 32 on-time], 100 `RETURNED`, 5 `LOST`; 146 with `renewalCount=0`, 18 with `renewalCount=1`)
 
 `loanId` (`LOAN-0001`..`LOAN-0164`), `memberId` (FK), `copyBarcode` (FK), `checkoutDate`, `dueDate`
 (`checkoutDate + 30 * (1 + renewalCount)`), `returnDate` (date for `RETURNED` loans; `null` for `ACTIVE` and `LOST` loans),
 `lostReportedOn` (date within `(REFERENCE_DATE - 30 days, REFERENCE_DATE]` for `LOST` loans; `null` for `ACTIVE` and `RETURNED` loans),
 `status` (`ACTIVE` | `RETURNED` | `LOST`), `renewalCount` (`0` or `1`), `renewedOn` (`null` if never renewed).
 
-### `fines.json` (47 rows)
+### `fines.json` (47 rows: 26 `UNPAID` totaling `187.50 TRY`, 16 `PAID`, 5 `WAIVED`; 27 on `RETURNED` loans, 15 on `ACTIVE` loans, 5 on `LOST` loans)
 
 `fineId` (`FINE-0001`..`FINE-0047`), `loanId` (FK, at most one fine per loan), `memberId` (FK), `overdueDays`,
 `amount` (**decimal string** with two digits, `0.25 * overdueDays` with no cap, e.g. `"13.25"`, to preserve scale for `BigDecimal`),
@@ -184,7 +185,7 @@ All files are UTF-8 (no BOM), LF line endings, a JSON array of objects. Dates ar
 `LOST` loans whose fine stopped accruing on the petition date; `REFERENCE_DATE` for `ACTIVE` overdue loans), `settledOn`,
 `settledBy` (librarian `username`, FK; `null` if unpaid).
 
-### `reservations.json` (22 rows across 12 titles)
+### `reservations.json` (22 rows across 12 titles: 19 `WAITING`, 3 `READY`)
 
 `reservationId` (`RES-0001`..`RES-0022`), `isbn13` (FK), `memberId` (FK), `queuePosition` (`1..n`, FIFO by `createdOn`),
 `status` (`WAITING` | `READY`), `createdOn`, `readyCopyBarcode` (the `RESERVED` copy for a `READY` reservation, otherwise `null`),

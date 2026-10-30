@@ -36,7 +36,7 @@ On **2026-10-22**, the project team (**Ibrahim Temur** and **Omer Faruk Kuş**) 
 ## 2. Supersedes HW01 Assumptions (`docs/01-proposal/PROJECT_PROPOSAL.md`)
 
 > [!IMPORTANT]
-> To preserve historical milestone integrity, [`docs/01-proposal/PROJECT_PROPOSAL.md`](../01-proposal/PROJECT_PROPOSAL.md) (`HW01`) is **not** modified. The table below documents how the confirmed ADU rules and updated Inception assumptions supersede or refine `ASSUMPTION-01`..`09` from `HW01`.
+> Following the course instructor's `2026-10-27` announcement postponing `HW01` to `2026-11-03` and expanding it to include the Domain Model, [`docs/01-proposal/PROJECT_PROPOSAL.md`](../01-proposal/PROJECT_PROPOSAL.md) (`v1.2`), [`docs/01-proposal/SOLUTION_OUTLINE.md`](../01-proposal/SOLUTION_OUTLINE.md) (`v1.2`), and [`docs/01-proposal/HW01_Problem_Solution_DomainModel.md`](../01-proposal/HW01_Problem_Solution_DomainModel.md) (`v1.2`) have been reconciled with the confirmed ADU rules in this document. The table below preserves the traceability mapping from the initial `ASSUMPTION-01`..`09` identifiers to `BR-001`..`BR-018`.
 
 | HW01 Assumption ID | HW01 Statement Summary | HW02 Disposition | Superseding / Implementing Rule(s) in This Document |
 |---|---|---|---|
