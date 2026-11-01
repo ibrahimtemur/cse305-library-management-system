@@ -14,7 +14,7 @@
 | **Project** | Library Management System (LMS) |
 | **Team & Scrum roles** | **Ibrahim Temur** (`231805033`) — Product Owner · **Omer Faruk Kuş** (`231805026`) — Scrum Master (both: Developer, Architect, QA, Reviewer) |
 | **Document version** | `1.2` |
-| **Document date** | 2026-10-30 |
+| **Document date** | 2026-11-01 |
 | **Submission** | HW01 — due **Tuesday 2026-11-03** (postponed from 2026-10-27 by the instructor's announcement of 2026-10-27; the document now has three parts: Problem Description, Solution Outline, Domain Model) |
 | **Archive** | `cse305_hw01_231805033_231805026.zip` (created with `tools\package 01`) |
 | **GitHub repository** | [`https://github.com/ibrahimtemur/cse305-library-management-system`](https://github.com/ibrahimtemur/cse305-library-management-system) |
@@ -87,6 +87,19 @@ Other confirmed rules in force: overdue fine `0.25 TRY` (25 kuruş) per overdue 
 | Should | `S4` | Librarian dashboard & overdue report | `FR-028`, `FR-029` | `UC-11` |
 | Could | `C1`..`C3` | Guest portal; live ISBN lookup; CSV export | `FR-030`..`FR-032` | `UC-01`, `UC-03`, `UC-11` |
 | Won't | `W1` | Online payments, external messaging, inter-library shipping | — | — |
+
+## 1.6 Domain Description
+
+The conceptual domain model in Part 3 is derived directly from the narrative descriptions below. Each sentence group is tagged (**D1**..**D8**) to establish formal traceability from domain text to conceptual classes, attributes, associations, and enumerations (see §3.9):
+
+- **D1.** The library keeps a catalog of **Books**. A Book is a bibliographic title identified by its `isbn13`. It has a `title`, an optional `subtitle`, one or more `authors`, a `publisher`, a `firstPublishYear`, a `category`, a list of `subjects`, a `pageCount`, a cover reference (`coverId`, `coverUrl`), and an `openLibraryWorkKey`. Some Books are `referenceOnly` (encyclopedias, dictionaries, catalogs): they stay in the library and are never lent.
+- **D2.** A Book *has* zero or more **Book Copies**. A Book Copy is one physical item of exactly one Book, identified by a unique `barcode`. Each Book Copy has a `status`: AVAILABLE, LOANED, RESERVED, MAINTENANCE or LOST. A Book must be cataloged before copies of it are added.
+- **D3.** The library serves **Members**. Each Member has a `memberId` (which stands for the personal ID card), a `firstName`, a `lastName`, an `email`, a `department` and a `registeredOn` date. A Member has a `memberType` (STUDENT, ACADEMIC_STAFF or ADMINISTRATIVE_STAFF) and a membership `status` (ACTIVE or SUSPENDED). An academic staff member may hold at most seven active loans, a student or an administrative staff member at most three.
+- **D4.** **Librarians** operate the circulation desk. Each Librarian has a `username`, a `displayName`, an `email` and a system `role` (`ROLE_LIBRARIAN`).
+- **D5.** A Member *borrows* a Book Copy, and every borrowing is recorded as a **Loan** identified by a unique `loanId`. A Loan has a `checkoutDate`, a `dueDate` (30 days after checkout, 30 days later again if renewed once), a `returnDate`, a `renewalCount`, a `renewedOn` date, a `lostReportedOn` date and a `status` (ACTIVE, RETURNED or LOST). A Member has zero or more Loans, each Loan belongs to exactly one Member and concerns exactly one Book Copy. A Book Copy is *lent in* zero or more Loans over time, but in at most one active Loan at any moment.
+- **D6.** When a Loan is overdue, the library charges a **Fine** for it identified by a unique `fineId`. A Fine has an `overdueDays` count, an `amount` (0.25 TRY per overdue day, with no maximum), a `currency`, a `status` (UNPAID, PAID or WAIVED), an `assessedOn` date and a `settledOn` date. A Loan *incurs* at most one Fine, and each Fine belongs to exactly one Loan. A Librarian *settles* a Fine by recording the payment or by waiving it; a Librarian settles zero or more Fines, and a settled Fine is settled by at most one Librarian (an unpaid fine is not settled yet).
+- **D7.** When no copy of a Book is available, a Member may place a **Reservation** on the Book. A Reservation has a `reservationId`, a `queuePosition` in the first-come-first-served queue of that Book, a `status` (WAITING or READY) and a `createdOn` date. A Member *places* zero or more Reservations and a Book *is reserved through* zero or more Reservations. When a copy is returned, the first waiting Reservation becomes READY and *holds* exactly one Book Copy until its `holdUntil` date, three days after its `readyOn` date. A Book Copy is held by at most one Reservation.
+- **D8.** If a Member loses a Book Copy, the Member reports it on a `lostReportedOn` date, the Loan becomes LOST, the fine for that Loan stops growing on that date, and the Book Copy becomes LOST. The Valuation Commission's `appraisedValue` and the resulting compensation of twice that value are entered by the Librarian when the book is not replaced within 30 days, deriving the `compensationAmount` (`2.00 * appraisedValue`).
 
 ---
 
@@ -161,7 +174,7 @@ Gate: `.\mvnw.cmd -q test` and `tools\data\.venv\Scripts\python.exe -m unittest 
 
 # Part 3 — Domain Model
 
-The domain model follows Larman, *Applying UML and Patterns* (3rd Ed., domain model chapter): it shows **conceptual classes** of the problem domain with attributes, named associations, and multiplicities. It deliberately contains **no** controllers, services, repositories, DTOs, strategies, or state classes — those are design concepts (HW03). Attribute names are the field names of `data/seed/*.json` and [`DOMAIN_GLOSSARY.md`](../02-inception/DOMAIN_GLOSSARY.md). **Foreign-key fields** (`isbn13` in a copy or reservation, `memberId`, `copyBarcode`, `loanId`, `readyCopyBarcode`, `settledBy`) are **not** shown as attributes; the corresponding **associations** express them (see the association table).
+The domain model follows Larman, *Applying UML and Patterns* (3rd Ed., domain model chapter): it shows **conceptual classes** of the problem domain with attributes, named associations, and multiplicities. It deliberately contains **no** controllers, services, repositories, DTOs, strategies, or state classes — those are design concepts (HW03). Attribute names are the field names of `data/seed/*.json` and [`DOMAIN_GLOSSARY.md`](../02-inception/DOMAIN_GLOSSARY.md). **Foreign-key fields** (`isbn13` in a copy or reservation, `memberId`, `copyBarcode`, `loanId`, `readyCopyBarcode`, `settledBy`) are **not** shown as attributes; the corresponding **associations** express them (see the association table). The model was derived directly from the domain description narrative in §1.6 (see §3.9 for the complete text-to-model traceability mapping).
 
 ## 3.1 Class Diagram
 
@@ -441,10 +454,25 @@ classDiagram
 | Controllers, services, repositories, DTOs, JPA entity mappings | Layered-architecture elements |
 | Compensation charge tracking; reservation history | See Known Limitations |
 
+## 3.9 From the Domain Description to the Model
+
+The domain model in this chapter is directly grounded in the domain narrative of §1.6. The table below traces each narrative paragraph (**D1**..**D8**) to its corresponding conceptual classes, attributes, associations, and enumerations in the domain model. All 7 conceptual classes, 50 attributes, 6 enumerations (18 values), and 8 associations (A1..A8) are verified with bidirectional traceability.
+
+| Paragraph ID | Narrative Concept (Text Name) | Target Model Class | Attributes Captured | Associations Captured | Enumerations & Values Captured | Domain Notes & Context |
+|---|---|---|---|---|---|---|
+| **D1** | Book (`Books`) | `Book` | `isbn13`, `title`, `subtitle`, `authors`, `publisher`, `firstPublishYear`, `category`, `subjects`, `pageCount`, `coverId`, `coverUrl`, `openLibraryWorkKey`, `referenceOnly` (13) | — | — | `referenceOnly = true` marks non-circulating reference works (encyclopedias, dictionaries, catalogs; `BR-014`). |
+| **D2** | Book Copy (`Book Copies`) | `BookCopy` | `barcode`, `status` (2) | A1: `Book` "1" -- "0..*" `BookCopy` : has > | `BookCopyStatus`: `AVAILABLE`, `LOANED`, `RESERVED`, `MAINTENANCE`, `LOST` (5) | A title must be cataloged before copies are added (`BR-017`). |
+| **D3** | Member (`Members`) | `Member` | `memberId`, `firstName`, `lastName`, `email`, `memberType`, `status`, `department`, `registeredOn` (8) | — | `MemberType`: `STUDENT`, `ACADEMIC_STAFF`, `ADMINISTRATIVE_STAFF` (3)<br>`MemberStatus`: `ACTIVE`, `SUSPENDED` (2) | `memberId` represents the personal ID card (`BR-016`). Loan limits (7 for staff, 3 for students) are rule parameters (`BR-002`). |
+| **D4** | Librarian (`Librarians`) | `Librarian` | `username`, `displayName`, `email`, `role` (4) | — | `role = "ROLE_LIBRARIAN"` (constant) | Circulation desk is the physical operation point (`ASSUMPTION-01`). |
+| **D5** | Loan (`Loan`) | `Loan` | `loanId`, `checkoutDate`, `dueDate`, `returnDate`, `status`, `renewalCount`, `renewedOn`, `lostReportedOn` (8 of 10) | A2: `Member` "1" -- "0..*" `Loan` : borrows ><br>A3: `BookCopy` "1" -- "0..*" `Loan` : is lent in > | `LoanStatus`: `ACTIVE`, `RETURNED`, `LOST` (3) | Standard period 30 days (`BR-003`), max 1 renewal (`BR-005`). At most one active loan per copy (`BR-017`). |
+| **D6** | Fine (`Fine`) | `Fine` | `fineId`, `overdueDays`, `amount`, `currency`, `status`, `assessedOn`, `settledOn` (7) | A4: `Loan` "1" -- "0..1" `Fine` : < incurs<br>A5: `Librarian` "0..1" -- "0..*" `Fine` : settles > | `FineStatus`: `UNPAID`, `PAID`, `WAIVED` (3) | Fine rate is 0.25 TRY/day without cap (`BR-008`, `BR-009`). Unpaid fine blocks new checkouts (`BR-011`). |
+| **D7** | Reservation (`Reservation`) | `Reservation` | `reservationId`, `queuePosition`, `status`, `createdOn`, `readyOn`, `holdUntil` (6) | A6: `Member` "1" -- "0..*" `Reservation` : places ><br>A7: `Book` "1" -- "0..*" `Reservation` : is reserved through ><br>A8: `Reservation` "0..1" -- "0..1" `BookCopy` : holds > | `ReservationStatus`: `WAITING`, `READY` (2) | Title-level FIFO queue (`BR-012`). Pickup hold window is 3 days (`BR-013`). |
+| **D8** | Lost Loan & Valuation | `Loan`, `BookCopy` | `Loan.lostReportedOn`, `Loan.appraisedValue`, `Loan.compensationAmount` (+2 on `Loan`, completing 10) | — | `LoanStatus.LOST`, `BookCopyStatus.LOST` | Valuation Commission is an institutional body (`BR-015`). `appraisedValue` is a runtime Librarian input; `compensationAmount` is derived (`2.00 * appraisedValue`). |
+
 ---
 
 ## Revision History
 
 | Version | Date | Summary |
 |---|---|---|
-| `1.2` | 2026-10-30 | First consolidated HW01 submission document: Problem Description, Solution Outline, and Domain Model; aligned with confirmed ADU rules and seed v2; schedule updated (HW01 due 2026-11-03). |
+| `1.2` | 2026-11-01 | First consolidated HW01 submission document: Problem Description, Solution Outline, and Domain Model; aligned with confirmed ADU rules and seed v2; schedule updated (HW01 due 2026-11-03); domain description (section 1.6) and text-to-model traceability (section 3.9) added; document date 2026-11-01. |
