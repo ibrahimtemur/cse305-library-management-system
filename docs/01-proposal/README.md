@@ -16,3 +16,26 @@ All documents in this directory are reconciled with the confirmed Adnan Menderes
 - [`PROJECT_PROPOSAL.md`](PROJECT_PROPOSAL.md) — Detailed **Part 1** reference (`v1.2`): Problem statement, motivation, stakeholders & roles, in/out-of-scope features, MoSCoW prioritization, confirmed ADU library rules & explicit `ASSUMPTION` register (`ASSUMPTION-01`..`17`), Agile Scrum process & sprint timeline, agentic development approach, and risk mitigation matrix (`RISK-01`..`07`).
 - [`SOLUTION_OUTLINE.md`](SOLUTION_OUTLINE.md) — Detailed **Part 2** reference (`v1.2`): Five-tier layered web architecture (`Thymeleaf UI -> Controller -> Service -> Repository -> H2`), technology stack (`pom.xml` active vs. planned), Stitch MCP UI-first design workflow, Open Library + synthetic `seed v2` data strategy, candidate GoF/GRASP design patterns, and agentic verification governance.
 - [`images/`](images/README.md) — Mermaid `.mmd` sources and pre-rendered `.png` / `.svg` diagrams (`domain-model.{mmd,png,svg}`, `architecture-overview.{mmd,png,svg}`).
+
+## PDF Export Pipeline & Link Sanitization Rule
+
+To prevent leaking local workstation paths (`file:///C:/Users/...`) and ensure offline grading readability, all PDF deliverables (`HW01_Problem_Solution_DomainModel.pdf` and upcoming HW02 deliverables) are generated via `tools/export-pdf.ps1` (or `python tools/export-pdf.py`).
+
+### Key Rules Enforced by the Pipeline
+1. **Zero Local Path / `file://` Links:** Hyperlinks pointing to local files or temporary scratch folders are strictly prohibited. All repository file references (`.md`, `.svg`, `.mmd`, `README`) are rendered in the PDF as plain text with repository-relative paths in code style (e.g., `<code>docs/02-inception/BUSINESS_RULES.md</code>`).
+2. **Private Repository URL:** The private GitHub repository link is rendered as plain text: `"Repository: github.com/ibrahimtemur/cse305-library-management-system (private; the full source is in the submitted archive)"` and is not clickable.
+3. **Internal Document Anchors Only:** Table of Contents links are rendered as verified internal PDF page anchors (`/Dest`). If an anchor cannot be resolved to an existing page, it is converted to plain text.
+4. **Base64 Embedded Images:** All architectural diagrams and domain models are inlined as base64 Data URIs (`data:image/png;base64,...`) so Chrome headless resolves zero external image files.
+5. **Dedicated Landscape Layout:** Section 3.1 (Class Diagram) is styled with `@page dm-landscape` on a dedicated A4 landscape page (11 pages total).
+6. **Automated Leak Assertion:** The export script parses the generated PDF with `pypdf` and fails loudly if any `file://`, `C:\Users`, `OneDrive`, `antigravity`, `.gemini`, or `scratch` path is detected in annotations, page text, or metadata.
+
+### Toolchain Dependencies & Execution
+- **Markdown Renderer:** `marked@18.1.2` (invoked via `npx --yes marked@18.1.2 --gfm`).
+- **PDF Inspection & Leak Scanning:** `pypdf==6.21.1` (pinned in [`tools/requirements-export.txt`](../../tools/requirements-export.txt)).
+- **Browser Engine:** Google Chrome headless. Discovered via `CHROME_PATH` environment variable, standard Windows installation locations (`%ProgramFiles%\Google\Chrome\Application\chrome.exe`), or system `PATH`.
+- **Command:**
+  ```powershell
+  .\tools\export-pdf.ps1
+  # or
+  python tools\export-pdf.py --input docs/01-proposal/HW01_Problem_Solution_DomainModel.md --output docs/01-proposal/HW01_Problem_Solution_DomainModel.pdf --root-output HW01_Problem_Solution_DomainModel.pdf
+  ```
