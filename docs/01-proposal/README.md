@@ -23,7 +23,7 @@ To prevent leaking local workstation paths (`file:///C:/Users/...`) and ensure o
 
 ### Key Rules Enforced by the Pipeline
 1. **Zero Local Path / `file://` Links:** Hyperlinks pointing to local files or temporary scratch folders are strictly prohibited. All repository file references (`.md`, `.svg`, `.mmd`, `README`) are rendered in the PDF as plain text with repository-relative paths in code style (e.g., `<code>docs/02-inception/BUSINESS_RULES.md</code>`).
-2. **Private Repository URL:** The private GitHub repository link is rendered as plain text: `"Repository: github.com/ibrahimtemur/cse305-library-management-system (private; the full source is in the submitted archive)"` and is not clickable.
+2. **Public Repository URL (Sole Permitted External Link):** Following the repository visibility switch to public on 2026-11-01, `https://github.com/ibrahimtemur/cse305-library-management-system` is preserved as a clickable external link in the PDF. It is the sole external URL permitted by the export tool's allowlist; all other external links and all local `file://` links remain strictly prohibited.
 3. **Internal Document Anchors Only:** Table of Contents links are rendered as verified internal PDF page anchors (`/Dest`). If an anchor cannot be resolved to an existing page, it is converted to plain text.
 4. **Base64 Embedded Images:** All architectural diagrams and domain models are inlined as base64 Data URIs (`data:image/png;base64,...`) so Chrome headless resolves zero external image files.
 5. **Dedicated Landscape Layout:** Section 3.1 (Class Diagram) is styled with `@page dm-landscape` on a dedicated A4 landscape page (11 pages total).

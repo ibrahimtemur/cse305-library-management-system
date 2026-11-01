@@ -18,6 +18,8 @@ from typing import Dict, List, Optional, Tuple
 from pypdf import PdfReader
 
 
+PUBLIC_GITHUB_REPO_URL = "https://github.com/ibrahimtemur/cse305-library-management-system"
+
 LEAK_PATTERNS = [
     "file://",
     "c:\\users",
@@ -118,12 +120,9 @@ def sanitize_links_and_structure(
         href = match.group("href").strip()
         content = match.group("content").strip()
 
-        # Case A: GitHub private repository link
+        # Case A: Public GitHub repository link (sole allowed external link)
         if "github.com/ibrahimtemur/cse305-library-management-system" in href:
-            return (
-                "Repository: github.com/ibrahimtemur/cse305-library-management-system "
-                "(private; the full source is in the submitted archive)"
-            )
+            return f'<a href="{PUBLIC_GITHUB_REPO_URL}"><code>{PUBLIC_GITHUB_REPO_URL}</code></a>'
 
         # Case B: Internal page anchor
         if href.startswith("#"):
@@ -409,8 +408,8 @@ def validate_pdf_integrity_and_leaks(pdf_path: pathlib.Path) -> List[Tuple[str, 
                     f"Leak pattern '{pat}' detected in extracted text on Page {page_num}"
                 )
 
-    # 3. Check link annotations & resolve internal destinations
-    resolved_toc: List[Tuple[str, str, int]] = []
+    # 3. Check link annotations & resolve internal destinations and allowlisted external links
+    resolved_links: List[Tuple[str, str, int]] = []
     named_dests = reader.named_destinations
 
     for idx, page in enumerate(reader.pages):
@@ -422,10 +421,12 @@ def validate_pdf_integrity_and_leaks(pdf_path: pathlib.Path) -> List[Tuple[str, 
                     action = annot.get("/A")
                     if action and "/URI" in action:
                         uri = str(action["/URI"])
-                        raise RuntimeError(
-                            f"Unexpected clickable /URI link found on Page {page_num}: {uri}. "
-                            "All repository links must be plain text code style and GitHub link must be unclickable."
-                        )
+                        if uri != PUBLIC_GITHUB_REPO_URL:
+                            raise RuntimeError(
+                                f"Unexpected clickable /URI link found on Page {page_num}: {uri}. "
+                                f"Only the public GitHub repository link ({PUBLIC_GITHUB_REPO_URL}) is permitted as an external link."
+                            )
+                        resolved_links.append(("EXTERNAL", uri, page_num))
 
                     dest = annot.get("/Dest")
                     if dest:
@@ -443,13 +444,13 @@ def validate_pdf_integrity_and_leaks(pdf_path: pathlib.Path) -> List[Tuple[str, 
                         if dest_obj is not None:
                             target_page_idx = reader.get_destination_page_number(dest_obj)
                             target_page_num = target_page_idx + 1
-                            resolved_toc.append((dest_key, dest_key.lstrip("/"), target_page_num))
+                            resolved_links.append(("INTERNAL", dest_key.lstrip("/"), target_page_num))
                         else:
                             raise RuntimeError(
                                 f"Internal anchor destination '{dest_key}' on Page {page_num} could not be resolved!"
                             )
 
-    return resolved_toc
+    return resolved_links
 
 
 def export_pdf(
@@ -488,7 +489,7 @@ def export_pdf(
             check=True,
         )
 
-        resolved_toc = validate_pdf_integrity_and_leaks(temp_pdf)
+        resolved_links = validate_pdf_integrity_and_leaks(temp_pdf)
 
         # Ensure output directories exist
         output_pdf.parent.mkdir(parents=True, exist_ok=True)
@@ -511,11 +512,11 @@ def export_pdf(
             raise ValueError("SHA-256 hashes of output PDFs do not match!")
         print("[OK] Identical SHA-256 hash verified across both PDF files.")
 
-    print("\n--- Internal Table of Contents Links Resolution ---")
-    print(f"{'Link Destination':<35} | {'Target Page'}")
-    print("-" * 52)
-    for raw_dest, clean_dest, target_page in resolved_toc:
-        print(f"{clean_dest:<35} | Page {target_page}")
+    print("\n--- Document Link Annotations Audit ---")
+    print(f"{'Type':<10} | {'Destination / Target':<65} | {'Page'}")
+    print("-" * 85)
+    for link_type, target, target_page in resolved_links:
+        print(f"{link_type:<10} | {target:<65} | Page {target_page}")
 
 
 def main():
