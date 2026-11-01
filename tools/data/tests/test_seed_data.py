@@ -608,6 +608,12 @@ class ReproducibilityTests(unittest.TestCase):
 
     def test_offline_fetch_books_matches_committed_books_openlibrary_with_zero_network_requests(self):
         import fetch_books
+        from lms_seed_common import RAW_DIR
+
+        if not RAW_DIR.is_dir() or not any(RAW_DIR.glob("*.json")):
+            self.skipTest(
+                f"Open Library raw cache ({RAW_DIR}) is not present (gitignored and excluded from submission archives)."
+            )
 
         client = fetch_books.PoliteClient(offline=True, refresh=False)
         catalog, _ = fetch_books.build_catalog(client)

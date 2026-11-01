@@ -117,20 +117,20 @@ classDiagram
     }
 
     Book "1" -- "0..*" BookCopy : has >
+    Book "1" -- "0..*" Reservation : is reserved through >
+    Member "1" -- "0..*" Reservation : places >
     Member "1" -- "0..*" Loan : borrows >
     BookCopy "1" -- "0..*" Loan : is lent in >
-    Loan "1" -- "0..1" Fine : incurs >
+    BookCopy "0..1" -- "0..1" Reservation : < holds
+    Fine "0..1" -- "1" Loan : < incurs
     Librarian "0..1" -- "0..*" Fine : settles >
-    Member "1" -- "0..*" Reservation : places >
-    Book "1" -- "0..*" Reservation : is reserved through >
-    Reservation "0..1" -- "0..1" BookCopy : holds >
 
     Member ..> MemberType
     Member ..> MemberStatus
     BookCopy ..> BookCopyStatus
-    Loan ..> LoanStatus
     Fine ..> FineStatus
-    Reservation ..> ReservationStatus
+    LoanStatus <.. Loan
+    ReservationStatus <.. Reservation
 
     note for Loan "appraisedValue: entered by the Librarian at runtime, not a seed field<br/>compensationAmount: derived as 2.00 times appraisedValue"
     note for Reservation "Title-level FIFO queue<br/>Only a READY reservation holds one RESERVED copy"
