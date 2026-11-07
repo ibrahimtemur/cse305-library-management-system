@@ -36,7 +36,7 @@
 
 **As a** librarian demo user, **I want** the application to load seed v2 on first startup and shift all dates relative to the application start day (`OPEN-04`), **so that** active, due-soon, and overdue loan scenarios never go stale.
 
-- **AC-1:** *Given* an empty database, *when* the application starts, *then* it loads `782` books, `1,706` copies, `60` members (`40/10/10`), `3` librarians, `164` loans, `47` fines, `22` reservations from `data/seed/` (`FR-019`, counts verified by a test against the JSON files).
+- **AC-1:** *Given* an empty database, *when* the application starts, *then* it loads `782` books (`779` circulating, `3` `referenceOnly`), `1,706` copies (`1,624` `AVAILABLE`, `59` `LOANED`, `15` `MAINTENANCE`, `5` `LOST`, `3` `RESERVED`), `60` members (`40` `STUDENT`, `10` `ACADEMIC_STAFF`, `10` `ADMINISTRATIVE_STAFF`; `55` `ACTIVE`, `5` `SUSPENDED`), `3` librarians, `164` loans (`59` `ACTIVE`, `100` `RETURNED`, `5` `LOST`), `47` fines (`26` `UNPAID` totaling `187.50 TRY`, `16` `PAID`, `5` `WAIVED`), and `22` reservations (`19` `WAITING`, `3` `READY`) from `data/seed/` (`FR-019`, counts verified by a test against the JSON files).
 - **AC-2:** *Given* seed dates are relative to `REFERENCE_DATE = 2026-10-22`, *when* the application starts on day D, *then* every date in loans, fines, reservations, and members is shifted by `D - REFERENCE_DATE` so that overdue day counts are preserved (`BR-007`).
 - **AC-3:** *Given* the database is already populated, *when* the application restarts, *then* the loader does nothing (idempotent).
 - **AC-4:** *Given* the seed contains a `LOST` loan, *when* it is loaded, *then* `returnDate` stays `null` and `lostReportedOn` is shifted like the other dates (`BR-015`, `BR-017`).

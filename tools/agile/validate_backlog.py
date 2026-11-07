@@ -117,6 +117,7 @@ def main() -> int:
         print(f"- {m}: {len(g)} stories, {sum(s['pts'] for s in g)} pts, {fmt(sum(s['human'] for s in g))} h")
 
     print("\n## " + ("Sprint kapasitesi (saat = insan emeği)" if tr else "Sprint capacity (hours = human effort)"))
+    print("*Sign convention for `Planned - Net`: positive (`+`) = overrun / over net capacity (`over`); negative (`-`) = unused net capacity (`slack`).*")
     hdr = ["Sprint", "Gross", "Ceremonies", "HW docs", "Buffer", "Net for stories", "Planned", "Must", "Should", "Could", "Planned - Net"]
     if tr:
         hdr = ["Sprint", "Brüt", "Seremoni", "HW belge", "Tampon", "Hikâye net", "Planlanan", "Must", "Should", "Could", "Planlanan - Net"]
@@ -131,8 +132,16 @@ def main() -> int:
         grp = [s for s in stories if s["sprint"] == sp]
         part = {m: sum(s["human"] for s in grp if s["moscow"] == m) for m in ("Must", "Should", "Could")}
         planned = sum(part.values())
+        delta = planned - net
+        label = "over" if delta > 0 else "slack"
+        if sp == "S3":
+            committed_s3 = sum(s["human"] for s in grp if "commit" in s["status"])
+            c_delta = committed_s3 - net
+            delta_str = f"{delta:+.1f} h (over; {c_delta:+.1f} h slack committed)"
+        else:
+            delta_str = f"{delta:+.1f} h ({label})"
         print(f"| {sp} ({a:%b %d}–{b:%b %d}) | {fmt(g)} | {fmt(CEREMONY_H[sp])} | {fmt(HW_DOC_H[sp])} | {fmt(buf)} | {fmt(net)} | {fmt(planned)} | "
-              f"{fmt(part['Must'])} | {fmt(part['Should'])} | {fmt(part['Could'])} | {planned - net:+.1f} |")
+              f"{fmt(part['Must'])} | {fmt(part['Should'])} | {fmt(part['Could'])} | {delta_str} |")
 
     must = sum(s["human"] for s in stories if s["moscow"] == "Must")
     must_s12 = sum(s["human"] for s in stories if s["moscow"] == "Must" and s["sprint"] in ("S1", "S2"))
@@ -221,6 +230,73 @@ def main() -> int:
             good = rank[by_id[d]["sprint"]] <= rank[s["sprint"]]
             ok &= good
             print(f"| {s['id']} | {s['sprint']} | {d} | {by_id[d]['sprint']} | {'yes' if good else 'NO'} |")
+
+    print("\n## Seed v2 JSON breakdown check (data/seed/*.json vs docs)")
+    import json
+    from collections import Counter
+    seed_dir = ROOT / "data/seed"
+    books_j = json.loads((seed_dir / "books-openlibrary.json").read_text(encoding="utf-8"))
+    copies_j = json.loads((seed_dir / "copies.json").read_text(encoding="utf-8"))
+    members_j = json.loads((seed_dir / "members.json").read_text(encoding="utf-8"))
+    libs_j = json.loads((seed_dir / "librarians.json").read_text(encoding="utf-8"))
+    loans_j = json.loads((seed_dir / "loans.json").read_text(encoding="utf-8"))
+    fines_j = json.loads((seed_dir / "fines.json").read_text(encoding="utf-8"))
+    res_j = json.loads((seed_dir / "reservations.json").read_text(encoding="utf-8"))
+
+    ref_cnt = Counter(bool(b.get("referenceOnly")) for b in books_j)
+    cp_cnt = Counter(c.get("status") for c in copies_j)
+    mt_cnt = Counter(m.get("memberType") for m in members_j)
+    ms_cnt = Counter(m.get("status") for m in members_j)
+    ln_cnt = Counter(l.get("status") for l in loans_j)
+    fn_cnt = Counter(f.get("status") for f in fines_j)
+    unpaid_try = sum(float(f.get("amount", 0)) for f in fines_j if f.get("status") == "UNPAID")
+    rs_cnt = Counter(r.get("status") for r in res_j)
+
+    print(f"- Books: {len(books_j)} (circulating={ref_cnt[False]}, referenceOnly={ref_cnt[True]})")
+    print(f"- Copies: {len(copies_j)} (AVAILABLE={cp_cnt['AVAILABLE']}, LOANED={cp_cnt['LOANED']}, MAINTENANCE={cp_cnt['MAINTENANCE']}, LOST={cp_cnt['LOST']}, RESERVED={cp_cnt['RESERVED']})")
+    print(f"- Members: {len(members_j)} (STUDENT={mt_cnt['STUDENT']}, ACADEMIC_STAFF={mt_cnt['ACADEMIC_STAFF']}, ADMINISTRATIVE_STAFF={mt_cnt['ADMINISTRATIVE_STAFF']}; ACTIVE={ms_cnt['ACTIVE']}, SUSPENDED={ms_cnt['SUSPENDED']})")
+    print(f"- Librarians: {len(libs_j)}")
+    print(f"- Loans: {len(loans_j)} (ACTIVE={ln_cnt['ACTIVE']}, RETURNED={ln_cnt['RETURNED']}, LOST={ln_cnt['LOST']})")
+    print(f"- Fines: {len(fines_j)} (UNPAID={fn_cnt['UNPAID']} [{unpaid_try:.2f} TRY], PAID={fn_cnt['PAID']}, WAIVED={fn_cnt['WAIVED']})")
+    print(f"- Reservations: {len(res_j)} (WAITING={rs_cnt['WAITING']}, READY={rs_cnt['READY']})")
+
+    doc_files = [ROOT / "README.md", ROOT / "data/README.md", ROOT / "data/seed/README.md", ROOT / "docs/process/PROJECT_STATE.md"] + sorted((ROOT / "docs/02-inception").glob("*.md"))
+    forbidden_patterns = [
+        (r"\b29\b[^|\n]{0,25}referenceOnly|referenceOnly[^|\n]{0,25}\b29\b", "outdated 29 referenceOnly"),
+        (r"\b1[,.]?472\b", "outdated 1,472 AVAILABLE copies"),
+        (r"\b164\s+`?LOANED`?", "outdated 164 LOANED copies"),
+        (r"\b8\s+`?RESERVED`?", "outdated 8 RESERVED copies"),
+        (r"\b49\s+`?MAINTENANCE`?", "outdated 49 MAINTENANCE copies"),
+        (r"\b13\s+`?LOST`?", "outdated 13 LOST copies/loans"),
+        (r"\b42\s+`?STUDENT`?", "outdated 42 STUDENT members"),
+        (r"\b12\s+`?ACADEMIC_STAFF`?", "outdated 12 ACADEMIC_STAFF members"),
+        (r"\b6\s+`?ADMINISTRATIVE_STAFF`?", "outdated 6 ADMINISTRATIVE_STAFF members"),
+        (r"\b56\s+`?ACTIVE`?", "outdated 56 ACTIVE members"),
+        (r"\b4\s+`?SUSPENDED`?", "outdated 4 SUSPENDED members"),
+        (r"\b58\s+`?ACTIVE`?", "outdated 58 ACTIVE loans"),
+        (r"\b93\s+`?RETURNED`?", "outdated 93 RETURNED loans"),
+        (r"\b18\s+`?UNPAID`?", "outdated 18 UNPAID fines"),
+        (r"\b23\s+`?PAID`?", "outdated 23 PAID fines"),
+        (r"\b6\s+`?WAIVED`?", "outdated 6 WAIVED fines"),
+        (r"\b14\s+`?WAITING`?", "outdated 14 WAITING reservations"),
+        (r"\b8\s+`?READY`?", "outdated 8 READY reservations"),
+    ]
+    seed_errors = []
+    for df in doc_files:
+        if not df.exists():
+            continue
+        txt = df.read_text(encoding="utf-8")
+        for pat, desc in forbidden_patterns:
+            if re.search(pat, txt):
+                seed_errors.append(f"{df.relative_to(ROOT)}: found {desc}")
+    for req_doc in (ROOT / "data/README.md", ROOT / "data/seed/README.md", ROOT / "docs/02-inception/REQUIREMENTS.md", ROOT / "docs/02-inception/USER_STORIES.md", ROOT / "docs/02-inception/HW02_Inception_Agile.md"):
+        txt = req_doc.read_text(encoding="utf-8")
+        for expected_tok in ("1,624", "59", "100", "26", "16", "19"):
+            if expected_tok not in txt:
+                seed_errors.append(f"{req_doc.relative_to(ROOT)}: missing verified seed breakdown token '{expected_tok}'")
+    print("- Seed breakdown mismatches in docs: " + ("none" if not seed_errors else "; ".join(seed_errors)))
+    ok &= not seed_errors
+
     print("\nOVERALL: " + ("PASS" if ok else "FAIL"))
     return 0 if ok else 1
 

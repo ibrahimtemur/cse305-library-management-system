@@ -29,11 +29,13 @@ Midterm weeks Nov 17 – Nov 28 reduce capacity. The iteration plan aligns with 
 | Buffer | 10 percent of gross capacity, not reduced |
 | Estimation ratio | Points total `88` (`48` Must, `32` Should, `8` Could); classic Must effort is `98 h`. Human hours reflect ~`0.40 x` coding effort plus fixed review/testing/doc overhead, the `4.0 h` spike (`LMS-008`), and PO-approved safety reserves on `LMS-005` (`7.5 h`) and `LMS-007` (`9.0 h`). **Sprint 1 actuals will be used to re-calibrate.** |
 
+*Sign convention for `Planned - Net`: positive (`+`) = overrun / over net capacity (`over`); negative (`-`) = unused net capacity (`slack`).*
+
 | Sprint | Gross | Ceremonies | HW docs | Buffer | Net for stories | Planned | Must | Should | Could | Planned - Net |
 |---|---|---|---|---|---|---|---|---|---|---|
-| S1 (Nov 11–Dec 08) | 46.9 | 4.0 | 8.0 | 4.7 | 30.2 | 28.5 | 28.5 | 0.0 | 0.0 | -1.7 |
-| S2 (Dec 09–Dec 22) | 32.0 | 4.0 | 4.0 | 3.2 | 20.8 | 24.5 | 24.5 | 0.0 | 0.0 | +3.7 |
-| S3 (Dec 23–Jan 05) | 32.0 | 4.0 | 7.0 | 3.2 | 17.8 | 37.0 | 0.0 | 29.5 | 7.5 | +19.2 |
+| S1 (Nov 11–Dec 08) | 46.9 | 4.0 | 8.0 | 4.7 | 30.2 | 28.5 | 28.5 | 0.0 | 0.0 | -1.7 h (slack) |
+| S2 (Dec 09–Dec 22) | 32.0 | 4.0 | 4.0 | 3.2 | 20.8 | 24.5 | 24.5 | 0.0 | 0.0 | +3.7 h (over) |
+| S3 (Dec 23–Jan 05) | 32.0 | 4.0 | 7.0 | 3.2 | 17.8 | 37.0 | 0.0 | 29.5 | 7.5 | +19.2 h (over; -0.3 h slack committed) |
 
 ## 3. Must Gap (accepted risk)
 

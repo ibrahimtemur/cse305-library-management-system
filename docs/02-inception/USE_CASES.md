@@ -19,47 +19,58 @@
 
 ```mermaid
 flowchart LR
-    subgraph Actors["Actors"]
-        GST["Guest\n(ROLE_GUEST)"]
-        MEM["Member\n(ROLE_MEMBER:\nSTUDENT,\nACADEMIC_STAFF,\nADMINISTRATIVE_STAFF)"]
-        LIB["Librarian / Admin\n(ROLE_LIBRARIAN)"]
-    end
+    GST["Guest\n(ROLE_GUEST)\nUnauthenticated Visitor"]
+    MEM["Library Member\n(ROLE_MEMBER:\nSTUDENT, ACADEMIC_STAFF,\nADMINISTRATIVE_STAFF)"]
 
     subgraph LMS["System Boundary — CSE305 Library Management System"]
-        UC01(["UC-01: Search and Browse Catalog"])
-        UC02(["UC-02: Log In and Log Out"])
-        UC03(["UC-03: Manage Bibliographic Catalog & Physical Copies"])
-        UC04(["UC-04: Manage Library Members"])
-        UC05(["UC-05: Borrow a Book (Checkout Copy)"])
-        UC06(["UC-06: Return a Book Copy"])
-        UC07(["UC-07: Renew an Active Loan"])
-        UC08(["UC-08: Reserve a Book (Place or Cancel Hold)"])
-        UC09(["UC-09: Pay or Waive Overdue Fine & Assess Lost Copy"])
-        UC10(["UC-10: View Member Self-Service Portal & History"])
-        UC11(["UC-11: View Operational Dashboard & Export Reports"])
+        direction TB
+        subgraph G1["1. Public Catalog Discovery (Guest, Member, Librarian)"]
+            UC01(["UC-01: Search and Browse Catalog"])
+        end
+
+        subgraph G2["2. Authentication, Self-Service & Holds (Member & Librarian)"]
+            UC02(["UC-02: Log In and Log Out"])
+            UC07(["UC-07: Renew an Active Loan"])
+            UC08(["UC-08: Reserve a Book (Place or Cancel Hold)"])
+            UC10(["UC-10: View Member Self-Service Portal & History"])
+        end
+
+        subgraph G3["3. In-Person Circulation Desk (Librarian Primary · Member Supporting)"]
+            UC05(["UC-05: Borrow a Book (Checkout Copy)"])
+            UC09(["UC-09: Pay or Waive Overdue Fine & Assess Lost Copy"])
+        end
+
+        subgraph G4["4. Librarian Administration, Returns & Reporting (Librarian Only)"]
+            UC03(["UC-03: Manage Bibliographic Catalog & Physical Copies"])
+            UC04(["UC-04: Manage Library Members"])
+            UC06(["UC-06: Return a Book Copy"])
+            UC11(["UC-11: View Operational Dashboard & Export Reports"])
+        end
     end
 
-    GST --> UC01
+    LIB["Librarian / Admin\n(ROLE_LIBRARIAN)\nStaff Account"]
 
-    MEM --> UC01
-    MEM --> UC02
-    MEM --> UC07
-    MEM --> UC08
-    MEM --> UC10
-    MEM -.->|"Supporting Actor\n(In-Person ID Card)"| UC05
-    MEM -.->|"Supporting Actor\n(Fine Settlement / Lost Petition)"| UC09
+    GST -->|"Read-Only Browse"| UC01
 
-    LIB --> UC01
-    LIB --> UC02
-    LIB --> UC03
-    LIB --> UC04
-    LIB --> UC05
-    LIB --> UC06
-    LIB --> UC07
-    LIB --> UC08
-    LIB --> UC09
-    LIB --> UC10
-    LIB --> UC11
+    MEM -->|"Primary Actor"| UC01
+    MEM -->|"Primary Actor"| UC02
+    MEM -->|"Primary Actor"| UC07
+    MEM -->|"Primary Actor"| UC08
+    MEM -->|"Primary Actor"| UC10
+    MEM -.->|"Supporting Actor (ID Card)"| UC05
+    MEM -.->|"Supporting Actor (Desk / Petition)"| UC09
+
+    UC01 ---|"Primary Actor"| LIB
+    UC02 ---|"Primary Actor"| LIB
+    UC07 ---|"Primary Actor"| LIB
+    UC08 ---|"Primary Actor"| LIB
+    UC10 ---|"Primary Actor"| LIB
+    UC05 ---|"Primary Actor"| LIB
+    UC09 ---|"Primary Actor"| LIB
+    UC03 ---|"Primary Actor"| LIB
+    UC04 ---|"Primary Actor"| LIB
+    UC06 ---|"Primary Actor"| LIB
+    UC11 ---|"Primary Actor"| LIB
 ```
 
 ---
