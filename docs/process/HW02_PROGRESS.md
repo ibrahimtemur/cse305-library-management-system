@@ -18,4 +18,4 @@
 - [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 17 pages, SHA-256 `ff6a370f...`, 4 links, 0 leaks, Seed v2 breakdowns & `Planned - Net` signs verified, visually inspected)
 - [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `tools/agile/make_reconciliation.py`, `BACKLOG_POINT_RECONCILIATION.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`, `ai-usage-log.md` with separate model rows)
 - [x] Part 3 cross-check and 2-person human review checklist (`İ-1`..`İ-3` reviewed by Ibrahim Temur; `Ö-1`..`Ö-3` reviewed by Omer Faruk Kuş)
-- [x] Part 4 packaging (`docs/hw02-agile` merged into `develop`, `dist/cse305_hw02_231805033_231805026.zip`, `hw02-final` & `hw02-final-r2` tags/releases with archive-mode `validate_backlog.py` `OVERALL: PASS`)
+- [x] Part 4 packaging (`docs/hw02-agile` merged into `develop`, `dist/cse305_hw02_231805033_231805026.zip`, `hw02-final`, `hw02-final-r2`, and log-only `hw02-final-r3` with archive-mode `validate_backlog.py` `OVERALL: PASS`)
