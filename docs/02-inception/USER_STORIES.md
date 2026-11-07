@@ -261,7 +261,7 @@ UI story: Stitch lost-copy dialog first. Design inputs: decision from `LMS-008`.
 
 UI story: Stitch dashboard KPI cards first.
 
-- **AC-a (KPIs):** *Given* the loaded seed, *when* the dashboard opens, *then* it displays KPI cards for total distinct titles, total physical copies, copies by state (`AVAILABLE`, `LOANED`, `RESERVED`, `MAINTENANCE`, `LOST`), active loans, overdue loans, and total unpaid fine amount (`TRY`), each matching the exact database count/sum (`FR-028`).
+- **AC-a (KPIs):** *Given* the loaded seed (`REFERENCE_DATE = 2026-10-22` or shifted startup date), *when* the dashboard opens, *then* it displays KPI cards for total distinct titles (`782`: `779` circulating, `3` `referenceOnly`), total physical copies (`1,706`) broken down by state (`1,624` `AVAILABLE`, `59` `LOANED`, `15` `MAINTENANCE`, `5` `LOST`, `3` `RESERVED`), active loans (`59`: `15` overdue active loans with `dueDate < currentDate`, `12` due-soon active loans with `dueDate` in `[currentDate, currentDate + 3 days]`, and `32` on-time active loans), and total unpaid fine amount (`187.50 TRY` across `26` `UNPAID` fines), each matching the exact database count/sum (`FR-028`).
 - **AC-b (role):** *Given* a member or guest session, *when* the dashboard URL is requested, *then* access is denied (`FR-017`, `BR-001`).
 
 ### LMS-021 — Actionable overdue loans and unpaid fines report (015b)

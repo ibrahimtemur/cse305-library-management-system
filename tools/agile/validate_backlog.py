@@ -252,11 +252,18 @@ def main() -> int:
     unpaid_try = sum(float(f.get("amount", 0)) for f in fines_j if f.get("status") == "UNPAID")
     rs_cnt = Counter(r.get("status") for r in res_j)
 
+    from datetime import date
+    ref_date = date(2026, 10, 22)
+    active_loans = [l for l in loans_j if l.get("status") == "ACTIVE"]
+    overdue_active = [l for l in active_loans if date.fromisoformat(l["dueDate"]) < ref_date]
+    due_soon_active = [l for l in active_loans if 0 <= (date.fromisoformat(l["dueDate"]) - ref_date).days <= 3]
+    ontime_active = [l for l in active_loans if (date.fromisoformat(l["dueDate"]) - ref_date).days > 3]
+
     print(f"- Books: {len(books_j)} (circulating={ref_cnt[False]}, referenceOnly={ref_cnt[True]})")
     print(f"- Copies: {len(copies_j)} (AVAILABLE={cp_cnt['AVAILABLE']}, LOANED={cp_cnt['LOANED']}, MAINTENANCE={cp_cnt['MAINTENANCE']}, LOST={cp_cnt['LOST']}, RESERVED={cp_cnt['RESERVED']})")
     print(f"- Members: {len(members_j)} (STUDENT={mt_cnt['STUDENT']}, ACADEMIC_STAFF={mt_cnt['ACADEMIC_STAFF']}, ADMINISTRATIVE_STAFF={mt_cnt['ADMINISTRATIVE_STAFF']}; ACTIVE={ms_cnt['ACTIVE']}, SUSPENDED={ms_cnt['SUSPENDED']})")
     print(f"- Librarians: {len(libs_j)}")
-    print(f"- Loans: {len(loans_j)} (ACTIVE={ln_cnt['ACTIVE']}, RETURNED={ln_cnt['RETURNED']}, LOST={ln_cnt['LOST']})")
+    print(f"- Loans: {len(loans_j)} (ACTIVE={ln_cnt['ACTIVE']} [overdue={len(overdue_active)}, due_soon_0_3d={len(due_soon_active)}, on_time={len(ontime_active)} @ {ref_date.isoformat()}], RETURNED={ln_cnt['RETURNED']}, LOST={ln_cnt['LOST']})")
     print(f"- Fines: {len(fines_j)} (UNPAID={fn_cnt['UNPAID']} [{unpaid_try:.2f} TRY], PAID={fn_cnt['PAID']}, WAIVED={fn_cnt['WAIVED']})")
     print(f"- Reservations: {len(res_j)} (WAITING={rs_cnt['WAITING']}, READY={rs_cnt['READY']})")
 
@@ -282,6 +289,10 @@ def main() -> int:
         (r"\b8\s+`?READY`?", "outdated 8 READY reservations"),
     ]
     seed_errors = []
+    if (len(active_loans), len(overdue_active), len(due_soon_active), len(ontime_active)) != (59, 15, 12, 32):
+        seed_errors.append(
+            f"loans.json ACTIVE breakdown mismatch: got {(len(active_loans), len(overdue_active), len(due_soon_active), len(ontime_active))}"
+        )
     for df in doc_files:
         if not df.exists():
             continue
@@ -294,7 +305,24 @@ def main() -> int:
         for expected_tok in ("1,624", "59", "100", "26", "16", "19"):
             if expected_tok not in txt:
                 seed_errors.append(f"{req_doc.relative_to(ROOT)}: missing verified seed breakdown token '{expected_tok}'")
-    print("- Seed breakdown mismatches in docs: " + ("none" if not seed_errors else "; ".join(seed_errors)))
+    for kpi_doc in (ROOT / "data/README.md", ROOT / "docs/02-inception/USER_STORIES.md", ROOT / "docs/02-inception/HW02_Inception_Agile.md"):
+        txt = kpi_doc.read_text(encoding="utf-8")
+        if not re.search(rf"\b{len(due_soon_active)}\b[^.\n]{{0,30}}due-soon", txt):
+            seed_errors.append(f"{kpi_doc.relative_to(ROOT)}: missing LMS-015 '{len(due_soon_active)} due-soon' count")
+        if not re.search(rf"\b{len(overdue_active)}\b[^.\n]{{0,30}}overdue", txt):
+            seed_errors.append(f"{kpi_doc.relative_to(ROOT)}: missing LMS-015 '{len(overdue_active)} overdue' count")
+
+    import subprocess
+    rec_out = subprocess.check_output(
+        [sys.executable, str(ROOT / "tools/agile/make_reconciliation.py")],
+        cwd=ROOT,
+        text=True,
+    )
+    rec_file = ROOT / "docs/process/BACKLOG_POINT_RECONCILIATION.md"
+    if not rec_file.exists() or rec_file.read_text(encoding="utf-8") != rec_out:
+        seed_errors.append("docs/process/BACKLOG_POINT_RECONCILIATION.md is out of sync with tools/agile/make_reconciliation.py")
+
+    print("- Seed breakdown & reconciliation mismatches in docs: " + ("none" if not seed_errors else "; ".join(seed_errors)))
     ok &= not seed_errors
 
     print("\nOVERALL: " + ("PASS" if ok else "FAIL"))
