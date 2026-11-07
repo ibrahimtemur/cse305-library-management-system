@@ -1,0 +1,16 @@
+%% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+%% Student No(s)#: 231805033, 231805026
+%% General Comments: Three-sprint iteration roadmap showing capacity, Must stories, Sprint 3 commitment line, and stretch slice.
+%%{init: {'flowchart': {'wrappingWidth': 520, 'nodeSpacing': 24, 'rankSpacing': 36}}}%%
+flowchart TB
+    S1["<b>Sprint 1 — Elaboration (HW03: Nov 11 – Dec 08, Midterms Nov 17–28)</b><br/>Net Capacity: 30.2 h | Planned: 28.5 h (6 Must stories, 26 pts, 52 classic h)<br/>• LMS-001 Domain & JPA Skeleton (3 pts, 3.5 h) | • LMS-002 Seed Loader + Date Shift (5 pts, 5.0 h)<br/>• LMS-003 Login/BCrypt + RBAC (5 pts, 5.0 h) | • LMS-004 Catalog Search & Detail (3 pts, 3.5 h)<br/>• LMS-005 Book CRUD & Copy State (8 pts, 7.5 h) | • LMS-008 Design Spike (2 pts, 4.0 h)"]
+
+    S2["<b>Sprint 2 — Construction (HW04: Dec 09 – Dec 22)</b><br/>Net Capacity: 20.8 h | Planned: 24.5 h (5 Must stories, 22 pts, 46 classic h)<br/>• LMS-006 Member Management (3 pts, 3.5 h) | • LMS-007 Checkout + Cooldown + RefOnly (8 pts, 9.0 h)<br/>• LMS-009 Uncapped 0.25 TRY/day Fine (3 pts, 3.5 h) | • LMS-010 Return to AVAILABLE (3 pts, 3.5 h)<br/>• LMS-013 Self-Service & Inspection (5 pts, 5.0 h)<br/><i>(S1+S2 Must = 53.0 h vs 51.0 h net: +2.0 h accepted gap; S3 Should acts as shock absorber)</i>"]
+
+    S3_C["<b>Sprint 3 — Committed MVP Slice (HW05: Dec 23 – Jan 05 | Net: 17.8 h)</b><br/>4 Committed Should Stories: 16 pts, 34 classic h, 17.5 human h &lt;= 17.8 h net<br/>1. LMS-017 Reservations, Hold Promotion &amp; In-App Alert (8 pts, 8.5 h, cum 8.5 h)<br/>2. LMS-011 Fine Payment &amp; Waiver (3 pts, 3.5 h, cum 12.0 h)<br/>3. LMS-012 Hold Cancellation &amp; 3-Day Expiry (3 pts, 3.5 h, cum 15.5 h)<br/>4. LMS-015 Dashboard KPI Summary Cards 015a (2 pts, 2.0 h, cum 17.5 h)<br/><b>=== COMMITMENT LINE: 17.5 h (Committed MVP = 15 stories, 64 pts, 70.5 h) ===</b>"]
+
+    S3_S["<b>Sprint 3 — Stretch Slice Below Commitment Line (At Risk)</b><br/>6 Stretch Stories (3 Should + 3 Could): 24 pts, 41 classic h, 19.5 human h<br/>5. LMS-014 Loan Renewal with Reserved Guard (Should, 5 pts, 3.5 h, cum 21.0 h)<br/>6. LMS-016 Lost-Copy Process &amp; 2x Valuation (Should, 8 pts, 5.5 h, cum 26.5 h)<br/>7. LMS-021 Actionable Overdue &amp; Unpaid Report 015b (Should, 3 pts, 3.0 h, cum 29.5 h)<br/>8–10. Could: LMS-018 Guest (2.0 h), LMS-019 CSV (2.0 h), LMS-020 ISBN Lookup (3.5 h)"]
+
+    S1 -->|"PSI-1: Runnable Catalog & Seeded Auth Base"| S2
+    S2 -->|"PSI-2: Working Circulation Desk & Self-Service"| S3_C
+    S3_C -.->|"If capacity remains after MVP (70.5 h)"| S3_S

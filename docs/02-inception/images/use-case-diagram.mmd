@@ -1,0 +1,56 @@
+%% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+%% Student No(s)#: 231805033, 231805026
+%% General Comments: Use case diagram (UC-01..UC-11) for the CSE305 Library Management System (HW02 Inception), grouped by actor access tier to eliminate edge crossings.
+flowchart LR
+    GST["<b>Guest</b><br/>(ROLE_GUEST)<br/>Unauthenticated Visitor"]
+    MEM["<b>Library Member</b><br/>(ROLE_MEMBER:<br/>STUDENT, ACADEMIC_STAFF,<br/>ADMINISTRATIVE_STAFF)"]
+
+    subgraph LMS["System Boundary — CSE305 Library Management System"]
+        direction TB
+        subgraph G1["1. Public Catalog Discovery (Guest, Member, Librarian)"]
+            UC01(["UC-01: Search and Browse Catalog"])
+        end
+
+        subgraph G2["2. Authentication, Self-Service & Holds (Member & Librarian)"]
+            UC02(["UC-02: Log In and Log Out"])
+            UC07(["UC-07: Renew an Active Loan"])
+            UC08(["UC-08: Reserve a Book (Place or Cancel Hold)"])
+            UC10(["UC-10: View Member Self-Service Portal & History"])
+        end
+
+        subgraph G3["3. In-Person Circulation Desk (Librarian Primary · Member Supporting)"]
+            UC05(["UC-05: Borrow a Book (Checkout Copy)"])
+            UC09(["UC-09: Pay or Waive Overdue Fine & Assess Lost Copy"])
+        end
+
+        subgraph G4["4. Librarian Administration, Returns & Reporting (Librarian Only)"]
+            UC03(["UC-03: Manage Bibliographic Catalog & Physical Copies"])
+            UC04(["UC-04: Manage Library Members"])
+            UC06(["UC-06: Return a Book Copy"])
+            UC11(["UC-11: View Operational Dashboard & Export Reports"])
+        end
+    end
+
+    LIB["<b>Librarian / Admin</b><br/>(ROLE_LIBRARIAN)<br/>Staff Account"]
+
+    GST -->|"Read-Only Browse"| UC01
+
+    MEM -->|"Primary Actor"| UC01
+    MEM -->|"Primary Actor"| UC02
+    MEM -->|"Primary Actor"| UC07
+    MEM -->|"Primary Actor"| UC08
+    MEM -->|"Primary Actor"| UC10
+    MEM -.->|"Supporting Actor (ID Card)"| UC05
+    MEM -.->|"Supporting Actor (Desk / Petition)"| UC09
+
+    UC01 ---|"Primary Actor"| LIB
+    UC02 ---|"Primary Actor"| LIB
+    UC07 ---|"Primary Actor"| LIB
+    UC08 ---|"Primary Actor"| LIB
+    UC10 ---|"Primary Actor"| LIB
+    UC05 ---|"Primary Actor"| LIB
+    UC09 ---|"Primary Actor"| LIB
+    UC03 ---|"Primary Actor"| LIB
+    UC04 ---|"Primary Actor"| LIB
+    UC06 ---|"Primary Actor"| LIB
+    UC11 ---|"Primary Actor"| LIB

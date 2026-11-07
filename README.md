@@ -21,6 +21,18 @@ A standalone web-based **Library Management System** developed for **CSE305 Soft
 
 ---
 
+## HW02 Submission Deliverables (`v1.0` — Due: Tuesday, November 10, 2026)
+
+For immediate inspection when opening the submission archive (`cse305_hw02_231805033_231805026.zip`), the consolidated two-part **HW02** document (**Part 1: UP Inception Overview** and **Part 2: Agile Scrum Product Backlog & Iteration Plan**) is placed both at the repository root and under [`docs/02-inception/`](docs/02-inception/README.md):
+
+- **[`HW02_Inception_Agile.pdf`](HW02_Inception_Agile.pdf)** *(Root-level print-ready PDF with 4 rendered diagrams)*
+- **[`docs/02-inception/HW02_Inception_Agile.md`](docs/02-inception/HW02_Inception_Agile.md)** & **[`docs/02-inception/HW02_Inception_Agile.pdf`](docs/02-inception/HW02_Inception_Agile.pdf)** *(Consolidated Markdown source & PDF)*
+- **Agile Scrum Deliverables:** [`THEMES_EPICS.md`](docs/02-inception/THEMES_EPICS.md) (`4` themes, `9` epics), [`USER_STORIES.md`](docs/02-inception/USER_STORIES.md) (`21` stories `LMS-001`..`LMS-021`), [`PRODUCT_BACKLOG.md`](docs/02-inception/PRODUCT_BACKLOG.md) (`88` story points, `173.0` classic h, `90.0` human h, `FR`–`UC`–`BR`–Story traceability), [`SPRINT_PLAN.md`](docs/02-inception/SPRINT_PLAN.md) (`3`-sprint capacity model, accepted `+2.0 h` Must gap, Sprint 3 commitment line at `17.5 h <= 17.8 h`, dependency proof, DoR/DoD, risks), [`TASKS.md`](docs/02-inception/TASKS.md) (`105` technical tasks), [`PSI_AND_MVP.md`](docs/02-inception/PSI_AND_MVP.md) (`64 pts / 70.5 h` committed MVP), and [`tools/agile/validate_backlog.py`](tools/agile/validate_backlog.py)
+- **UP Inception Deliverables:** [`VISION_AND_CONTEXT.md`](docs/02-inception/VISION_AND_CONTEXT.md), [`PERSONAS.md`](docs/02-inception/PERSONAS.md), [`REQUIREMENTS.md`](docs/02-inception/REQUIREMENTS.md) (`FR-001`..`FR-032`, `NFR-001`..`NFR-012`, `CON-001`..`CON-006`, `DR-001`..`DR-007`), [`BUSINESS_RULES.md`](docs/02-inception/BUSINESS_RULES.md) (`BR-001`..`BR-018`), [`DOMAIN_GLOSSARY.md`](docs/02-inception/DOMAIN_GLOSSARY.md), and [`USE_CASES.md`](docs/02-inception/USE_CASES.md) (`UC-01`..`UC-11`)
+- **Rendered Diagrams:** [`docs/02-inception/images/`](docs/02-inception/images/README.md) (`system-context`, `use-case-diagram`, `themes-epics`, `sprint-roadmap` in `.mmd`, `.png`, `.svg`)
+
+---
+
 ## HW01 Submission Deliverables (`v1.2` — Due: Tuesday, November 3, 2026)
 
 For immediate inspection when opening the submission archive (`cse305_hw01_231805033_231805026.zip`), the consolidated three-part **HW01** document (**Part 1: Problem Description**, **Part 2: Solution Outline**, and **Part 3: Domain Model**) is placed both at the repository root and under [`docs/01-proposal/`](docs/01-proposal/README.md):
@@ -48,27 +60,30 @@ For immediate inspection when opening the submission archive (`cse305_hw01_23180
 
 ```text
 LibraryManagementSystem/
+├── HW02_Inception_Agile.pdf             # Root-level consolidated HW02 submission PDF (v1.0)
 ├── HW01_Problem_Solution_DomainModel.pdf # Root-level consolidated HW01 submission PDF (v1.2)
-├── AGENTS.md                        # Permanent AI agent & engineering governance rules
-├── README.md                        # Project overview and usage instructions
-├── pom.xml                          # Maven build configuration
-├── mvnw / mvnw.cmd                  # Maven Wrapper scripts
+├── AGENTS.md                            # Permanent AI agent & engineering governance rules
+├── README.md                            # Project overview and usage instructions
+├── pom.xml                              # Maven build configuration
+├── mvnw / mvnw.cmd                      # Maven Wrapper scripts
 ├── docs/
-│   ├── 00-course/                   # Course guidelines and assignment rubrics
-│   ├── 01-proposal/                 # HW01 Problem Description, Solution Outline & Domain Model (v1.2)
-│   ├── 02-inception/                # Requirements, personas, use cases, product backlog
-│   ├── 03-design/                   # Architecture, UML diagrams, GoF/GRASP documentation
-│   │   └── ui/                      # Stitch UI screen designs and exports
-│   ├── 04-sprints/                  # Sprint planning, review, and retrospective artifacts
+│   ├── 00-course/                       # Course guidelines and assignment rubrics
+│   ├── 01-proposal/                     # HW01 Problem Description, Solution Outline & Domain Model (v1.2)
+│   ├── 02-inception/                    # HW02 UP Inception & Agile Scrum Backlog (v1.0)
+│   ├── 03-design/                       # Architecture, UML diagrams, GoF/GRASP documentation
+│   │   └── ui/                          # Stitch UI screen designs and exports
+│   ├── 04-sprints/                      # Sprint planning, review, and retrospective artifacts
 │   └── process/
-│       ├── PROJECT_STATE.md         # Current phase, completed work, decisions, next steps
-│       └── ai-usage-log.md          # Complete audit log of AI-assisted tasks
+│       ├── PROJECT_STATE.md             # Current phase, completed work, decisions, next steps
+│       └── ai-usage-log.md              # Complete audit log of AI-assisted tasks
 ├── data/
-│   └── seed/                        # Reproducible Open Library + synthetic seed v2 datasets
+│   └── seed/                            # Reproducible Open Library + synthetic seed v2 datasets
 ├── tools/
-│   ├── data/                        # Reproducible seed data pipeline scripts & 80 unit tests
-│   ├── set-author.ps1 / .cmd        # Sets repository-local Git author (ibrahim | omer)
-│   └── package.ps1 / .cmd           # Builds homework zip: cse305_hwNN_231805033_231805026.zip
+│   ├── agile/validate_backlog.py        # Deterministic Agile backlog, capacity & traceability validator
+│   ├── data/                            # Reproducible seed data pipeline scripts & 80 unit tests
+│   ├── export-pdf.py / .ps1             # Generalized leak-free Markdown-to-PDF exporter
+│   ├── set-author.sh / .ps1 / .cmd      # Sets repository-local Git author (ibrahim | omer)
+│   └── package.py / .ps1 / .cmd         # Builds homework zip: cse305_hwNN_231805033_231805026.zip
 └── src/
     ├── main/
     │   ├── java/edu/adu/lms/        # Application source code
@@ -82,36 +97,39 @@ LibraryManagementSystem/
 
 ## Getting Started
 
-### 1. Select Active Author (Shared Computer Rule)
-Because both team members work on the same workstation in turns, always set the local Git author before committing:
+### 1. Select Active Author (Shared Workspace Rule)
+The primary environment is the remote Linux VM (Antigravity project connected to GitHub, DEC-20). Windows/PowerShell commands remain as optional equivalents.
 
-```powershell
+```bash
 # If Ibrahim Temur is working:
-tools\set-author ibrahim
+tools/set-author.sh ibrahim
 
 # If Omer Faruk Kuş is working:
-tools\set-author omer
+tools/set-author.sh omer
 ```
+Windows equivalent: `tools\set-author ibrahim` / `tools\set-author omer`.
 
 ### 2. Run Automated Tests
-```powershell
-mvn test
-# or without a system Maven installation:
-.\mvnw.cmd test
+```bash
+./mvnw -q test
+python3 -m unittest discover -s tools/data/tests
 ```
+Windows equivalent: `.\mvnw.cmd test`.
+
+> **VM-only workaround:** inside the remote Linux VM the JDK has an empty truststore and outbound HTTPS goes through a proxy, so the plain `./mvnw` cannot download dependencies there. `tools/mvnw-vm.sh -q test` is a VM-specific helper for that case only. `pom.xml`, `mvnw`, and `~/.m2` settings are intentionally left standard; on a normal machine use `./mvnw` directly.
 
 ### 3. Run the Application Locally
-```powershell
-mvn spring-boot:run
+```bash
+./mvnw spring-boot:run
 ```
 - Application URL: `http://localhost:8080`
 - H2 Console (local dev): `http://localhost:8080/h2-console` (`JDBC URL`: `jdbc:h2:file:./data/db/lms;AUTO_SERVER=TRUE`, user: `sa`, password: empty)
 
 ### 4. Package a Homework Submission Archive
-```powershell
-tools\package 01
+```bash
+python3 tools/package.py 02
 ```
-Produces `dist\cse305_hw01_231805033_231805026.zip` with `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, and IDE files excluded.
+Produces `dist/cse305_hw02_231805033_231805026.zip` with `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, `data/raw/`, `__pycache__/`, `*.pyc`, and IDE files excluded. Windows equivalent: `tools\package 02`.
 
 ---
 
