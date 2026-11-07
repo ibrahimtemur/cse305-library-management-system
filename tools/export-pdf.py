@@ -111,16 +111,28 @@ def render_markdown_to_html(md_text: str) -> str:
     )
 
     npx_cmd = "npx.cmd" if sys.platform == "win32" else "npx"
-    proc = subprocess.run(
-        [npx_cmd, "--yes", "marked@18.1.2", "--gfm"],
-        input=md_prepared,
-        text=True,
-        encoding="utf-8",
-        capture_output=True,
-    )
-    if proc.returncode != 0:
-        raise RuntimeError(f"marked@18.1.2 failed with code {proc.returncode}:\n{proc.stderr}")
-    return proc.stdout
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".md", encoding="utf-8", delete=False
+    ) as tf_in, tempfile.NamedTemporaryFile(
+        mode="w", suffix=".html", encoding="utf-8", delete=False
+    ) as tf_out:
+        tf_in.write(md_prepared)
+        temp_md_path = tf_in.name
+        temp_html_path = tf_out.name
+    try:
+        proc = subprocess.run(
+            [npx_cmd, "--yes", "marked@18.1.2", "--gfm", "-i", temp_md_path, "-o", temp_html_path],
+            text=True,
+            encoding="utf-8",
+            capture_output=True,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"marked@18.1.2 failed with code {proc.returncode}:\n{proc.stderr}")
+        return pathlib.Path(temp_html_path).read_text(encoding="utf-8")
+    finally:
+        for p in (temp_md_path, temp_html_path):
+            if os.path.exists(p):
+                os.remove(p)
 
 
 def sanitize_links_and_structure(

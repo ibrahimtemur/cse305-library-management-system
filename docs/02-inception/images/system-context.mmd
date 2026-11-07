@@ -1,8 +1,10 @@
 %% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
 %% Student No(s)#: 231805033, 231805026
 %% General Comments: System context diagram for the CSE305 Library Management System (HW02 Inception).
-flowchart LR
+%%{init: {'flowchart': {'nodeSpacing': 28, 'rankSpacing': 42}}}%%
+flowchart TB
     subgraph Actors["Human Actors"]
+        direction LR
         LIB["Librarian / Admin<br/>(ROLE_LIBRARIAN)<br/>e.g., syn-lib-0001"]
         MEM["Library Member<br/>(ROLE_MEMBER: STUDENT,<br/>ACADEMIC_STAFF,<br/>ADMINISTRATIVE_STAFF)<br/>e.g., SYN-STU-0001"]
         GST["Guest Visitor<br/>(ROLE_GUEST)<br/>Unauthenticated"]
@@ -13,26 +15,22 @@ flowchart LR
         H2[("Embedded H2 Database<br/>(./data/db/lms)<br/>+ Seed JSON Loader")]
         SEED_FILES[("Versioned Seed Files<br/>(data/seed/*.json, v2)<br/>782 Books, 1,706 Copies,<br/>60 Members, 3 Librarians,<br/>164 Loans, 47 Fines, 22 Holds")]
         WEB <-->|"JPA / ACID Transactions"| H2
-        SEED_FILES -->|"Loaded on startup<br/>(100% offline, date-shifted)"| H2
+        SEED_FILES -->|"Loaded on startup (100% offline, date-shifted)"| H2
     end
 
-    subgraph DataPrep["Offline Data-Preparation Pipeline (tools/data/)"]
-        FETCH["fetch_books.py &<br/>generate_synthetic.py"]
-    end
+    OL["<b>External Public Service</b><br/>Open Library Search API (https://openlibrary.org)<br/>CC0 / Public Domain Metadata"]
+    FETCH["<b>Offline Data-Preparation Pipeline (tools/data/)</b><br/>fetch_books.py &amp; generate_synthetic.py"]
 
-    subgraph External["External Public Service"]
-        OL["Open Library Search API<br/>(https://openlibrary.org)<br/>CC0 / Public Domain Metadata"]
-    end
-
-    subgraph Excluded["Explicitly Excluded External Systems (No Connection)"]
-        ADU_IT["ADU Institutional Systems<br/>(OBIS/OBS, LDAP, SSO,<br/>Smart-Card Readers)"]
+    subgraph Excluded["Explicitly Excluded External Systems (Zero Connection)"]
+        direction LR
+        ADU_IT["ADU Institutional Systems<br/>(OBIS/OBS, LDAP, SSO, Smart-Card)"]
         EXT_GW["External Payment, Bank,<br/>SMTP Email & SMS Gateways"]
     end
 
-    LIB <-->|"HTTPS / HTML Forms:<br/>Catalog & Copy CRUD, Member Mgmt,<br/>Desk Checkout/Return, Fine & Lost-Book<br/>Settlement, Dashboard & CSV Export"| WEB
-    MEM <-->|"HTTPS / HTML Views:<br/>Search Catalog, View Own Loans/Fines,<br/>Self-Service Renewal, Place/Cancel<br/>Reservation, In-App Notifications"| WEB
-    GST -->|"HTTPS GET (Read-Only):<br/>Browse & Search Public Catalog,<br/>Check Copy Availability"| WEB
+    LIB <-->|"HTTPS Forms: Catalog/Copy CRUD, Member Mgmt,<br/>Checkout/Return, Fine & Lost Settlement, Dashboard"| WEB
+    MEM <-->|"HTTPS Views: Search Catalog, View Own Loans/Fines,<br/>Self-Service Renewal, Hold Queue & In-App Alerts"| WEB
+    GST -->|"HTTPS GET (Read-Only):<br/>Browse Catalog & Copy Availability"| WEB
 
-    OL -.->|"1. Offline data-prep time only<br/>(>= 1.2s polite rate limit)"| FETCH
-    FETCH -.->|"2. Generates deterministic<br/>JSON snapshots"| SEED_FILES
-    WEB -.->|"Optional Could-Have (C2):<br/>Live ISBN lookup with<br/>offline fallback"| OL
+    OL -.->|"1. Offline data-prep only (>= 1.2s rate limit)"| FETCH
+    FETCH -.->|"2. Deterministic JSON snapshots"| SEED_FILES
+    WEB -.->|"Optional Could-Have (C2): Live ISBN lookup with offline fallback"| OL
