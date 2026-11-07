@@ -12,7 +12,7 @@
 | **Course** | CSE305 Software Engineering — Adnan Menderes University (ADU), Department of Computer Engineering |
 | **Instructor** | Assoc. Prof. Dr. Fatih Soygazi |
 | **Project** | Library Management System (LMS) |
-| **Team & Scrum roles** | **Ibrahim Temur** (`231805033`) — Product Owner *(proposed)* · **Omer Faruk Kuş** (`231805026`) — Scrum Master *(proposed)* (both: Developer, Architect, QA, Reviewer) |
+| **Team & Scrum roles** | **Ibrahim Temur** (`231805033`) — Product Owner · **Omer Faruk Kuş** (`231805026`) — Scrum Master (both: Developer, Architect, QA, Reviewer) |
 | **Document version** | `1.0` |
 | **Document date** | 2026-11-07 |
 | **Submission** | HW02 — due **Tuesday 2026-11-10** (UP Inception + Agile Scrum Product Backlog & Iteration Plan) |

@@ -14,7 +14,7 @@
 ## 1. Provenance & Git History Facts
 
 1. **External Prompt Baseline vs. First Git Commit:**
-   - A preliminary 23-story outline (`88` story points, `98` classic Must hours) existed only in the external task prompt (`ROADMAP_AND_PROMPTS.md`) and was **never committed to Git**.
+   - A preliminary 23-story planning outline (`88` story points, `98` classic Must hours) was kept outside the repository and was never committed to Git.
    - The first Git commits of the Agile backlog on branch `docs/hw02-agile` were `6b4265c` (`USER_STORIES.md`) and `583e1a2` / `28c40d9` (`PRODUCT_BACKLOG.md`), which consolidated the backlog into **`20` stories (`LMS-001`..`LMS-020`)** totaling **`132` story points**, **`211.0` classic hours**, and **`90.0` human hours** (`46` agent sessions).
 2. **Re-Calibration & Story Split in Commit `df7eaa4` (`HEAD` / PDF):**
    - In commit `df7eaa4`, story points and classic hours were re-calibrated across the backlog to **`88` story points** and **`173.0` classic hours** (with Must stories totaling **`48` points** and **`98.0` classic hours**: Sprint 1 = `52.0 h`, Sprint 2 = `46.0 h`), while human-hour estimates remained **`90.0` human hours** (`46` agent sessions).

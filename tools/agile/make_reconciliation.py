@@ -226,7 +226,7 @@ def main() -> int:
 ## 1. Provenance & Git History Facts
 
 1. **External Prompt Baseline vs. First Git Commit:**
-   - A preliminary 23-story outline (`88` story points, `98` classic Must hours) existed only in the external task prompt (`ROADMAP_AND_PROMPTS.md`) and was **never committed to Git**.
+   - A preliminary 23-story planning outline (`88` story points, `98` classic Must hours) was kept outside the repository and was never committed to Git.
    - The first Git commits of the Agile backlog on branch `docs/hw02-agile` were `6b4265c` (`USER_STORIES.md`) and `583e1a2` / `{OLD_COMMIT}` (`PRODUCT_BACKLOG.md`), which consolidated the backlog into **`{old_sum['count']}` stories (`LMS-001`..`LMS-020`)** totaling **`{old_sum['pts']}` story points**, **`{old_sum['classic']:.1f}` classic hours**, and **`{old_sum['human']:.1f}` human hours** (`{old_sum['sessions']}` agent sessions).
 2. **Re-Calibration & Story Split in Commit `{NEW_COMMIT}` (`HEAD` / PDF):**
    - In commit `{NEW_COMMIT}`, story points and classic hours were re-calibrated across the backlog to **`{new_sum['pts']}` story points** and **`{new_sum['classic']:.1f}` classic hours** (with Must stories totaling **`{new_sum['by_moscow']['Must']['pts']}` points** and **`{new_sum['by_moscow']['Must']['classic']:.1f}` classic hours**: Sprint 1 = `{new_sum['by_sprint']['S1']['classic']:.1f} h`, Sprint 2 = `{new_sum['by_sprint']['S2']['classic']:.1f} h`), while human-hour estimates remained **`{new_sum['human']:.1f}` human hours** (`{new_sum['sessions']}` agent sessions).
