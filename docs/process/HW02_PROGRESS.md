@@ -16,6 +16,6 @@
 - [x] Diagrams (`system-context`, `use-case-diagram`, `themes-epics`, `sprint-roadmap` rendered to PNG/SVG under `docs/02-inception/images/`, visually verified)
 - [x] `tools/export-pdf` generalization (HW01 regression to `/tmp/hw01_regression.pdf`: 11 pages, Page 6 landscape, 5 links, 0 leaks; delivered HW01 PDFs untouched)
 - [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 18 pages, SHA-256 `9a27ce45...`, 4 links, 0 leaks, all 18 pages visually verified)
-- [ ] Docs updates (syllabus, README, inception README, PROJECT_STATE, ai-usage-log)
-- [ ] Part 3 cross-check and human review checklist
+- [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`, `ai-usage-log.md` with separate model rows)
+- [x] Part 3 cross-check and human review checklist (Stage 3 STOP — awaiting human review confirmation)
 - [ ] Part 4 packaging (only after confirmations)
