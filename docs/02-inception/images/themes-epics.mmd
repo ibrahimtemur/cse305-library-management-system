@@ -1,0 +1,36 @@
+%% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+%% Student No(s)#: 231805033, 231805026
+%% General Comments: Themes and epics hierarchy diagram (4 themes -> 9 epics -> 21 stories, 88 pts, 90.0 h).
+%%{init: {'flowchart': {'wrappingWidth': 420, 'nodeSpacing': 16, 'rankSpacing': 40}}}%%
+flowchart LR
+    P["LMS Product Backlog<br/>21 stories | 88 pts | 90.0 h"]
+
+    T1["T1: Platform Foundation<br/>4 stories | 18 pts | 18.5 h"]
+    T2["T2: Collection & Membership<br/>5 stories | 19 pts | 20.0 h"]
+    T3["T3: Circulation<br/>5 stories | 27 pts | 28.0 h"]
+    T4["T4: Compliance & Insight<br/>7 stories | 24 pts | 23.5 h"]
+
+    E1["E1: Data Import & Seed Loader<br/>LMS-001, LMS-002 (2 stories, 8 pts, 8.5 h)"]
+    E2["E2: Auth, RBAC & Self-Service<br/>LMS-003, LMS-013 (2 stories, 10 pts, 10.0 h)"]
+    E3["E3: Catalog, Search & Copy Lifecycle<br/>LMS-004, LMS-005, LMS-018, LMS-020 (4 stories, 16 pts, 16.5 h)"]
+    E4["E4: Member Management<br/>LMS-006 (1 story, 3 pts, 3.5 h)"]
+    E5["E5: Borrowing, Returning & Renewal<br/>LMS-007, LMS-010, LMS-014 (3 stories, 16 pts, 16.0 h)"]
+    E6["E6: Reservations & Pickup Holds<br/>LMS-017, LMS-012 (2 stories, 11 pts, 12.0 h)"]
+    E7["E7: Overdue & Fines<br/>LMS-009, LMS-011 (2 stories, 6 pts, 7.0 h)"]
+    E8["E8: Lost-Copy Handling<br/>LMS-008, LMS-016 (2 stories, 10 pts, 9.5 h)"]
+    E9["E9: Dashboard & CSV Reports<br/>LMS-015, LMS-021, LMS-019 (3 stories, 8 pts, 7.0 h)"]
+
+    P --> T1
+    P --> T2
+    P --> T3
+    P --> T4
+
+    T1 --> E1
+    T1 --> E2
+    T2 --> E3
+    T2 --> E4
+    T3 --> E5
+    T3 --> E6
+    T4 --> E7
+    T4 --> E8
+    T4 --> E9

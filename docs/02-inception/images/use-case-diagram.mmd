@@ -1,0 +1,45 @@
+%% Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
+%% Student No(s)#: 231805033, 231805026
+%% General Comments: Use case diagram (UC-01..UC-11) for the CSE305 Library Management System (HW02 Inception).
+flowchart LR
+    subgraph Actors["Actors"]
+        GST["Guest<br/>(ROLE_GUEST)"]
+        MEM["Member<br/>(ROLE_MEMBER:<br/>STUDENT, ACADEMIC_STAFF,<br/>ADMINISTRATIVE_STAFF)"]
+        LIB["Librarian / Admin<br/>(ROLE_LIBRARIAN)"]
+    end
+
+    subgraph LMS["System Boundary — CSE305 Library Management System"]
+        UC01(["UC-01: Search and Browse Catalog"])
+        UC02(["UC-02: Log In and Log Out"])
+        UC03(["UC-03: Manage Bibliographic Catalog & Physical Copies"])
+        UC04(["UC-04: Manage Library Members"])
+        UC05(["UC-05: Borrow a Book (Checkout Copy)"])
+        UC06(["UC-06: Return a Book Copy"])
+        UC07(["UC-07: Renew an Active Loan"])
+        UC08(["UC-08: Reserve a Book (Place or Cancel Hold)"])
+        UC09(["UC-09: Pay or Waive Overdue Fine & Assess Lost Copy"])
+        UC10(["UC-10: View Member Self-Service Portal & History"])
+        UC11(["UC-11: View Operational Dashboard & Export Reports"])
+    end
+
+    GST --> UC01
+
+    MEM --> UC01
+    MEM --> UC02
+    MEM --> UC07
+    MEM --> UC08
+    MEM --> UC10
+    MEM -.->|"Supporting Actor<br/>(In-Person ID Card)"| UC05
+    MEM -.->|"Supporting Actor<br/>(Fine Settlement / Lost Petition)"| UC09
+
+    LIB --> UC01
+    LIB --> UC02
+    LIB --> UC03
+    LIB --> UC04
+    LIB --> UC05
+    LIB --> UC06
+    LIB --> UC07
+    LIB --> UC08
+    LIB --> UC09
+    LIB --> UC10
+    LIB --> UC11
