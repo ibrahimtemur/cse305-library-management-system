@@ -179,6 +179,17 @@ def main() -> int:
     print("- Mismatches: " + ("none" if not bad else "; ".join(bad)))
     ok &= not bad
 
+    print("\n## Task hours vs story hours (TASKS.md)")
+    tt = ROOT / "docs/02-inception/TASKS.md"
+    sums, ntasks = {}, 0
+    for ln in tt.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"\| (T-\d{3}-\d+) \| (LMS-\d{3}) \| .* \| ([\d.]+) \|\s*\|\s*$", ln)
+        if m:
+            sums[m[2]] = sums.get(m[2], 0.0) + float(m[3]); ntasks += 1
+    tbad = [f"{s['id']}: tasks {sums.get(s['id'], 0.0):.1f} vs story {s['human']:.1f}" for s in stories if abs(sums.get(s["id"], 0.0) - s["human"]) > 1e-9]
+    print(f"- Tasks: {ntasks}; total task hours {sum(sums.values()):.1f}; mismatches: {'none' if not tbad else '; '.join(tbad)}")
+    ok &= not tbad
+
     print("\n## FR coverage (every Must FR must be in Sprint 1 or Sprint 2)")
     reqs = parse_requirements(REQ_MD)
     cov = fr_coverage(meta)
