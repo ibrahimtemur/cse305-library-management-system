@@ -101,6 +101,8 @@ python3 -m unittest discover -s tools/data/tests
 ```
 Windows equivalent: `.\mvnw.cmd test`.
 
+> **VM-only workaround:** inside the remote Linux VM the JDK has an empty truststore and outbound HTTPS goes through a proxy, so the plain `./mvnw` cannot download dependencies there. `tools/mvnw-vm.sh -q test` is a VM-specific helper for that case only. `pom.xml`, `mvnw`, and `~/.m2` settings are intentionally left standard; on a normal machine use `./mvnw` directly.
+
 ### 3. Run the Application Locally
 ```bash
 ./mvnw spring-boot:run
