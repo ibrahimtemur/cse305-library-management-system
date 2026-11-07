@@ -1,17 +1,17 @@
 <!--
   Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
   Student No(s)#: 231805033, 231805026
-  General Comments: User stories LMS-001..LMS-020 with Given/When/Then acceptance criteria, MoSCoW priority, Fibonacci points, human-hour estimates, and target sprints for the HW02 Scrum backlog.
+  General Comments: User stories LMS-001..LMS-021 with Given/When/Then acceptance criteria, MoSCoW priority, Fibonacci points, human-hour estimates, and target sprints for the HW02 Scrum backlog.
 -->
 # User Stories — Library Management System (LMS)
 
-- **Version:** 1.0 (draft pending Product Owner approval of the Sprint 3 commitment line) — 2026-11-07
+- **Version:** 1.0 (Product Owner approved 2026-11-07) — 2026-11-07
 - **Product Owner:** Ibrahim Temur · **Scrum Master:** Omer Faruk Kuş
 - **Sources:** [`REQUIREMENTS.md`](REQUIREMENTS.md) (`FR`/`NFR`), [`USE_CASES.md`](USE_CASES.md) (`UC`), [`BUSINESS_RULES.md`](BUSINESS_RULES.md) (`BR`), [`PERSONAS.md`](PERSONAS.md)
 - **Backlog and totals:** [`PRODUCT_BACKLOG.md`](PRODUCT_BACKLOG.md) (numbers are produced by `tools/agile/validate_backlog.py`; the `Meta` lines below are checked against it)
 
 > [!NOTE]
-> **Estimation convention.** `Human h` is human effort only (steering AI agents, review, manual testing, documents); agent working time is not counted. Points are Fibonacci. Human hours are about `0.40 x` classic effort (assumption, **to be re-calibrated with the actual Sprint 1 hours**). `Agent sessions` is the expected number of heavy AI chats (`ceil(classic / 6)`), relevant for the weekly AI quota risk. Merged stories keep their acceptance criteria separate (labelled AC-a, AC-b, ...).
+> **Estimation convention.** `Human h` is human effort only (steering AI agents, review, manual testing, documents); agent working time is not counted. Points are Fibonacci (`88` points total across `21` stories; merging the three story pairs and splitting `LMS-015` into `LMS-015` + `LMS-021` preserve the `88`-point baseline without point inflation). Human hours reflect ~`0.40 x` classic coding effort plus fixed per-story human review/manual-test/documentation overhead, the `4.0 h` human design spike (`LMS-008`), and PO-approved safety buffers on `LMS-005` (`7.5 h`) and `LMS-007` (`9.0 h`), **to be re-calibrated with the actual Sprint 1 hours**. `Agent sessions` is the expected number of heavy AI chats, relevant for the weekly AI quota risk. Merged stories keep their acceptance criteria separate (labelled AC-a, AC-b, ...).
 
 > [!NOTE]
 > **Stitch design step.** Every story marked "UI" starts with a Stitch MCP design task (screen exported to `docs/03-design/ui/`) *before* any Thymeleaf template is written (`NFR-001`).
@@ -23,7 +23,7 @@
 ## Epic E1 — Data Import and Seed Loader
 
 ### LMS-001 — Domain model and persistence skeleton
-**Meta:** E1 | Must | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S1 | FR: enabler (`DR-001`..`DR-007`, `NFR-010`) | UC: — | BR: `BR-017`
+**Meta:** E1 | Must | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S1 | FR: enabler (`DR-001`..`DR-007`, `NFR-010`) | UC: — | BR: `BR-017`
 
 **As a** developer, **I want** the JPA entities, enumerations, and repositories of the confirmed domain model on an H2 database, **so that** every later story builds on one persistent model that matches seed v2.
 
@@ -32,7 +32,7 @@
 - **AC-3:** *Given* `./mvnw -q test`, *when* the persistence tests run, *then* they pass offline (`NFR-004`).
 
 ### LMS-002 — Seed loader with date shifting
-**Meta:** E1 | Must | 8 pts | 5 h (classic 13) | 3 agent sessions | S1 | FR: `FR-019` | UC: System Startup | BR: `BR-017`, `BR-018`
+**Meta:** E1 | Must | 5 pts | 5 h (classic 10) | 3 agent sessions | S1 | FR: `FR-019` | UC: System Startup | BR: `BR-017`, `BR-018`
 
 **As a** librarian demo user, **I want** the application to load seed v2 on first startup and shift all dates relative to the application start day (`OPEN-04`), **so that** active, due-soon, and overdue loan scenarios never go stale.
 
@@ -56,7 +56,7 @@
 ## Epic E2 — Authentication, RBAC and Member Self-Service
 
 ### LMS-003 — Login/logout with BCrypt demo passwords and RBAC
-**Meta:** E2 | Must | 8 pts | 5 h (classic 13) | 3 agent sessions | S1 | FR: `FR-016`, `FR-017` | UC: UC-02 | BR: `BR-001`, `BR-018`
+**Meta:** E2 | Must | 5 pts | 5 h (classic 10) | 3 agent sessions | S1 | FR: `FR-016`, `FR-017` | UC: UC-02 | BR: `BR-001`, `BR-018`
 
 **As a** librarian or member, **I want** to log in and out with a local account, **so that** I only see and do what my role allows.
 
@@ -69,7 +69,7 @@ UI story: Stitch login screen first.
 - **AC-e (suspended):** *Given* a `SUSPENDED` member, *when* the member logs in, *then* login succeeds but borrowing, renewing, and reserving stay blocked (`BR-011`).
 
 ### LMS-013 — Member self-service portal and librarian member inspection
-**Meta:** E2 | Must | 8 pts | 5 h (classic 13) | 3 agent sessions | S2 | FR: `FR-008`, `FR-018` | UC: UC-10, UC-04 | BR: `BR-002`, `BR-006`, `BR-010`, `BR-011`
+**Meta:** E2 | Must | 5 pts | 5 h (classic 10) | 3 agent sessions | S2 | FR: `FR-008`, `FR-018` | UC: UC-10, UC-04 | BR: `BR-002`, `BR-006`, `BR-010`, `BR-011`
 
 **As a** member, **I want** a personal page with my loans, history, cooldowns, and fines, **so that** I know my due dates and what I owe without asking the desk.
 
@@ -87,7 +87,7 @@ UI story: Stitch self-service screen first. **Scope fix:** this story shows acti
 ## Epic E3 — Catalog, Search and Copy Lifecycle
 
 ### LMS-004 — Catalog search and book detail
-**Meta:** E3 | Must | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S1 | FR: `FR-002`, `FR-003` | UC: UC-01 | BR: `BR-001`, `BR-014`, `BR-017`
+**Meta:** E3 | Must | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S1 | FR: `FR-002`, `FR-003` | UC: UC-01 | BR: `BR-001`, `BR-014`, `BR-017`
 
 **As a** logged-in user, **I want** to search the catalog and open a book detail page, **so that** I can find a title and see whether a copy is available.
 
@@ -99,7 +99,7 @@ UI story: Stitch search and detail screens first.
 - **AC-d (empty):** *Given* no match, *when* a search runs, *then* an empty-state message is shown.
 
 ### LMS-005 — Book CRUD, copy registration and copy lifecycle
-**Meta:** E3 | Must | 13 pts | 7.5 h (classic 18) | 3 agent sessions | S1 | FR: `FR-001`, `FR-004`, `FR-005` | UC: UC-03 | BR: `BR-014`, `BR-015`, `BR-017`
+**Meta:** E3 | Must | 8 pts | 7.5 h (classic 16) | 3 agent sessions | S1 | FR: `FR-001`, `FR-004`, `FR-005` | UC: UC-03 | BR: `BR-014`, `BR-015`, `BR-017`
 
 **As a** librarian, **I want** to maintain books and their physical copies on one screen and have copy states enforced, **so that** the catalog stays correct and copies never reach an illegal state.
 
@@ -116,7 +116,7 @@ UI story: Stitch book form and copy table first. Merged story; acceptance criter
 ## Epic E4 — Member Management
 
 ### LMS-006 — Member registration, profile update and suspension
-**Meta:** E4 | Must | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S2 | FR: `FR-006`, `FR-007` | UC: UC-04 | BR: `BR-002`, `BR-011`, `BR-018`
+**Meta:** E4 | Must | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S2 | FR: `FR-006`, `FR-007` | UC: UC-04 | BR: `BR-002`, `BR-011`, `BR-018`
 
 **As a** librarian, **I want** to register synthetic members, edit them, and suspend or reactivate them, **so that** only eligible members borrow.
 
@@ -132,7 +132,7 @@ UI story: Stitch member form first.
 ## Epic E5 — Borrowing, Returning and Renewal
 
 ### LMS-007 — Checkout with eligibility, cooldown and referenceOnly enforcement
-**Meta:** E5 | Must | 13 pts | 9 h (classic 22) | 4 agent sessions | S2 | FR: `FR-009`, `FR-010`, `FR-011`, `FR-013` | UC: UC-05 | BR: `BR-002`, `BR-003`, `BR-006`, `BR-011`, `BR-013`, `BR-014`, `BR-016`, `BR-017`
+**Meta:** E5 | Must | 8 pts | 9 h (classic 18) | 4 agent sessions | S2 | FR: `FR-009`, `FR-010`, `FR-011`, `FR-013` | UC: UC-05 | BR: `BR-002`, `BR-003`, `BR-006`, `BR-011`, `BR-013`, `BR-014`, `BR-016`, `BR-017`
 
 **As a** librarian, **I want** to check out a copy to a member at the desk with all rules enforced, **so that** every loan is valid and traceable.
 
@@ -147,7 +147,7 @@ UI story: Stitch checkout desk screen first (keyboard/barcode entry, `NFR-002`).
 - **AC-g (execution):** *Given* all checks pass, *when* confirmed, *then* one transaction creates an `ACTIVE` loan with `dueDate = checkoutDate + 30 days` and sets the copy `LOANED`; on any failure nothing is persisted (`FR-011`, `BR-003`, `NFR-003`).
 
 ### LMS-010 — Return of a copy (copy to AVAILABLE only)
-**Meta:** E5 | Must | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S2 | FR: `FR-012` | UC: UC-06 | BR: `BR-007`, `BR-008`, `BR-017`
+**Meta:** E5 | Must | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S2 | FR: `FR-012` | UC: UC-06 | BR: `BR-007`, `BR-008`, `BR-017`
 
 **As a** librarian, **I want** to scan a returned copy and close its loan, **so that** the copy is available again and any overdue fine is created.
 
@@ -177,7 +177,7 @@ UI story: Stitch renew action first.
 ## Epic E6 — Reservations and Pickup Holds
 
 ### LMS-017 — Reservation, FIFO queue, hold promotion and in-app notification
-**Meta:** E6 | Should | 13 pts | 8.5 h (classic 21) | 4 agent sessions | S3 | FR: `FR-020`, `FR-021`, `FR-022` | UC: UC-08, UC-06, UC-10 | BR: `BR-011`, `BR-012`, `BR-013`, `BR-014`
+**Meta:** E6 | Should | 8 pts | 8.5 h (classic 16) | 4 agent sessions | S3 | FR: `FR-020`, `FR-021`, `FR-022` | UC: UC-08, UC-06, UC-10 | BR: `BR-011`, `BR-012`, `BR-013`, `BR-014`
 
 **As a** member, **I want** to reserve a title with no available copy and be notified in the application when a copy is held for me, **so that** I get the book without checking the catalog repeatedly.
 
@@ -191,7 +191,7 @@ UI story: Stitch reserve button, my-reservations list, and notification panel fi
 - **AC-f (self-service extension):** *Given* `LMS-013` exists, *then* active reservations, holds, and notifications appear on the self-service page (added by this story).
 
 ### LMS-012 — Reservation cancellation and hold expiry
-**Meta:** E6 | Should | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S3 | FR: `FR-023` | UC: UC-08 | BR: `BR-012`, `BR-013`
+**Meta:** E6 | Should | 3 pts | 3.5 h (classic 7) | 2 agent sessions | S3 | FR: `FR-023` | UC: UC-08 | BR: `BR-012`, `BR-013`
 
 **As a** member or librarian, **I want** to cancel a reservation and have unclaimed holds expire, **so that** the queue keeps moving.
 
@@ -205,7 +205,7 @@ UI story: Stitch cancel action first.
 ## Epic E7 — Overdue and Fines
 
 ### LMS-009 — Overdue detection and uncapped fine calculation
-**Meta:** E7 | Must | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S2 | FR: `FR-014`, `FR-015` | UC: UC-06, UC-09, UC-11 | BR: `BR-007`, `BR-008`, `BR-009`, `BR-010`, `BR-015`
+**Meta:** E7 | Must | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S2 | FR: `FR-014`, `FR-015` | UC: UC-06, UC-09, UC-11 | BR: `BR-007`, `BR-008`, `BR-009`, `BR-010`, `BR-015`
 
 **As a** librarian, **I want** deterministic overdue days and a fine of `0.25 TRY` per day with no cap, **so that** every fine is reproducible and correct.
 
@@ -218,7 +218,7 @@ Non-UI domain service (`FineCalculator`); TDD tests first (`NFR-011`).
 - **AC-e (one fine per loan):** *Given* a loan already has a fine, *when* recalculated, *then* the existing `UNPAID` record is updated, never duplicated (`BR-010`).
 
 ### LMS-011 — Fine payment and waiver
-**Meta:** E7 | Should | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S3 | FR: `FR-025`, `FR-026` | UC: UC-09 | BR: `BR-010`, `BR-011`
+**Meta:** E7 | Should | 3 pts | 3.5 h (classic 7) | 2 agent sessions | S3 | FR: `FR-025`, `FR-026` | UC: UC-09 | BR: `BR-010`, `BR-011`
 
 **As a** librarian, **I want** to record that an `UNPAID` fine was paid or waived at the desk, **so that** the member is unblocked.
 
@@ -235,7 +235,7 @@ UI story: Stitch fine settlement screen first.
 ## Epic E8 — Lost-Copy Handling
 
 ### LMS-016 — Lost-copy process with runtime appraised value
-**Meta:** E8 | Should | 8 pts | 5.5 h (classic 13) | 3 agent sessions | S3 | FR: `FR-027` | UC: UC-09 | BR: `BR-005`, `BR-015`, `BR-017`
+**Meta:** E8 | Should | 8 pts | 5.5 h (classic 12) | 3 agent sessions | S3 | FR: `FR-027` | UC: UC-09 | BR: `BR-005`, `BR-015`, `BR-017`
 
 **As a** librarian, **I want** to record a lost-book petition and, after 30 days without replacement, assess `2x` the appraised value, **so that** lost copies are handled according to ADU rules.
 
@@ -251,23 +251,36 @@ UI story: Stitch lost-copy dialog first. Design inputs: decision from `LMS-008`.
 
 ## Epic E9 — Dashboard and CSV Reports
 
-### LMS-015 — Dashboard KPIs and overdue/unpaid report
-**Meta:** E9 | Should | 8 pts | 5 h (classic 12) | 2 agent sessions | S3 | FR: `FR-028`, `FR-029` | UC: UC-11 | BR: `BR-001`, `BR-007`, `BR-008`, `BR-011`
+> [!NOTE]
+> **Story split (`LMS-015` -> `LMS-015` + `LMS-021`, Product Owner decision 2026-11-07):** The original `5`-point (`10` classic h / `5.0` human h) dashboard and reporting story is split into **`LMS-015` (`015a`: Operational dashboard KPI summary cards, `2 pts`, `4` classic h, `2.0` human h — Sprint 3 Commit)** and **`LMS-021` (`015b`: Actionable overdue loans and unpaid fines report, `3 pts`, `6` classic h, `3.0` human h — Sprint 3 Stretch)** so that KPI summary cards fit inside the Sprint 3 commitment line (`17.5 h <= 17.8 h` net) while preserving the exact combined sum (`2 + 3 = 5 pts`, `4 + 6 = 10` classic h, `2.0 + 3.0 = 5.0` human h).
 
-**As a** librarian, **I want** a dashboard with key counts and a prioritized overdue and unpaid report, **so that** I see what needs action today.
+### LMS-015 — Operational dashboard KPI summary cards (015a)
+**Meta:** E9 | Should | 2 pts | 2 h (classic 4) | 1 agent session | S3 | FR: `FR-028` | UC: UC-11 | BR: `BR-001`, `BR-007`, `BR-008`
 
-UI story: Stitch dashboard first.
+**As a** librarian, **I want** an operational dashboard showing real-time KPI summary cards (active loans, overdue loans, unpaid fine totals, and title/copy counts by state), **so that** I can monitor circulation health at a glance.
 
-- **AC-a (KPIs):** *Given* the loaded seed, *when* the dashboard opens, *then* it shows total titles, total copies, copies by state, active loans, overdue loans, and total unpaid fine amount, each equal to a direct database count (`FR-028`).
-- **AC-b (report):** *Given* overdue loans and `UNPAID` fines, *when* the report opens, *then* it lists them sorted by overdue days descending with member, title, and amount (`FR-029`).
-- **AC-c (role):** *Given* a member session, *when* the dashboard is requested, *then* access is denied (`FR-017`).
+UI story: Stitch dashboard KPI cards first.
+
+- **AC-a (KPIs):** *Given* the loaded seed, *when* the dashboard opens, *then* it displays KPI cards for total distinct titles, total physical copies, copies by state (`AVAILABLE`, `LOANED`, `RESERVED`, `MAINTENANCE`, `LOST`), active loans, overdue loans, and total unpaid fine amount (`TRY`), each matching the exact database count/sum (`FR-028`).
+- **AC-b (role):** *Given* a member or guest session, *when* the dashboard URL is requested, *then* access is denied (`FR-017`, `BR-001`).
+
+### LMS-021 — Actionable overdue loans and unpaid fines report (015b)
+**Meta:** E9 | Should | 3 pts | 3 h (classic 6) | 1 agent session | S3 | FR: `FR-029` | UC: UC-11 | BR: `BR-007`, `BR-008`, `BR-011`
+
+**As a** librarian, **I want** a prioritized report table of overdue active loans and unpaid fines, **so that** I can see which borrowers require immediate follow-up or desk settlement.
+
+UI story: Stitch overdue and unpaid report table first. Stretch story in Sprint 3 (`015b`).
+
+- **AC-a (report table):** *Given* overdue active loans and `UNPAID` fines exist, *when* the report view opens, *then* it lists them ordered by `overdueDays` descending with `memberId`, member name, book title, `copyBarcode`, `dueDate`, `overdueDays`, and accrued fine amount (`FR-029`, `BR-007`, `BR-008`).
+- **AC-b (consistency):** *Given* the report rows, *when* compared against the KPI cards of `LMS-015`, *then* the overdue loan count and unpaid fine total match identically.
+- **AC-c (role):** *Given* a member session, *when* the report is requested, *then* access is denied (`FR-017`).
 
 ### LMS-019 — CSV export of overdue and inventory reports
 **Meta:** E9 | Could | 3 pts | 2 h (classic 5) | 1 agent session | S3 | FR: `FR-032` | UC: UC-11 | BR: `BR-001`
 
 **As a** librarian, **I want** to download the overdue report and the copy inventory as CSV, **so that** I can use them in a spreadsheet.
 
-- **AC-a:** *Given* the report page, *when* the librarian clicks export, *then* a UTF-8 CSV with a header row and Turkish characters intact is downloaded (`FR-032`).
+- **AC-a:** *Given* the report page (`LMS-021`) or inventory table (`LMS-005`), *when* the librarian clicks export, *then* a UTF-8 CSV with a header row and Turkish characters intact is downloaded (`FR-032`).
 - **AC-b:** *Given* a member session, *when* export is requested, *then* access is denied.
 
 ---
@@ -275,7 +288,7 @@ UI story: Stitch dashboard first.
 ## Stretch (Could) stories
 
 ### LMS-018 — Public guest catalog portal
-**Meta:** E3 | Could | 3 pts | 2 h (classic 5) | 1 agent session | S3 | FR: `FR-030` | UC: UC-01 | BR: `BR-001`, `BR-014`
+**Meta:** E3 | Could | 2 pts | 2 h (classic 4) | 1 agent session | S3 | FR: `FR-030` | UC: UC-01 | BR: `BR-001`, `BR-014`
 
 **As a** guest, **I want** to search the catalog without logging in, **so that** I can check availability before visiting the library.
 
@@ -285,7 +298,7 @@ UI story: Stitch guest page first (reuses the `LMS-004` design).
 - **AC-b:** *Given* a guest, *when* a librarian URL is requested, *then* access is denied.
 
 ### LMS-020 — Open Library ISBN lookup helper
-**Meta:** E3 | Could | 5 pts | 3.5 h (classic 8) | 2 agent sessions | S3 | FR: `FR-031` | UC: UC-03 | BR: `BR-001`
+**Meta:** E3 | Could | 3 pts | 3.5 h (classic 6) | 2 agent sessions | S3 | FR: `FR-031` | UC: UC-03 | BR: `BR-001`
 
 **As a** librarian, **I want** a "Fetch by ISBN" button on the book form, **so that** I can fill bibliographic fields faster.
 

@@ -1,12 +1,12 @@
 <!--
   Name(s) Surname(s) : Ibrahim Temur, Omer Faruk Kuş
   Student No(s)#: 231805033, 231805026
-  General Comments: Technical tasks per user story, including Stitch design and TDD test tasks, whose planned human hours sum exactly to each story estimate.
+  General Comments: Technical tasks per user story (LMS-001..LMS-021), including Stitch design and TDD test tasks, whose planned human hours sum exactly to each story estimate.
 -->
 # Tasks — Library Management System (LMS)
 
 - **Version:** 1.0 — 2026-11-07
-- Task hours are human hours (steering agents, review, manual testing, documents), the same unit as the stories in [`PRODUCT_BACKLOG.md`](PRODUCT_BACKLOG.md). Planned hours per story must equal the story estimate; `tools/agile/validate_backlog.py` checks this.
+- Task hours are human hours (steering agents, review, manual testing, documents), the same unit as the stories in [`PRODUCT_BACKLOG.md`](PRODUCT_BACKLOG.md). Planned hours per story must equal the story estimate; `tools/agile/validate_backlog.py` checks this (`LMS-015` `2.0 h` + `LMS-021` `3.0 h` = `5.0 h` combined).
 - **"Actual human h" is empty on purpose** and is filled during the sprints; Sprint 1 actuals are used to re-calibrate all estimates.
 - UI stories start with the Stitch design task; test tasks come before implementation tasks (TDD).
 
@@ -84,12 +84,10 @@
 | T-014-3 | LMS-014 | Steer agent: renewal and reserved-guard query | Implementation (steer agent) | 1.0 | |
 | T-014-4 | LMS-014 | Manual test | Manual test | 0.5 | |
 | T-014-5 | LMS-014 | Update AI log | Docs and AI log | 0.5 | |
-| T-015-1 | LMS-015 | Stitch dashboard | Stitch design | 0.5 | |
-| T-015-2 | LMS-015 | Write KPI query tests first | TDD tests | 1.0 | |
-| T-015-3 | LMS-015 | Steer agent: dashboard and report | Implementation (steer agent) | 1.5 | |
-| T-015-4 | LMS-015 | Review KPI values against direct counts | Review | 1.0 | |
-| T-015-5 | LMS-015 | Manual test | Manual test | 0.5 | |
-| T-015-6 | LMS-015 | Update AI log | Docs and AI log | 0.5 | |
+| T-015-1 | LMS-015 | Stitch dashboard KPI summary cards | Stitch design | 0.5 | |
+| T-015-2 | LMS-015 | Write KPI query tests first | TDD tests | 0.5 | |
+| T-015-3 | LMS-015 | Steer agent: dashboard KPI summary service and view | Implementation (steer agent) | 0.5 | |
+| T-015-4 | LMS-015 | Verify KPI values against direct database counts and update AI log | Review | 0.5 | |
 | T-016-1 | LMS-016 | Stitch lost-copy dialog | Stitch design | 0.5 | |
 | T-016-2 | LMS-016 | Write lost-copy tests first | TDD tests | 1.5 | |
 | T-016-3 | LMS-016 | Steer agent: petition, window, assessment | Implementation (steer agent) | 1.5 | |
@@ -115,4 +113,9 @@
 | T-020-3 | LMS-020 | Steer agent: lookup helper | Implementation (steer agent) | 1.0 | |
 | T-020-4 | LMS-020 | Manual test | Manual test | 0.5 | |
 | T-020-5 | LMS-020 | Update AI log | Docs and AI log | 0.5 | |
+| T-021-1 | LMS-021 | Stitch overdue and unpaid fines report table | Stitch design | 0.5 | |
+| T-021-2 | LMS-021 | Write overdue/unpaid report ordering and filtering tests first | TDD tests | 0.5 | |
+| T-021-3 | LMS-021 | Steer agent: overdue/unpaid report query and controller | Implementation (steer agent) | 1.0 | |
+| T-021-4 | LMS-021 | Review report consistency against KPI cards | Review | 0.5 | |
+| T-021-5 | LMS-021 | Manual test and update AI log | Manual test | 0.5 | |
 <!-- TASKS-TABLE:END -->

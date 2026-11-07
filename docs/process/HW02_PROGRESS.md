@@ -8,11 +8,11 @@
 - [x] Linux adaptations (`tools/package.py`, `tools/set-author.sh`, `mvnw` mode, venv, DEC-20, README/AGENTS)
 - [x] `USER_STORIES.md`
 - [x] `PRODUCT_BACKLOG.md` (validator-generated totals, traceability)
-- [x] `SPRINT_PLAN.md` (Sprint 3 order is a proposal, awaiting Product Owner approval)
+- [x] `SPRINT_PLAN.md` (Product Owner-approved Sprint 3 commitment line at 17.5 h <= 17.8 h, 88 pts / 90.0 h)
 - [x] `THEMES_EPICS.md`
 - [x] `TASKS.md`
 - [x] `PSI_AND_MVP.md`
-- [ ] Product Owner approval of the Sprint 3 commitment line
+- [x] Product Owner approval of the Sprint 3 commitment line (`LMS-015` split into `LMS-015` `015a` + `LMS-021` `015b`, 88 pts reconciled)
 - [ ] Diagrams (Mermaid to PNG/SVG, visual check)
 - [ ] `tools/export-pdf` generalization (HW01 regression)
 - [ ] `HW02_Inception_Agile.md` and PDFs
