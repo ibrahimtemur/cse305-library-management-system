@@ -14,7 +14,7 @@
 - [x] `PSI_AND_MVP.md`
 - [x] Product Owner approval of the Sprint 3 commitment line (`LMS-015` split into `LMS-015` `015a` + `LMS-021` `015b`, 88 pts reconciled)
 - [x] Diagrams (`system-context`, `use-case-diagram`, `themes-epics`, `sprint-roadmap` rendered to PNG/SVG under `docs/02-inception/images/`, visually verified)
-- [ ] `tools/export-pdf` generalization (HW01 regression)
+- [x] `tools/export-pdf` generalization (HW01 regression to `/tmp/hw01_regression.pdf`: 11 pages, Page 6 landscape, 5 links, 0 leaks; delivered HW01 PDFs untouched)
 - [ ] `HW02_Inception_Agile.md` and PDFs
 - [ ] Docs updates (syllabus, README, inception README, PROJECT_STATE, ai-usage-log)
 - [ ] Part 3 cross-check and human review checklist
