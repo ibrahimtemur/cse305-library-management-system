@@ -122,25 +122,61 @@ def summarize(rows: list[dict]) -> dict:
     }
 
 
+def has_git_commit(commit: str) -> bool:
+    try:
+        res = subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}:{BACKLOG_REL}"],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return res.returncode == 0
+    except OSError:
+        return False
+
+
+def verify_archive_mode(new_rows: list[dict], new_raw: list[str], new_sum: dict) -> int:
+    if not OUT_MD.exists():
+        print(f"[ERROR] Missing {OUT_MD.relative_to(ROOT)} in archive mode", file=sys.stderr)
+        return 1
+    rec_text = OUT_MD.read_text(encoding="utf-8")
+    errors: list[str] = []
+    if (new_sum["pts"], round(new_sum["classic"], 1), round(new_sum["human"], 1)) != (88, 173.0, 90.0):
+        errors.append(
+            f"PRODUCT_BACKLOG.md totals mismatch: got {(new_sum['pts'], new_sum['classic'], new_sum['human'])}, expected (88, 173.0, 90.0)"
+        )
+    expected_tot_row = (
+        "| **TOTAL (`20` stories)** | **`LMS-001`..`LMS-020` in `28c40d9`** | **11M / 6S / 3C** | **S1–S3** | **132** | **211.0** | **90.0** "
+        "| **TOTAL (`21` stories)** | **`LMS-001`..`LMS-021` in `HEAD` / PDF** | **11M / 7S / 3C** | **S1–S3** | **88** | **173.0** | **90.0** |"
+    )
+    expected_cat_tot = "| **Total Backlog** | **20** | **132** | **211.0** | **90.0** | **21** | **88** | **173.0** | **90.0** |"
+    if expected_tot_row not in rec_text:
+        errors.append("BACKLOG_POINT_RECONCILIATION.md missing verified §3 TOTAL row (132/211.0/90.0 -> 88/173.0/90.0)")
+    if expected_cat_tot not in rec_text:
+        errors.append("BACKLOG_POINT_RECONCILIATION.md missing verified §4 Total Backlog row (132/211.0/90.0 -> 88/173.0/90.0)")
+    if chr(10).join(new_raw) not in rec_text:
+        errors.append("BACKLOG_POINT_RECONCILIATION.md §2.2 raw table lines out of sync with PRODUCT_BACKLOG.md")
+    for nr in new_rows:
+        expected_new_cols = (
+            f"| `{nr['id']}` | {nr['title']} | {nr['moscow']} | {nr['sprint']} | {nr['pts']} | {fmt_num(nr['classic'])} | {nr['human']:.1f} |"
+        )
+        if expected_new_cols not in rec_text:
+            errors.append(f"BACKLOG_POINT_RECONCILIATION.md missing or mismatched row for {nr['id']}")
+    if errors:
+        for e in errors:
+            print(f"[ERROR] {e}", file=sys.stderr)
+        return 1
+    print("git history not available in archive; byte-for-byte regeneration check SKIPPED")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true", help="Write docs/process/BACKLOG_POINT_RECONCILIATION.md")
     args = ap.parse_args()
 
-    old_md = subprocess.check_output(
-        ["git", "show", f"{OLD_COMMIT}:{BACKLOG_REL}"],
-        cwd=ROOT,
-        text=True,
-    )
     new_md = (ROOT / BACKLOG_REL).read_text(encoding="utf-8")
-
-    old_rows, old_raw = parse_backlog_table(old_md)
     new_rows, new_raw = parse_backlog_table(new_md)
-
-    old_by_id = {r["id"]: r for r in old_rows}
-    new_by_id = {r["id"]: r for r in new_rows}
-
-    old_sum = summarize(old_rows)
     new_sum = summarize(new_rows)
 
     # Verify against HW02_Inception_Agile.md (§2.2 and §2.3)
@@ -159,6 +195,18 @@ def main() -> int:
         for m in mismatches:
             print(f"[ERROR] {m}", file=sys.stderr)
         return 1
+
+    if not has_git_commit(OLD_COMMIT):
+        return verify_archive_mode(new_rows, new_raw, new_sum)
+
+    old_md = subprocess.check_output(
+        ["git", "show", f"{OLD_COMMIT}:{BACKLOG_REL}"],
+        cwd=ROOT,
+        text=True,
+    )
+    old_rows, old_raw = parse_backlog_table(old_md)
+    old_by_id = {r["id"]: r for r in old_rows}
+    old_sum = summarize(old_rows)
 
     # Build reconciliation table rows in current backlog order
     table_lines = [
