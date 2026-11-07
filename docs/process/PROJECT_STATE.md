@@ -6,11 +6,11 @@
 # Project State — CSE305 Library Management System
 
 - **Last Updated:** 2026-11-07
-- **Active Team Member:** Omer Faruk Kuş (`231805026` — Scrum Master)
+- **Active Team Member:** Ibrahim Temur (`231805033` — Product Owner)
 - **Team Members:** Ibrahim Temur (`231805033` — Product Owner) & Omer Faruk Kuş (`231805026` — Scrum Master)
 - **Active Branch:** `develop`
 - **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Public)
-- **Current Phase:** **HW02 Final (`v1.0`, Tag `hw02-final-r3`) — UP Inception Overview & Agile Scrum Product Backlog (`docs/02-inception/`, Deadline: Tuesday, Nov 10, 2026) COMPLETED & PACKAGED** → Next: **Upload `dist/cse305_hw02_231805033_231805026.zip` Individually to ADUZEM & Proceed to HW03: Elaboration + Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`, Deadline: Dec 8)**
+- **Current Phase:** **HW02 Final (`v1.0`, Tag `hw02-final-r3`, ZIP SHA-256 `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, PDF SHA-256 `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`) — PACKAGED & UPLOADED TO ADUZEM BY BOTH MEMBERS (CLOSED)** → Next: **HW03 (Due `2026-12-08`): Elaboration + Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`)**
 
 ---
 
@@ -43,11 +43,24 @@
 ---
 
 ## 2. What Is Next
-1. **Human Review & Packaging of HW02 (`v1.0`, Deadline: Tuesday, Nov 10, 2026):** Confirm human review of the HW02 deliverables in chat, merge `docs/hw02-agile` into `develop`, run `python3 tools/package.py 02` to produce `dist/cse305_hw02_231805033_231805026.zip`, and have both **Ibrahim Temur** (`231805033`) and **Omer Faruk Kuş** (`231805026`) upload the archive from their own individual ADUZEM accounts.
-2. **HW03 — Elaboration & Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`, Sprint 1 Window: Nov 11 – Dec 8, 2026):**
-   - Execute the 6 Sprint 1 Must stories (`LMS-001`..`LMS-005`, `LMS-008`: `26 pts`, `28.5` human h against `30.2 h` net capacity) and record actual human hours in `docs/02-inception/TASKS.md` to calibrate the Sprint 2–3 conversion ratio (`RISK-H01`, `RISK-H04`).
-   - Design UI screens first with the Stitch MCP (`docs/03-design/ui/`) and produce the HW03 design deliverables (Use-Case Diagram, System Sequence Diagrams, Design Class Diagram, TDD/Git/Maven plan, and justified GoF/GRASP patterns in `docs/03-design/`).
-3. **Collaborator Setup:** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`.
+1. **HW02 Status (`hw02-final-r3`, CLOSED):**
+   - Packaged as `dist/cse305_hw02_231805033_231805026.zip` (SHA-256: `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, `92` files, `8,390,825` bytes) and `HW02_Inception_Agile.pdf` (SHA-256: `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`, `17` pages, `3,208,404` bytes).
+   - **ADUZEM Upload:** Completed on `2026-11-07` by both team members (**Ibrahim Temur** `231805033` and **Omer Faruk Kuş** `231805026`) individually from their own ADUZEM accounts.
+2. **Next Work Item — HW03: Elaboration + Sprint 1 (Due `2026-12-08`, `docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`):**
+   - **Sprint 1 Working Increment:** Implement and test Must stories **`LMS-001`..`LMS-005` and `LMS-008`** (`26` story points, `28.5` human hours) in `src/`.
+   - **Elaboration Design Deliverables (`docs/03-design/` & `docs/04-sprints/sprint-1/`):** Use-Case Diagram, System Sequence Diagrams (SSDs), Design Class Diagram, TDD/Git/Maven plan, justified GoF/GRASP design patterns, and Sprint 1 backlog/review/retrospective records.
+   - **Schedule & Capacity:** Sprint 1 window is **`2026-11-11` – `2026-12-08`**; midterm exam weeks (**`Nov 17–28`**) run at reduced pace (`3 h/week` per student vs `8 h/week` normal); Sprint 1 net capacity = **`30.2 h`**, planned Must = **`28.5 h`** (`-1.7 h` slack).
+   - **Open Capacity Risk (`RISK-H01`):** `S1 + S2` Must = `53.0 h` vs `51.0 h` net (`+2.0 h` accepted gap; Sprint 3 Should stories serve as shock absorber if Sprint 1 actual/classic ratio exceeds `0.45` or Sprint 2 Must exceeds net capacity by `> 10%`).
+3. **Open Technical Baseline Entering Sprint 1:**
+   - Maven test suite currently has **`1` JUnit 5 test** (`LibraryManagementApplicationTests`) alongside `80` Python `unittest` seed tests (`tools/data/tests/`).
+   - `spring-boot-starter-security` / BCrypt is **not yet in `pom.xml`** (to be added in **`LMS-003`**).
+   - **Stitch MCP UI prototypes** (`docs/03-design/ui/`) will be designed in **HW03 / Sprint 1** prior to implementing Thymeleaf views.
+4. **Permanent Process Rules Reminder (`AGENTS.md`):**
+   - Agent replies in **Turkish** in chat; all repository content, code, comments, and commit messages are in **English** with the mandatory 3-line header (JSON seed files exempt).
+   - At the start of every chat session, ask who is at the keyboard (**Ibrahim Temur** or **Omer Faruk Kuş**) and run `./tools/set-author.sh ibrahim` or `./tools/set-author.sh omer` (`--local` git config only).
+   - Log the exact model name from the Antigravity model selector in `docs/process/ai-usage-log.md`; keep `"Pending human review"` on any entry not yet explicitly confirmed by the user.
+   - Never touch `main` or existing release tags without explicit user approval; push to `origin` after every commit; never commit secrets or real personal data.
+5. **Collaborator Setup (`OPEN-01`):** Collect Omer Faruk Kuş's GitHub username to invite him as a collaborator on `ibrahimtemur/cse305-library-management-system`.
 
 ---
 

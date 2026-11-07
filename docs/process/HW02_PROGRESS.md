@@ -3,7 +3,10 @@
   Student No(s)#: 231805033, 231805026
   General Comments: Interruption-safe progress checklist for the HW02 agile artifacts, consolidated PDF, checks, and packaging.
 -->
-# HW02 Progress Checklist
+# HW02 Progress Checklist — CLOSED (`2026-11-07`, `hw02-final-r3`)
+
+> **Status:** **CLOSED** (`2026-11-07` — Packaged as `hw02-final-r3`, ZIP SHA-256 `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, PDF SHA-256 `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`, uploaded to ADUZEM by both team members).
+> **Next Work Item:** **HW03 (Due `2026-12-08` — Elaboration + Sprint 1):** Working Sprint 1 increment (`LMS-001`..`LMS-005` & `LMS-008`) + Use-Case Diagram, System Sequence Diagrams, Design Class Diagram, Stitch MCP UI prototypes, and TDD/Git/Maven plan (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`).
 
 - [x] Linux adaptations (`tools/package.py`, `tools/set-author.sh`, `mvnw` mode, venv, DEC-20, README/AGENTS)
 - [x] `USER_STORIES.md`
@@ -18,4 +21,4 @@
 - [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 17 pages, SHA-256 `ff6a370f...`, 4 links, 0 leaks, Seed v2 breakdowns & `Planned - Net` signs verified, visually inspected)
 - [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `tools/agile/make_reconciliation.py`, `BACKLOG_POINT_RECONCILIATION.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`, `ai-usage-log.md` with separate model rows)
 - [x] Part 3 cross-check and 2-person human review checklist (`İ-1`..`İ-3` reviewed by Ibrahim Temur; `Ö-1`..`Ö-3` reviewed by Omer Faruk Kuş)
-- [x] Part 4 packaging (`docs/hw02-agile` merged into `develop`, `dist/cse305_hw02_231805033_231805026.zip`, `hw02-final`, `hw02-final-r2`, and log-only `hw02-final-r3` with archive-mode `validate_backlog.py` `OVERALL: PASS`)
+- [x] Part 4 packaging & closure (`docs/hw02-agile` merged into `develop`, `dist/cse305_hw02_231805033_231805026.zip`, `hw02-final`, `hw02-final-r2`, and `hw02-final-r3` with archive-mode `validate_backlog.py` `OVERALL: PASS`; uploaded to ADUZEM by both members — **CLOSED**)
