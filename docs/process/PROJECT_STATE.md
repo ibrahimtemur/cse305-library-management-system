@@ -46,6 +46,7 @@
 1. **HW02 Status (`hw02-final-r3`, CLOSED):**
    - Packaged as `dist/cse305_hw02_231805033_231805026.zip` (SHA-256: `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, `92` files, `8,390,825` bytes) and `HW02_Inception_Agile.pdf` (SHA-256: `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`, `17` pages, `3,208,404` bytes).
    - **ADUZEM Upload:** Completed on `2026-11-07` by both team members (**Ibrahim Temur** `231805033` and **Omer Faruk Kuş** `231805026`) individually from their own ADUZEM accounts.
+   - **Protected `main` Release Sync:** Following explicit user approval in chat, `main` (`160124c`) was fast-forwarded (`--ff-only`) to `develop` (`278858cf7f4b97bf61b0361a8b100e954c510014`) on `2026-11-07` (`main fast-forwarded to 278858cf7f4b97bf61b0361a8b100e954c510014 on 2026-11-07` and kept in sync with the subsequent log commit).
 2. **Next Work Item — HW03: Elaboration + Sprint 1 (Due `2026-12-08`, `docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`):**
    - **Sprint 1 Working Increment:** Implement and test Must stories **`LMS-001`..`LMS-005` and `LMS-008`** (`26` story points, `28.5` human hours) in `src/`.
    - **Elaboration Design Deliverables (`docs/03-design/` & `docs/04-sprints/sprint-1/`):** Use-Case Diagram, System Sequence Diagrams (SSDs), Design Class Diagram, TDD/Git/Maven plan, justified GoF/GRASP design patterns, and Sprint 1 backlog/review/retrospective records.
