@@ -68,9 +68,9 @@ General Comments: <one-line purpose of this file>
 ---
 
 ## 3. Shared Computer Rule (Mandatory Start-of-Chat Check)
-Both team members work on this **same computer**, taking turns under a shared Windows session and GitHub login:
+Both team members work in the **same remote Linux VM workspace** (Antigravity project connected to GitHub, since DEC-20), taking turns under a shared GitHub login. (Before DEC-20 this was one shared Windows 11 / PowerShell / OneDrive computer; the Windows commands remain as optional equivalents.)
 1. **At the very start of every chat session**, the agent MUST ask the user in **Turkish** who is currently at the keyboard (**Ibrahim Temur** or **Omer Faruk Kuş**).
-2. **Before making any Git commit**, run `tools\set-author ibrahim` or `tools\set-author omer` so that repository-local (`--local` scope only) `user.name` and `user.email` match the active student.
+2. **Before making any Git commit**, run `tools/set-author.sh ibrahim` or `tools/set-author.sh omer` (Windows equivalent: `tools\set-author ibrahim` / `omer`) so that repository-local (`--local` scope only) `user.name` and `user.email` match the active student.
 3. **Never modify `--global` Git identity.**
 4. **Never commit under the wrong person.**
 5. Record the active team member's full name in every new entry added to `docs/process/ai-usage-log.md` and `docs/process/PROJECT_STATE.md`.
@@ -80,12 +80,12 @@ Both team members work on this **same computer**, taking turns under a shared Wi
 ## 4. Engineering Methodology & Design Patterns
 - **Methodology:** Agile **Scrum** with iterative sprints documented under `docs/04-sprints/`.
 - **Object-Oriented Design Patterns:** Apply **GoF** (Gang of Four) and **GRASP** principles wherever architecturally justified (never forced artificially) and document every pattern decision, structure, and rationale in `docs/03-design/`.
-- **Test-Driven Development (TDD):** Write or update automated JUnit 5 tests before or alongside production code and verify with `mvn test` (`.\mvnw.cmd test`).
+- **Test-Driven Development (TDD):** Write or update automated JUnit 5 tests before or alongside production code and verify with `./mvnw -q test` (Windows equivalent: `.\mvnw.cmd test`).
 
 ---
 
 ## 5. Git, Branching, and Release Discipline
-- **Build Tool:** Apache Maven (`mvn test`, `mvn package`, or `./mvnw.cmd`).
+- **Build Tool:** Apache Maven (`mvn test`, `mvn package`, or `./mvnw`; Windows: `.\mvnw.cmd`).
 - **Branching Model:**
   - `main`: stable, user-approved releases only.
   - `develop`: ongoing sprint integration branch.

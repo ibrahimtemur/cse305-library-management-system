@@ -67,8 +67,8 @@ LibraryManagementSystem/
 │   └── seed/                        # Reproducible Open Library + synthetic seed v2 datasets
 ├── tools/
 │   ├── data/                        # Reproducible seed data pipeline scripts & 80 unit tests
-│   ├── set-author.ps1 / .cmd        # Sets repository-local Git author (ibrahim | omer)
-│   └── package.ps1 / .cmd           # Builds homework zip: cse305_hwNN_231805033_231805026.zip
+│   ├── set-author.sh / .ps1 / .cmd  # Sets repository-local Git author (ibrahim | omer)
+│   └── package.py / .ps1 / .cmd     # Builds homework zip: cse305_hwNN_231805033_231805026.zip
 └── src/
     ├── main/
     │   ├── java/edu/adu/lms/        # Application source code
@@ -82,36 +82,37 @@ LibraryManagementSystem/
 
 ## Getting Started
 
-### 1. Select Active Author (Shared Computer Rule)
-Because both team members work on the same workstation in turns, always set the local Git author before committing:
+### 1. Select Active Author (Shared Workspace Rule)
+The primary environment is the remote Linux VM (Antigravity project connected to GitHub, DEC-20). Windows/PowerShell commands remain as optional equivalents.
 
-```powershell
+```bash
 # If Ibrahim Temur is working:
-tools\set-author ibrahim
+tools/set-author.sh ibrahim
 
 # If Omer Faruk Kuş is working:
-tools\set-author omer
+tools/set-author.sh omer
 ```
+Windows equivalent: `tools\set-author ibrahim` / `tools\set-author omer`.
 
 ### 2. Run Automated Tests
-```powershell
-mvn test
-# or without a system Maven installation:
-.\mvnw.cmd test
+```bash
+./mvnw -q test
+python3 -m unittest discover -s tools/data/tests
 ```
+Windows equivalent: `.\mvnw.cmd test`.
 
 ### 3. Run the Application Locally
-```powershell
-mvn spring-boot:run
+```bash
+./mvnw spring-boot:run
 ```
 - Application URL: `http://localhost:8080`
 - H2 Console (local dev): `http://localhost:8080/h2-console` (`JDBC URL`: `jdbc:h2:file:./data/db/lms;AUTO_SERVER=TRUE`, user: `sa`, password: empty)
 
 ### 4. Package a Homework Submission Archive
-```powershell
-tools\package 01
+```bash
+python3 tools/package.py 02
 ```
-Produces `dist\cse305_hw01_231805033_231805026.zip` with `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, and IDE files excluded.
+Produces `dist/cse305_hw02_231805033_231805026.zip` with `target/`, `.git/`, `.venv/`, `dist/`, `data/db/`, `data/raw/`, `__pycache__/`, `*.pyc`, and IDE files excluded. Windows equivalent: `tools\package 02`.
 
 ---
 
