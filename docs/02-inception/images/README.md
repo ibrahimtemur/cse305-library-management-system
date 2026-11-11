@@ -15,7 +15,7 @@ Contains the Mermaid source files (`*.mmd`) and their pre-rendered vector (`*.sv
 | `use-case-diagram.mmd` / `.png` / `.svg` | Use Case Diagram mapping the three actor roles to `UC-01`..`UC-11`. |
 | `themes-epics.mmd` / `.png` / `.svg` | Agile Scrum hierarchy mapping 4 Themes (`T1`..`T4`) to 9 Epics (`E1`..`E9`) across 21 stories (`88` story points, `90.0` human hours). |
 | `sprint-roadmap.mmd` / `.png` / `.svg` | Three-Sprint Iteration Roadmap (Sprint 1 / HW03, Sprint 2 / HW04, Sprint 3 / HW05) showing net capacity, Must stories (`53.0 h`), the Sprint 3 commitment line (`17.5 h <= 17.8 h`), and stretch stories (`19.5 h`). |
-| `trello-board.png` | Live screenshot of the public Trello Sprint Board (`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`) captured via headless Chromium. |
+| `trello-board.png` | Screenshot of the public Trello Sprint Board (`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`) showing the 6-list workflow and story cards. |
 
 > **File Header Note:** The `.mmd` source files carry the mandatory CSE305 authorship header using Mermaid `%%` comments. Binary/generated output files (`*.png`, `*.svg`, and `../HW02_Inception_Agile.pdf`) are machine-rendered outputs produced from these sources and documented here.
 
