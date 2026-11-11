@@ -20,7 +20,7 @@
 - [x] `tools/export-pdf` generalization (HW01 regression to `/tmp/hw01_regression.pdf`: 11 pages, Page 6 landscape, 5 links, 0 leaks; delivered HW01 PDFs untouched)
 - [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 18 pages, SHA-256 `6bba4989...`, 6 links, 0 leaks, Seed v2 breakdowns & `Planned - Net` signs verified, embedded high-res Trello screenshot)
 - [x] Trello sprint board provisioning (`CSE305 LMS — Sprint Board`, `https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`, 6 lists, 21 stories, 88 pts / 90.0 h, LMS-001 checklist, MoSCoW labels)
-- [x] `docs/02-inception/TRELLO_BOARD.md` authored, `HW02_Inception_Agile.md` §2.7 and Revision History v1.1 updated, `README.md` updated
+- [x] `docs/02-inception/TRELLO_BOARD.md` authored, `HW02_Inception_Agile.md` §2.6 and Revision History v1.1 updated, `README.md` updated
 - [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `tools/agile/make_reconciliation.py`, `BACKLOG_POINT_RECONCILIATION.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`/`DEC-23`, `ai-usage-log.md`)
 - [x] Part 3 cross-check and 2-person human review checklist (`İ-1`..`İ-3` reviewed by Ibrahim Temur; `Ö-1`..`Ö-3` reviewed by Omer Faruk Kuş)
 - [x] Part 4 packaging & closure (`dist/cse305_hw02_231805033_231805026.zip`, tagged `hw02-final`, release created; to be uploaded to ADUZEM by both members)
