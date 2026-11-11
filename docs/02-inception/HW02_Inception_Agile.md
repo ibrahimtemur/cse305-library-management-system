@@ -13,11 +13,12 @@
 | **Instructor** | Assoc. Prof. Dr. Fatih Soygazi |
 | **Project** | Library Management System (LMS) |
 | **Team & Scrum roles** | **Ibrahim Temur** (`231805033`) — Product Owner · **Omer Faruk Kuş** (`231805026`) — Scrum Master (both: Developer, Architect, QA, Reviewer) |
-| **Document version** | `1.0` |
-| **Document date** | 2026-11-07 |
+| **Document version** | `1.1` |
+| **Document date** | 2026-11-11 |
 | **Submission** | HW02 — due **Tuesday 2026-11-10** (UP Inception + Agile Scrum Product Backlog & Iteration Plan) |
 | **Archive** | `cse305_hw02_231805033_231805026.zip` (created with `python3 tools/package.py 02`) |
 | **GitHub repository** | [`https://github.com/ibrahimtemur/cse305-library-management-system`](https://github.com/ibrahimtemur/cse305-library-management-system) |
+| **Trello sprint board** | [`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`](https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board) |
 
 > [!NOTE]
 > **How to read this document.** Part 1 provides a self-contained executive consolidation of the Unified Process (UP) Inception artifacts and links to the authoritative detail files in `docs/02-inception/`: [`VISION_AND_CONTEXT.md`](VISION_AND_CONTEXT.md), [`PERSONAS.md`](PERSONAS.md), [`REQUIREMENTS.md`](REQUIREMENTS.md) (`FR-001`..`FR-032`, `NFR-001`..`NFR-012`, `CON-001`..`CON-006`, `DR-001`..`DR-007`), [`BUSINESS_RULES.md`](BUSINESS_RULES.md) (`BR-001`..`BR-018`), [`USE_CASES.md`](USE_CASES.md) (`UC-01`..`UC-11`), and [`DOMAIN_GLOSSARY.md`](DOMAIN_GLOSSARY.md). Part 2 presents the complete Agile Scrum deliverables: Themes & Epics ([`THEMES_EPICS.md`](THEMES_EPICS.md)), User Stories ([`USER_STORIES.md`](USER_STORIES.md), `LMS-001`..`LMS-021`), Ordered Product Backlog ([`PRODUCT_BACKLOG.md`](PRODUCT_BACKLOG.md)), Three-Sprint Iteration Plan ([`SPRINT_PLAN.md`](SPRINT_PLAN.md)), Task Breakdown ([`TASKS.md`](TASKS.md), `105` tasks), and Potentially Shippable Increment / MVP Definition ([`PSI_AND_MVP.md`](PSI_AND_MVP.md)). Every story point, classic hour, human hour, capacity calculation, commitment line, and traceability check is verified deterministically by [`tools/agile/validate_backlog.py`](../../tools/agile/validate_backlog.py).
@@ -357,6 +358,9 @@ In accordance with the CSE305 HW02 Agile instructions (*"Use Trello to properly 
   6. `Done` (milestone deliverables `HW01` and `HW02` + verified increments satisfying the DoD)
 - **Story Card Uniform Syntax:** `LMS-xxx | MoSCoW | N pts | H h | title` with color-coded native labels (`Must` = Red, `Should` = Yellow, `Could` = Blue).
 - **Backlog & Task Consistency:** All 21 user stories (`88 pts`, `90.0 h`) contain their Given/When/Then acceptance criteria and explicit story dependencies mirrored from [`USER_STORIES.md`](USER_STORIES.md). Story `LMS-001` embeds the 4 granular technical tasks (`T-001-1`..`T-001-4`) from [`TASKS.md`](TASKS.md) as a native checklist.
+
+![CSE305 LMS Sprint Board in Trello](images/trello-board.png)
+
 
 ---
 

@@ -44,6 +44,9 @@ flowchart LR
 5. **`In Progress`** (0 cards initially): Active work item column during an iteration. Max WIP limit: 2 cards per developer.
 6. **`Done`** (2 milestone cards + completed stories): Archive for completed deliverables satisfying the Definition of Done (DoD). Contains milestone cards for `HW01` and `HW02`.
 
+### Board Snapshot
+![CSE305 LMS Sprint Board in Trello](images/trello-board.png)
+
 ---
 
 ## 3. Card Naming and Label Conventions

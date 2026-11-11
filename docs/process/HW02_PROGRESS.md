@@ -5,7 +5,7 @@
 -->
 # HW02 Progress Checklist — r4 (`2026-11-11`, `hw02-final-r4`)
 
-> **Status:** **PACKAGED as `hw02-final-r4`** (`2026-11-11` — Trello sprint board provisioned and documented, PDF SHA-256 `84e7473c84e94239c56626db08d906f0b206ac72b9523158868adfff2dd2f1cf`, ADUZEM upload postponed to `2026-11-24` to be completed by both team members).
+> **Status:** **PACKAGED as `hw02-final-r4`** (`2026-11-11` — Trello sprint board provisioned, screenshotted, and documented, PDF SHA-256 `15840f9c1b0ca529040e21a674c8f5e525e873f253921a23c5a91f44a06c4789`, ADUZEM upload postponed to `2026-11-24` to be completed by both team members).
 > **Next Work Item:** **HW03 (Due `2026-12-08` — Elaboration + Sprint 1):** Working Sprint 1 increment (`LMS-001`..`LMS-005` & `LMS-008`) + Use-Case Diagram, System Sequence Diagrams, Design Class Diagram, Stitch MCP UI prototypes, and TDD/Git/Maven plan (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`).
 
 - [x] Linux adaptations (`tools/package.py`, `tools/set-author.sh`, `mvnw` mode, venv, DEC-20, README/AGENTS)
@@ -18,7 +18,7 @@
 - [x] Product Owner approval of the Sprint 3 commitment line (`LMS-015` split into `LMS-015` `015a` + `LMS-021` `015b`, 88 pts reconciled)
 - [x] Diagrams (`system-context`, `use-case-diagram`, `themes-epics`, `sprint-roadmap` rendered to PNG/SVG under `docs/02-inception/images/`, `use-case-diagram` re-laid out with 0 crossings and visually verified)
 - [x] `tools/export-pdf` generalization (HW01 regression to `/tmp/hw01_regression.pdf`: 11 pages, Page 6 landscape, 5 links, 0 leaks; delivered HW01 PDFs untouched)
-- [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 18 pages, SHA-256 `84e7473c...`, 6 links, 0 leaks, Seed v2 breakdowns & `Planned - Net` signs verified, visually inspected)
+- [x] `HW02_Inception_Agile.md` and PDFs (`docs/02-inception/HW02_Inception_Agile.pdf` & root `HW02_Inception_Agile.pdf`, 18 pages, SHA-256 `15840f9c...`, 7 links, 0 leaks, Seed v2 breakdowns & `Planned - Net` signs verified, embedded Trello screenshot)
 - [x] Trello sprint board provisioning (`CSE305 LMS — Sprint Board`, `https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`, 6 lists, 21 stories, 88 pts / 90.0 h, LMS-001 checklist, MoSCoW labels)
 - [x] `docs/02-inception/TRELLO_BOARD.md` authored, `HW02_Inception_Agile.md` §2.7 and Revision History v1.1 updated, `README.md` updated
 - [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `tools/agile/make_reconciliation.py`, `BACKLOG_POINT_RECONCILIATION.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`/`DEC-23`, `ai-usage-log.md`)
