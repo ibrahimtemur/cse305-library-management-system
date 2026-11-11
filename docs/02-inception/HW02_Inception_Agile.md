@@ -341,8 +341,28 @@ Authoritative source: [`PSI_AND_MVP.md`](PSI_AND_MVP.md).
 
 ---
 
+## 2.7 Sprint Tracking in Trello
+
+Authoritative detail document: [`TRELLO_BOARD.md`](TRELLO_BOARD.md).
+
+In accordance with the CSE305 HW02 Agile instructions (*"Use Trello to properly track and manage your sprints"*), sprint execution, work-in-progress visibility, and acceptance criteria verification are tracked using a dedicated, public Trello board.
+
+- **Public Board URL:** [`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`](https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board)
+- **Board Architecture:** Structured into **6 lists** corresponding to the three delivery sprints and workflow states:
+  1. `Sprint 1 (Nov 11–Dec 8)` (6 cards, 26 pts, 28.5 h — Must)
+  2. `Sprint 2 (Dec 9–22)` (5 cards, 22 pts, 24.5 h — Must)
+  3. `Sprint 3 Commit (Dec 23–Jan 5)` (4 cards, 16 pts, 17.5 h — Should)
+  4. `Sprint 3 Stretch` (6 cards, 24 pts, 19.5 h — Should & Could)
+  5. `In Progress` (active work items; max 2 cards per developer)
+  6. `Done` (milestone deliverables `HW01` and `HW02` + verified increments satisfying the DoD)
+- **Story Card Uniform Syntax:** `LMS-xxx | MoSCoW | N pts | H h | title` with color-coded native labels (`Must` = Red, `Should` = Yellow, `Could` = Blue).
+- **Backlog & Task Consistency:** All 21 user stories (`88 pts`, `90.0 h`) contain their Given/When/Then acceptance criteria and explicit story dependencies mirrored from [`USER_STORIES.md`](USER_STORIES.md). Story `LMS-001` embeds the 4 granular technical tasks (`T-001-1`..`T-001-4`) from [`TASKS.md`](TASKS.md) as a native checklist.
+
+---
+
 ## Revision History
 
 | Version | Date | Summary |
 |---|---|---|
 | `1.0` | 2026-11-07 | First consolidated HW02 submission document: Part 1 consolidates the UP Inception Overview (`VISION_AND_CONTEXT.md`, `PERSONAS.md`, `REQUIREMENTS.md`, `BUSINESS_RULES.md`, `USE_CASES.md`, `DOMAIN_GLOSSARY.md`) with embedded System Context and Use Case diagrams; Part 2 presents the Product Owner-approved Agile Scrum Product Backlog (`21` stories `LMS-001`..`LMS-021`, `88` story points, `173.0` classic hours, `90.0` human hours, `105` tasks), 3-sprint capacity model, accepted `+2.0 h` Must gap governance (`RISK-H01`), Sprint 3 commitment line (`17.5 h <= 17.8 h` net), Themes/Epics and Sprint Roadmap diagrams, dependency proof (`OVERALL: PASS`), and PSI/MVP definition (`64 pts / 70.5 h` committed). |
+| `1.1` | 2026-11-11 | Added Section 2.7 for Trello sprint board tracking (HW02 r4): incorporated public board URL ([`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`](https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board)), 6-list workflow architecture, MoSCoW color labels, 21 story cards (88 pts, 90.0 h), LMS-001 technical task checklist, and cross-reference to `TRELLO_BOARD.md`. |

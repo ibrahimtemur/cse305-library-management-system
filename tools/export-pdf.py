@@ -20,6 +20,11 @@ from pypdf import PdfReader
 
 
 PUBLIC_GITHUB_REPO_URL = "https://github.com/ibrahimtemur/cse305-library-management-system"
+PUBLIC_TRELLO_BOARD_URL = "https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board"
+ALLOWED_EXTERNAL_URLS = {
+    PUBLIC_GITHUB_REPO_URL,
+    PUBLIC_TRELLO_BOARD_URL,
+}
 
 LEAK_PATTERNS = [
     "file://",
@@ -181,9 +186,11 @@ def sanitize_links_and_structure(
         href = match.group("href").strip()
         content = match.group("content").strip()
 
-        # Case A: Public GitHub repository link (sole allowed external link)
+        # Case A: Public GitHub repository link or Trello board link (allowed external links)
         if "github.com/ibrahimtemur/cse305-library-management-system" in href:
             return f'<a href="{PUBLIC_GITHUB_REPO_URL}"><code>{PUBLIC_GITHUB_REPO_URL}</code></a>'
+        if "trello.com/b/34K6O3Y1" in href:
+            return f'<a href="{PUBLIC_TRELLO_BOARD_URL}"><code>{PUBLIC_TRELLO_BOARD_URL}</code></a>'
 
         # Case B: Internal page anchor
         if href.startswith("#"):
@@ -500,10 +507,10 @@ def validate_pdf_integrity_and_leaks(
                     action = annot.get("/A")
                     if action and "/URI" in action:
                         uri = str(action["/URI"])
-                        if uri != PUBLIC_GITHUB_REPO_URL:
+                        if uri not in ALLOWED_EXTERNAL_URLS:
                             raise RuntimeError(
                                 f"Unexpected clickable /URI link found on Page {page_num}: {uri}. "
-                                f"Only the public GitHub repository link ({PUBLIC_GITHUB_REPO_URL}) is permitted as an external link."
+                                f"Only allowlisted external links ({ALLOWED_EXTERNAL_URLS}) are permitted as external links."
                             )
                         resolved_links.append(("EXTERNAL", uri, page_num))
 
