@@ -3,9 +3,9 @@
   Student No(s)#: 231805033, 231805026
   General Comments: Interruption-safe progress checklist for the HW02 agile artifacts, consolidated PDF, checks, and packaging.
 -->
-# HW02 Progress Checklist — r4 (`2026-11-11`, `hw02-final-r4`)
+# HW02 Progress Checklist — Final (`2026-11-11`, `hw02-final`)
 
-> **Status:** **PACKAGED as `hw02-final-r4`** (`2026-11-11` — Trello sprint board provisioned, screenshotted with high-res 3815x1741 snapshot, and documented, PDF SHA-256 `6bba49893ee4460fedc41726b23356c36f86c2ec561bcf651f9ca1db36451d60`, ADUZEM upload postponed to `2026-11-24` to be completed by both team members).
+> **Status:** **PACKAGED as `hw02-final`** (`2026-11-11` — Trello sprint board provisioned, screenshotted with high-res 3815x1741 snapshot, and documented, PDF SHA-256 `6bba49893ee4460fedc41726b23356c36f86c2ec561bcf651f9ca1db36451d60`, ADUZEM upload postponed to `2026-11-24` to be completed by both team members).
 > **Next Work Item:** **HW03 (Due `2026-12-08` — Elaboration + Sprint 1):** Working Sprint 1 increment (`LMS-001`..`LMS-005` & `LMS-008`) + Use-Case Diagram, System Sequence Diagrams, Design Class Diagram, Stitch MCP UI prototypes, and TDD/Git/Maven plan (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`).
 
 - [x] Linux adaptations (`tools/package.py`, `tools/set-author.sh`, `mvnw` mode, venv, DEC-20, README/AGENTS)
@@ -23,4 +23,4 @@
 - [x] `docs/02-inception/TRELLO_BOARD.md` authored, `HW02_Inception_Agile.md` §2.7 and Revision History v1.1 updated, `README.md` updated
 - [x] Docs updates (`COURSE_SYLLABUS_AND_SCHEDULE.md`, `README.md`, `docs/02-inception/README.md`, `tools/agile/make_reconciliation.py`, `BACKLOG_POINT_RECONCILIATION.md`, `PROJECT_STATE.md` `DEC-21`/`DEC-22`/`DEC-23`, `ai-usage-log.md`)
 - [x] Part 3 cross-check and 2-person human review checklist (`İ-1`..`İ-3` reviewed by Ibrahim Temur; `Ö-1`..`Ö-3` reviewed by Omer Faruk Kuş)
-- [x] Part 4 packaging & closure (`dist/cse305_hw02_231805033_231805026.zip`, tagged `hw02-final-r4`, release created; to be uploaded to ADUZEM by both members)
+- [x] Part 4 packaging & closure (`dist/cse305_hw02_231805033_231805026.zip`, tagged `hw02-final`, release created; to be uploaded to ADUZEM by both members)
