@@ -5,12 +5,12 @@
 -->
 # Project State — CSE305 Library Management System
 
-- **Last Updated:** 2026-11-07
+- **Last Updated:** 2026-11-11
 - **Active Team Member:** Ibrahim Temur (`231805033` — Product Owner)
 - **Team Members:** Ibrahim Temur (`231805033` — Product Owner) & Omer Faruk Kuş (`231805026` — Scrum Master)
 - **Active Branch:** `develop`
 - **Repository:** `https://github.com/ibrahimtemur/cse305-library-management-system` (Public)
-- **Current Phase:** **HW02 Final (`v1.0`, Tag `hw02-final-r3`, ZIP SHA-256 `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, PDF SHA-256 `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`) — PACKAGED & UPLOADED TO ADUZEM BY BOTH MEMBERS (CLOSED)** → Next: **HW03 (Due `2026-12-08`): Elaboration + Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`)**
+- **Current Phase:** **HW02 Final (`v1.1`, Tag `hw02-final-r4`, PDF SHA-256 `84e7473c84e94239c56626db08d906f0b206ac72b9523158868adfff2dd2f1cf`) — Trello Sprint Board Provisioned & Documented, Postponed to 2026-11-24, Ready for ADUZEM Upload** → Next: **HW03 (Due `2026-12-08`): Elaboration + Sprint 1 (`docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`)**
 
 ---
 
@@ -43,10 +43,11 @@
 ---
 
 ## 2. What Is Next
-1. **HW02 Status (`hw02-final-r3`, CLOSED):**
-   - Packaged as `dist/cse305_hw02_231805033_231805026.zip` (SHA-256: `593bebee7c1ae2b939be86805f20db0c7208791f32a044c8de9135bcb2a666a9`, `92` files, `8,390,825` bytes) and `HW02_Inception_Agile.pdf` (SHA-256: `ff6a370f2d256954ef59be14beacea0428ff621c427c51cd63716b05f3bd4179`, `17` pages, `3,208,404` bytes).
-   - **ADUZEM Upload:** Completed on `2026-11-07` by both team members (**Ibrahim Temur** `231805033` and **Omer Faruk Kuş** `231805026`) individually from their own ADUZEM accounts.
-   - **Protected `main` Release Sync:** Following explicit user approval in chat, `main` (`160124c`) was fast-forwarded (`--ff-only`) to `develop` (`278858cf7f4b97bf61b0361a8b100e954c510014`) on `2026-11-07` (`main fast-forwarded to 278858cf7f4b97bf61b0361a8b100e954c510014 on 2026-11-07` and kept in sync with the subsequent log commit).
+1. **HW02 Status (`hw02-final-r4`, Ready for ADUZEM Upload):**
+   - Packaged as `dist/cse305_hw02_231805033_231805026.zip` and `HW02_Inception_Agile.pdf` (SHA-256: `84e7473c84e94239c56626db08d906f0b206ac72b9523158868adfff2dd2f1cf`, `18` pages, `3,237,926` bytes).
+   - **Trello Board:** Publicly available at `https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board` (6 lists, 21 stories, 88 pts, 90.0 h, LMS-001 checklist).
+   - **ADUZEM Upload:** Postponed by instructor to `2026-11-24`; `hw02-final-r4` package is ready to be uploaded by both team members (**Ibrahim Temur** `231805033` and **Omer Faruk Kuş** `231805026`) individually from their own ADUZEM accounts.
+   - **Protected `main` Policy:** `main` remains untouched until explicit user approval.
 2. **Next Work Item — HW03: Elaboration + Sprint 1 (Due `2026-12-08`, `docs/03-design/`, `docs/04-sprints/sprint-1/`, `src/`):**
    - **Sprint 1 Working Increment:** Implement and test Must stories **`LMS-001`..`LMS-005` and `LMS-008`** (`26` story points, `28.5` human hours) in `src/`.
    - **Elaboration Design Deliverables (`docs/03-design/` & `docs/04-sprints/sprint-1/`):** Use-Case Diagram, System Sequence Diagrams (SSDs), Design Class Diagram, TDD/Git/Maven plan, justified GoF/GRASP design patterns, and Sprint 1 backlog/review/retrospective records.
@@ -90,6 +91,7 @@
 | DEC-20 | 2026-11-07 | Ibrahim Temur | Remote Linux VM workflow | Development moves from the shared Windows 11/OneDrive computer to a remote Linux VM (Antigravity project connected to GitHub). Adds `tools/package.py` (cross-platform zip, also excludes `__pycache__`, `*.pyc`, `.pytest_cache`), `tools/set-author.sh`, and VM-only `tools/mvnw-vm.sh` (leaving `./mvnw` and `pom.xml` standard); `mvnw` mode `100755`; Python venv at `tools/data/.venv`; Windows `.ps1`/`.cmd` tools stay as optional equivalents. |
 | DEC-21 | 2026-11-07 | Ibrahim Temur | Generalized Cross-Platform PDF Export Pipeline (`tools/export-pdf.py` & `tools/export-pdf.ps1`) | Parameterizes `export-pdf` with `--input`, `--docs-output`, `--root-output`, `--expected-pages`, and `--max-pages`, supports generic `<!-- landscape:start -->` ... `<!-- landscape:end -->` markers (plus backward-compatible HW01 §3.1 fallback), uses file-based `marked@18.1.2` `-i`/`-o` invocation to prevent Linux 64 KB pipe truncation, and auto-discovers Linux `/usr/bin/chromium` while preserving 100% HW01 regression compatibility. |
 | DEC-22 | 2026-11-07 | Ibrahim Temur | HW02 Agile Backlog Calibration (`21` Stories, `88` Points, `90.0` Human Hours), Accepted `+2.0 h` Must Gap (`RISK-H01`), & Sprint 3 Commitment Line (`17.5 h <= 17.8 h` Net) | Establishes a two-student human-effort capacity model (`8 h/wk` normal, `3 h/wk` midterm weeks Nov 17–28, `4.0 h` ceremonies, `8/4/7 h` HW docs, `10%` buffer -> net `30.2 / 20.8 / 17.8 h`); documents the `+2.0 h` S1+S2 Must gap (`53.0 h` vs `51.0 h` net) as accepted risk `RISK-H01` with Sprint 3 Should shock-absorber and quantitative re-plan triggers; splits `LMS-015` (`015a` KPI cards, `2 pts`, `2.0 h`, committed) and `LMS-021` (`015b` overdue/unpaid report, `3 pts`, `3.0 h`, stretch); defines the committed MVP as all `11` Must stories (`48 pts`, `53.0 h`) + `4` Should stories above the Sprint 3 commitment line (`LMS-017`, `LMS-011`, `LMS-012`, `LMS-015` = `16 pts`, `17.5 h`) = **`64 pts / 70.5 h` across `15` stories**; and verifies all totals and dependencies via `tools/agile/validate_backlog.py`. |
+| DEC-23 | 2026-11-11 | Ibrahim Temur | Trello Sprint Tracking Integration & External Allowlist in PDF Pipeline | Provisions public Trello Sprint Board (`https://trello.com/b/34K6O3Y1/cse305-lms-sprint-board`) to satisfy course requirements ("Use Trello to properly track and manage your sprints"); updates `tools/export-pdf.py` to allowlist the Trello board URL alongside GitHub repository URL; documents structure in `docs/02-inception/TRELLO_BOARD.md` and `HW02_Inception_Agile.md` (§2.7). |
 
 ---
 
